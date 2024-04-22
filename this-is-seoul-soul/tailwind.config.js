@@ -26,6 +26,8 @@ export default {
         800: '#424242',
         900: '#212121',
       },
+      white: '#FFFFFF',
+      black: '#000000'
     },
     extend: {},
   },
