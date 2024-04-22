@@ -1,7 +1,14 @@
 import './App.css';
+import { SignIn } from './pages/Auth/SignIn';
 
-function App() {
-  return <h1 className='text-3xl font-bold underline bg-red-500'>Hello world!</h1>;
+export type LoginStatusType = 'init' | 'nickname' | 'festi' | 'complete';
+
+export default function App() {
+  // const [status, setStatus] = useState<LoginStatusType>();
+
+  return (
+    <div className='w-full h-full'>
+      <SignIn />
+    </div>
+  );
 }
-
-export default App;
