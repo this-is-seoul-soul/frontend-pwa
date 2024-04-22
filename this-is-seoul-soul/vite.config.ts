@@ -22,14 +22,4 @@ export default defineConfig({
       templates: '/src/components/templates',
     },
   },
-  build: {
-    rollupOptions: {
-      input: {
-        main: '/index.html',
-        sw: './sw.js',
-      },
-    },
-
-    sourcemap: true,
-  },
 });
