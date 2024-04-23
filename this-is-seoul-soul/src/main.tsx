@@ -3,16 +3,33 @@ import ReactDOM from 'react-dom/client';
 import App from './App.tsx';
 import './index.css';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import { TestPage } from './pages/TestPage.tsx';
+import { HomePage } from "./pages/HomePage.tsx";
+import { MapPage } from "./pages/MapPage.tsx";
+import { HeartPage } from "./pages/HeartPage.tsx";
+import { MyPage } from "./pages/MyPage.tsx";
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
-  },
-  {
-    path: '/test',
-    element: <TestPage />,
+    children: [
+      {
+        path: '/home',
+        element: <HomePage />,
+      },
+      {
+        path: '/map',
+        element: <MapPage />,
+      },
+      {
+        path: '/heart',
+        element: <HeartPage />,
+      },
+      {
+        path: '/my',
+        element: <MyPage />,
+      },
+    ]
   },
 ]);
 
