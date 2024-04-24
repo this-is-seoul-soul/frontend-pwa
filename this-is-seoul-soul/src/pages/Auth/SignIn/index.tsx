@@ -9,10 +9,8 @@ export const SignIn = () => {
         <div className={cls('w-56 mb-14 mx-auto')}>
           <img src={LogoNoBackground} alt='로고' />
         </div>
-        <div className={cls('w-full py-4 bg-yellow-200')}>
-          <span>
+        <div className={cls('w-full py-4')}>
             <GoogleLoginButton />
-          </span>
         </div>
       </div>
     </div>
