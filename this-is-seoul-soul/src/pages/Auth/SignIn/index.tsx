@@ -4,15 +4,13 @@ import { GoogleLoginButton } from 'components/atoms/socialLoginButton/GoogleLogi
 
 export const SignIn = () => {
   return (
-    <div className='w-full h-full bg-yellow-400 flex justify-center items-center px-4'>
+    <div className='w-full h-screen bg-yellow-400 flex justify-center items-center px-4'>
       <div className='w-full'>
         <div className={cls('w-56 mb-14 mx-auto')}>
           <img src={LogoNoBackground} alt='로고' />
         </div>
-        <div className={cls('w-full py-4 bg-yellow-200')}>
-          <span>
-            <GoogleLoginButton />
-          </span>
+        <div className={cls('w-full py-4')}>
+          <GoogleLoginButton />
         </div>
       </div>
     </div>
