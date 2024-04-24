@@ -3,36 +3,20 @@ import ReactDOM from 'react-dom/client';
 import App from './App.tsx';
 import './index.css';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import { HomePage } from './pages/HomePage.tsx';
-import { MapPage } from './pages/MapPage.tsx';
-import { HeartPage } from './pages/HeartPage.tsx';
-import { MyPage } from './pages/MyPage.tsx';
 import { SignIn } from 'pages/Auth/SignIn/index.tsx';
 import { CheckNickname } from 'pages/Auth/CheckNickname/index.tsx';
 import { Landing } from 'pages/FestiTest/Landing/index.tsx';
 import { Prosecutor } from 'pages/FestiTest/Prosecutor/index.tsx';
+import { HomePage } from 'pages/Home/index.tsx';
+import { MapPage } from 'pages/Map/index.tsx';
+import { HeartPage } from 'pages/Heart/index.tsx';
+import { MyPage } from 'pages/My/index.tsx';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
     children: [
-      {
-        path: '/home',
-        element: <HomePage />,
-      },
-      {
-        path: '/map',
-        element: <MapPage />,
-      },
-      {
-        path: '/heart',
-        element: <HeartPage />,
-      },
-      {
-        path: '/my',
-        element: <MyPage />,
-      },
       {
         path: '/auth/signin',
         element: <SignIn />,
@@ -48,6 +32,22 @@ const router = createBrowserRouter([
       {
         path: '/festiTest/prosecutor',
         element: <Prosecutor />,
+      },
+      {
+        path: '/home',
+        element: <HomePage />,
+      },
+      {
+        path: '/map',
+        element: <MapPage />,
+      },
+      {
+        path: '/heart',
+        element: <HeartPage />,
+      },
+      {
+        path: '/my',
+        element: <MyPage />,
       },
     ],
   },
