@@ -1,3 +1,8 @@
+import { SearchBar } from "components/organisms/SearchBar";
+
+
 export const HomePage = () => {
-  return <div>HomePage</div>;
+  return <div>HomePage
+    <SearchBar/>
+  </div>;
 };
