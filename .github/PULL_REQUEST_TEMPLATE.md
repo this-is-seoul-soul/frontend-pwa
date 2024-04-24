@@ -1,7 +1,6 @@
-제목:  SEOULDATA-이슈번호 [FEATURE] 기능명
-ex) SEOULDATA-41 [FEATURE] 랜딩 페이지 구현
-(확인 후 지워주세요!)
-
+제목:  SEOULDATA-이슈번호 [FEATURE] 기능명  
+ex) SEOULDATA-41 [FEATURE] 랜딩 페이지 구현  
+(확인 후 지워주세요) 
 # PR 타입
 - [x] 기능 추가
 - [ ] 기능 수정
