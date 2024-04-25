@@ -1,8 +1,11 @@
 import LogoCharacter from 'assets/images/LogoCharacter.png';
 import { BottomButton } from 'components/atoms/buttons/BottomButton';
+import { useAppNavigation } from 'hooks/useAppNavigation';
 import { cls } from 'utils/cls';
 
 export const Landing = () => {
+  const navigation = useAppNavigation();
+
   return (
     <div className={cls('w-full h-screen bg-yellow-50 px-4')}>
       <div
@@ -18,7 +21,7 @@ export const Landing = () => {
           <div className={cls('font-bold text-5xl')}>환영합니다!</div>
         </div>
         <div className={cls('w-44 mr-7 mx-auto')}>
-          <img src={LogoCharacter} alt="캐릭터" />
+          <img src={LogoCharacter} alt='캐릭터' />
         </div>
       </div>
 
@@ -30,7 +33,11 @@ export const Landing = () => {
         </div>
       </div>
 
-      <BottomButton title="시작하기" type="button" />
+      <BottomButton
+        title='시작하기'
+        type='button'
+        onClick={() => navigation.navigateToFestiTestProsecutor()}
+      />
     </div>
   );
 };
