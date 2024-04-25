@@ -8,7 +8,7 @@ interface SearchBarProps {
 export const SearchBar = ({ map = false }: SearchBarProps) => {
     return (
         <div className={`${map ? "p-4": ""}`}>
-            <div className={`flex w-full bg-white shadow-md ${map ? "rounded-xl" : ""}`}>
+            <div className={`flex w-full max-w-[500px] bg-white shadow-md ${map ? "rounded-xl" : "fixed z-50"}`}>
                 <div className="p-4">
                     <GoSearch
                         size={20}
