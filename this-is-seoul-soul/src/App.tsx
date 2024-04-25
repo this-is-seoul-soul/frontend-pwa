@@ -21,10 +21,8 @@ export default function App() {
 
   return (
     <div className='w-full h-full'>
-      <div>
-        <Outlet />
-        <BottomTabNavigation label={label!} />
-      </div>
+      <Outlet />
+      <BottomTabNavigation label={label!} />
     </div>
   );
 }
