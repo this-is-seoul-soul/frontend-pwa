@@ -1,0 +1,18 @@
+export const codeNameColor: { [key: string]: string } = {
+  '뮤지컬/오페라': 'bg-yellow-100',
+  '클래식': 'bg-red-100',
+  '국악': 'bg-green-100',
+  '연극': 'bg-green-200',
+  '무용': 'bg-red-50',
+  '전시/미술': 'bg-orange-100',
+  '교육/체험': 'bg-orange-200',
+  '콘서트': 'bg-purple-100',
+  '독주/독창회': 'bg-purple-200',
+  '영화': 'bg-purple-300',
+  '기타': 'bg-gray-200',
+  '축제-시민화합': 'bg-yellow-200',
+  '축제-전통/역사': 'bg-yellow-200',
+  '축제-문화/예술': 'bg-yellow-200',
+  '축제-기타': 'bg-yellow-200',
+  '축제-자연/경관': 'bg-yellow-200',
+};
