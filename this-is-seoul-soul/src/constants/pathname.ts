@@ -38,6 +38,11 @@ export const FestiTestProsecutorPage = {
   label: 'FESTI 검사',
 };
 
+export const FestiDetailPage = {
+  path: '/festidetail',
+  label: "축제 상세",
+}
+
 export const pathname = [
   signInPage,
   CheckNicknamePage,
@@ -47,4 +52,5 @@ export const pathname = [
   mapPage,
   heartPage,
   myPage,
+  FestiDetailPage,
 ];
