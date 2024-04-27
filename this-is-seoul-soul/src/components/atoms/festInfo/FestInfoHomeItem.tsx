@@ -22,7 +22,7 @@ export const FestInfoHomeItem = ({ fest }: FestInfoProps) => {
     };
 
     return (
-        <div className="flex flex-col p-2 bg-white gap-1" onClick={() => navigation.navigateToFestiDetail(fest.festSeq)}>
+        <div className="flex flex-col p-2 bg-white gap-1" onClick={() => navigation.navigateToFestDetail(fest.festSeq)}>
             <div id="image-container" className="relative w-full min-w-[140px] min-h-[140px] h-0 pb-[100%]">
                 <img src={image} className="absolute w-full h-full left-0 right-0 top-0 object-cover" />
             </div>

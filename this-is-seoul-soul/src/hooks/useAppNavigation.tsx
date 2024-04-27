@@ -3,7 +3,7 @@ import {
   FestiTestLandingPage,
   FestiTestProsecutorPage,
   signInPage,
-  FestiDetailPage,
+  FestDetailPage,
 } from 'constants/pathname';
 import { createSearchParams, useNavigate } from 'react-router-dom';
 
@@ -31,21 +31,21 @@ export const useAppNavigation = () => {
   };
 
   // 축제 아이템 상세 화면
-  const navigateToFestiDetail = (festSeq: number) => {
+  const navigateToFestDetail = (festSeq: number) => {
     navigate({
-      pathname: FestiDetailPage.path,
+      pathname: FestDetailPage.path,
       search: createSearchParams({
         festSeq: `${festSeq}`
       }).toString()
     });
-
   };
+
 
   return {
     navigateToSignIn,
     navigateToCheckNickname,
     navigateToFestiTestLanding,
     navigateToFestiTestProsecutor,
-    navigateToFestiDetail,
+    navigateToFestDetail,
   };
 };

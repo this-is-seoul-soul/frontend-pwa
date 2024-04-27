@@ -51,7 +51,7 @@ const router = createBrowserRouter([
         element: <MyPage />,
       },
       {
-        path: '/festidetail',
+        path: '/festdetail',
         element: <FestDetailPage />,
       }
     ],
