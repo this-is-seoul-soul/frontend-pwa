@@ -2,6 +2,7 @@ import { FestInfoMapItem } from "components/atoms/festInfo/FestInfoMapItem";
 import { FestInfoHomeItem } from "components/atoms/festInfo/FestInfoHomeItem";
 import { SearchBar } from "components/organisms/SearchBar";
 import { cls } from "utils/cls";
+import { ListHeader } from "components/molecules/ListHeader";
 
 const FestDummy = [
   {
@@ -99,22 +100,37 @@ const FestDummy = [
 ];
 
 export const HomePage = () => {
-  const SEARCH_BAR_HEIGHT : number = 52;
+  const nickname = "핏짜";
 
   return <div className="w-full h-full bg-yellow-50">
-    <div className={`h-[${SEARCH_BAR_HEIGHT}px]`}>
-      <SearchBar />
-    </div>
-    <div className={`grid grid-cols-2 gap-5 p-4 pb-24 bg-white`}>
-      {FestDummy.length > 0 &&
-        FestDummy.map((fest, index) => (
-          <div key={index}>
-            <FestInfoHomeItem fest={fest} />
-          </div>
-      ))}
+    <SearchBar />
+    <section>
+      {/* TODO: 배너 */}
+    </section>
+    <section>
+      <div className="pl-4 pt-9 pb-3 bg-white">{nickname}님<br /><b>이런 축제는 어떤가요?</b></div>
+      <div className="pl-2 pb-8 bg-white flex overflow-x-auto">
+        {FestDummy.length > 0 &&
+          FestDummy.map((fest, index) => (
+            <div key={index}>
+              <FestInfoHomeItem fest={fest} />
+            </div>
+        ))}
+      </div>
+    </section>
+    <section>
+      <div className="pl-4 pt-9 pb-3 bg-white"><b>원하시는 축제</b>를 만나보세요!</div>
+      <ListHeader />
+      <div className={`grid grid-cols-2 gap-4 p-5 pb-24 bg-white`}>
+        {FestDummy.length > 0 &&
+          FestDummy.map((fest, index) => (
+            <div key={index}>
+              <FestInfoHomeItem fest={fest} />
+            </div>
+        ))}
+      </div>
+    </section>
 
-
-    </div>
 
   </div>;
 };
