@@ -1,4 +1,4 @@
-import { FestiDetailPage } from "constants/pathname";
+import { FestDetailPage } from "constants/pathname";
 import { useAtomValue } from "jotai";
 import { headerTitleAtom } from "stores/headerStore";
 import { TopHeaderBase } from "./TopHeaderBase";
@@ -12,7 +12,7 @@ export const TopHeader = ({ label }: TopHeaderProps) => {
 
     return (
         <>
-            {label === FestiDetailPage.label && <TopHeaderBase back title={headerTitle} /> }
+            {label === FestDetailPage.label && <TopHeaderBase back title={headerTitle} /> }
         </>
     );
 }

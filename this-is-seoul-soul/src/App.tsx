@@ -3,6 +3,7 @@ import './App.css';
 import { BottomTabNavigation } from './components/organisms/BottomTabNavigation';
 import { pathname, signInPage } from './constants/pathname';
 import { useEffect } from 'react';
+import { TopHeader } from "components/molecules/TopHeader";
 
 export type LoginStatusType = 'init' | 'nickname' | 'festi' | 'complete';
 
@@ -21,6 +22,7 @@ export default function App() {
 
   return (
     <div className='w-full h-full'>
+      <TopHeader label={label!} />
       <Outlet />
       <BottomTabNavigation label={label!} />
     </div>
