@@ -1,9 +1,13 @@
-import { TopHeader } from "components/molecules/TopHeader";
 import { useSetAtom } from "jotai";
 import { useSearchParams } from "react-router-dom";
 import { headerTitleAtom } from "stores/headerStore";
 import { festDetail } from "types/festDetail";
 import { GoBookmark, GoBookmarkFill, GoShareAndroid, GoStarFill } from "react-icons/go";
+import { useState } from "react";
+import { TabHomePage } from "./TabHomePage";
+import { TabReviewPage } from "./TabReviewPage";
+import { TabMapPage } from "./TabMapPage";
+import { tabItemType } from "types/tab";
 
 interface Props {}
 
@@ -34,12 +38,26 @@ const fest : festDetail = {
     ]
 }
 
+
+
+const tabs = [
+    { label: '홈', component: <TabHomePage /> },
+    { label: '리뷰', component: <TabReviewPage /> },
+    { label: '지도', component: <TabMapPage /> },
+];
+
 export const FestDetailPage = ({ }: Props) => {
     const [searchParams] = useSearchParams();
-    const setHeaderTitle = useSetAtom(headerTitleAtom); 
     const param = searchParams.get('festSeq') || "";
     const festSeq = parseInt(param);
+    
+    const setHeaderTitle = useSetAtom(headerTitleAtom); 
     setHeaderTitle(fest.title);
+
+    const [activeTab, setActiveTab] = useState<tabItemType>(tabs[0]);
+    const handleTabClick = (tab: tabItemType) => {
+        setActiveTab(tab);
+    };
 
     return (
         <div>
@@ -47,7 +65,7 @@ export const FestDetailPage = ({ }: Props) => {
                 <img src={fest.mainImg} alt="" />
             </div>
             <section>
-                <div className="flex flex-col p-4">
+                <div className="flex flex-col p-4 pb-8">
                     <div className="flex justify-end gap-2">
                         <GoShareAndroid size={24} className=" text-gray-600"/>
                         <GoBookmark size={24} className=" text-gray-600"/>
@@ -75,7 +93,20 @@ export const FestDetailPage = ({ }: Props) => {
                     </div>
                 </div>
             </section>
-            <section><div></div></section>            
+            <section>
+                <div className={`grid grid-cols-${tabs.length} border-b-2`}>
+                    {tabs.map((tab, id) => (
+                        <div
+                            key={id}
+                            className={`w-1/2 text-center mx-auto py-2 ${activeTab.label === tab.label ? 'font-extrabold border-b border-b-black' : ''}`}
+                            onClick={() => handleTabClick(tab)}
+                        >
+                            {tab.label}
+                        </div>
+                    ))}
+                </div>
+                {activeTab?.component}
+            </section>            
         </div>
     );
 }
