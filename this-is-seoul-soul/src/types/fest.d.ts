@@ -1,4 +1,4 @@
-export type Fest = {
+export type FestType = {
   festSeq: number;
   title: string;
   codeName: string;
@@ -11,3 +11,11 @@ export type Fest = {
   isContinue: boolean;
   isHeart: boolean;
 };
+
+export type FestLocationType = {
+  festSeq: number;
+  title: string;
+  lot: number;
+  lat: number;
+  isHeart: boolean;
+}

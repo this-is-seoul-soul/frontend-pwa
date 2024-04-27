@@ -3,12 +3,12 @@ import Bookmark from 'assets/images/Bookmark.png';
 import BookmarkChecked from 'assets/images/BookmarkChecked.png';
 import Default from 'assets/images/Default.png';
 import { cls } from 'utils/cls';
-import type { Fest } from 'types/fest';
+import type { FestType } from 'types/fest';
 import { codeNameColor } from 'constants/codename';
 import { useState } from 'react';
 
 type FestInfoProps = {
-  fest: Fest;
+  fest: FestType;
 };
 
 const FestDummy = {
