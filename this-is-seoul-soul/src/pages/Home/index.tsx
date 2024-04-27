@@ -120,7 +120,7 @@ export const HomePage = () => {
     </section>
     <section>
       <div className="pl-4 pt-9 pb-3 bg-white"><b>원하시는 축제</b>를 만나보세요!</div>
-      <ListHeader />
+      <ListHeader total={24} />
       <div className={`grid grid-cols-2 gap-4 p-5 pb-24 bg-white`}>
         {FestDummy.length > 0 &&
           FestDummy.map((fest, index) => (
