@@ -21,7 +21,7 @@ export const FestInfoHomeItem = ({ fest }: FestInfoProps) => {
 
     return (
         <div className="flex flex-col p-2 bg-white gap-1">
-            <div id="image-container" className="relative w-full h-0 pb-[100%]">
+            <div id="image-container" className="relative w-full min-w-[140px] min-h-[140px] h-0 pb-[100%]">
                 <img src={image} className="absolute w-full h-full left-0 right-0 top-0 object-cover" />
             </div>
             <div id="category" className="flex items-center justify-between pt-1">
