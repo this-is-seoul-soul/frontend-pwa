@@ -3,6 +3,7 @@ import { useSetAtom } from "jotai";
 import { useSearchParams } from "react-router-dom";
 import { headerTitleAtom } from "stores/headerStore";
 import { festDetail } from "types/festDetail";
+import { GoBookmark, GoBookmarkFill, GoShareAndroid, GoStarFill } from "react-icons/go";
 
 interface Props {}
 
@@ -42,9 +43,39 @@ export const FestDetailPage = ({ }: Props) => {
 
     return (
         <div>
-            <img src={fest.mainImg} alt="" />
-            <section><div>fef</div></section>
-            <section><div>fefe</div></section>            
+            <div className="w-full h-32 overflow-hidden">
+                <img src={fest.mainImg} alt="" />
+            </div>
+            <section>
+                <div className="flex flex-col p-4">
+                    <div className="flex justify-end gap-2">
+                        <GoShareAndroid size={24} className=" text-gray-600"/>
+                        <GoBookmark size={24} className=" text-gray-600"/>
+                    </div>
+                    <div className="flex flex-col justify-center items-center">
+                        <div className="text-xl font-extrabold">{fest.title}</div>
+                        <div className="pt-1 text-gray-600">{fest.codename}</div>
+                        <div className="pt-4 flex items-center gap-2">
+                        <div className="flex flex-wrap justify-start items-center gap-4">
+                            <div>{ fest.isContinue ? "진행중" : "미진행"}</div>
+                            <div className="flex items-center gap-1">
+                                <GoStarFill className="fill-yellow-400" />
+                                {fest.avgPoint}
+                            </div>
+                            <div className="flex items-center gap-1">
+                                <div>리뷰</div>
+                                <div>{fest.cntReview >= 50 ? '50+' : `${fest.cntReview}`}</div>
+                            </div>
+                                <div className="flex items-center gap-1">
+                                    <GoBookmarkFill className="fill-yellow-400" />
+                                    {fest.tag[0]?.cnt}
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section><div></div></section>            
         </div>
     );
 }
