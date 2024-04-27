@@ -6,8 +6,10 @@ interface SearchBarProps {
 
 /* 지도 화면 검색바는 <SearchBar map /> 으로 사용합니다. */
 export const SearchBar = ({ map = false }: SearchBarProps) => {
+    
+    
     return (
-        <div className={`${map ? "p-4": ""}`}>
+        <div className={`${map ? "p-4": `h-[52px]`}`}>
             <div className={`flex w-full max-w-[500px] bg-white shadow-md ${map ? "rounded-xl" : "fixed z-50"}`}>
                 <div className="p-4">
                     <GoSearch
