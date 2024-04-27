@@ -1,7 +1,5 @@
-import { FestInfoMapItem } from "components/atoms/festInfo/FestInfoMapItem";
 import { FestInfoHomeItem } from "components/atoms/festInfo/FestInfoHomeItem";
 import { SearchBar } from "components/organisms/SearchBar";
-import { cls } from "utils/cls";
 import { ListHeader } from "components/molecules/ListHeader";
 
 const FestDummy = [

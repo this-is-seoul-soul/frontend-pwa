@@ -11,6 +11,7 @@ import { HomePage } from 'pages/Home/index.tsx';
 import { MapPage } from 'pages/Map/index.tsx';
 import { HeartPage } from 'pages/Heart/index.tsx';
 import { MyPage } from 'pages/My/index.tsx';
+import { FestDetailPage } from "pages/Home/FestDetail/index.tsx";
 
 const router = createBrowserRouter([
   {
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
         path: '/my',
         element: <MyPage />,
       },
+      {
+        path: '/festidetail',
+        element: <FestDetailPage />,
+      }
     ],
   },
 ]);

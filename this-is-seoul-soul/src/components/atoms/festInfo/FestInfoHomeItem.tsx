@@ -3,6 +3,7 @@ import type { Fest } from 'types/fest';
 import { codeNameColor } from 'constants/codename';
 import { useState } from 'react';
 import { GoBookmark, GoBookmarkFill, GoStarFill  } from "react-icons/go";
+import { useAppNavigation } from "hooks/useAppNavigation";
 
 type FestInfoProps = {
   fest: Fest;
@@ -13,6 +14,7 @@ export const FestInfoHomeItem = ({ fest }: FestInfoProps) => {
     const [isHeart, setIsHeart] = useState(fest.isHeart);
     const codeColor = codeNameColor[fest.codeName] || 'bg-gray-100';
     const image = fest.mainImg || Default;
+    const navigation = useAppNavigation();
 
     const handleHeart = async () => {
     // TODO: 찜 추가/취소 api 연결
@@ -20,7 +22,7 @@ export const FestInfoHomeItem = ({ fest }: FestInfoProps) => {
     };
 
     return (
-        <div className="flex flex-col p-2 bg-white gap-1">
+        <div className="flex flex-col p-2 bg-white gap-1" onClick={() => navigation.navigateToFestiDetail(fest.festSeq)}>
             <div id="image-container" className="relative w-full min-w-[140px] min-h-[140px] h-0 pb-[100%]">
                 <img src={image} className="absolute w-full h-full left-0 right-0 top-0 object-cover" />
             </div>
