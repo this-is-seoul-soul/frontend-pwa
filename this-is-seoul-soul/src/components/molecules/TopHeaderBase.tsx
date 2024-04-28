@@ -11,7 +11,7 @@ export const TopHeaderBase = ({ back = false, title}: BaseTopHeaderProps) => {
 
     return (
         <div className="relative h-[47px]">
-            <div className="fixed left-0 right-0  grid grid-cols-3 px-5 py-3 bg-red-100">
+            <div className="fixed left-0 right-0  grid grid-cols-3 px-5 py-3 bg-white">
                 <div className="justify-self-start">
                     {back ? <div onClick={() => { navigate(-1) }}><IoIosArrowBack size={24} /></div> : <></>}
                 </div>
