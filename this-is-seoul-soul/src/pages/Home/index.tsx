@@ -106,7 +106,7 @@ export const HomePage = () => {
       {/* TODO: 배너 */}
     </section>
     <section>
-      <div className="pl-4 pt-9 pb-3 bg-white">{nickname}님<br /><b>이런 축제는 어떤가요?</b></div>
+      <div className="pl-6 pt-9 pb-3 text-lg bg-white">{nickname}님,<br /><b>이런 축제는 어떤가요?</b></div>
       <div className="pl-2 pb-8 bg-white flex overflow-x-auto">
         {FestDummy.length > 0 &&
           FestDummy.map((fest, index) => (
@@ -117,7 +117,7 @@ export const HomePage = () => {
       </div>
     </section>
     <section>
-      <div className="pl-4 pt-9 pb-3 bg-white"><b>원하시는 축제</b>를 만나보세요!</div>
+      <div className="pl-6 pt-9 pb-3 text-lg bg-white"><b>원하시는 축제</b>를 만나보세요!</div>
       <ListHeader total={24} />
       <div className={`grid grid-cols-2 gap-4 p-5 pb-24 bg-white`}>
         {FestDummy.length > 0 &&

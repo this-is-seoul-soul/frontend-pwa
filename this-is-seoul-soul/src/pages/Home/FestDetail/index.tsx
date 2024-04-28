@@ -42,7 +42,7 @@ const fest : festDetail = {
 
 const tabs = [
     { label: '홈', component: <TabHomePage fest={fest} /> },
-    { label: '리뷰', component: <TabReviewPage /> },
+    { label: '리뷰', component: <TabReviewPage fest={fest} /> },
     { label: '지도', component: <TabMapPage /> },
 ];
 
