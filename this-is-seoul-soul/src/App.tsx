@@ -13,12 +13,12 @@ export default function App() {
 
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   const isInitialRoute = localStorage.getItem('isInitialRoute');
-  //   if (isInitialRoute !== 'F') {
-  //     navigate(signInPage.path, { replace: true });
-  //   }
-  // }, [navigate]);
+  useEffect(() => {
+    const isInitialRoute = localStorage.getItem('isInitialRoute');
+    if (isInitialRoute !== 'F') {
+      navigate(signInPage.path, { replace: true });
+    }
+  }, [navigate]);
 
   return (
     <div className='w-full h-full'>
