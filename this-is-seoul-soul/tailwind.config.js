@@ -62,6 +62,7 @@ export default {
       },
       white: '#FFFFFF',
       black: '#000000',
+      blue: '#2F49A5',
     },
     extend: {},
   },

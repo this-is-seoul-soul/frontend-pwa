@@ -41,7 +41,7 @@ const fest : festDetail = {
 
 
 const tabs = [
-    { label: '홈', component: <TabHomePage /> },
+    { label: '홈', component: <TabHomePage fest={fest} /> },
     { label: '리뷰', component: <TabReviewPage /> },
     { label: '지도', component: <TabMapPage /> },
 ];
@@ -75,35 +75,32 @@ export const FestDetailPage = ({ }: Props) => {
                     <div className="flex justify-end gap-2">
                         <GoShareAndroid size={24} className=" text-gray-600"/>
                         <div onClick={(e) => handleHeart(e)}>
-                        {isHeart == true ? (
-                            <GoBookmarkFill size={24} className=" fill-yellow-400"/>
-                        ) : (
-                            <GoBookmark size={24} className=" text-gray-400 " />
+                            {isHeart == true ? (
+                                <GoBookmarkFill size={24} className=" fill-yellow-400"/>
+                            ) : (
+                                <GoBookmark size={24} className=" text-gray-400 " />
                             )}
                         </div>
-                    
                     </div>
-                </div>
-                <div>
                     <div className="flex flex-col justify-center items-center">
                         <div className="text-xl font-extrabold">{fest.title}</div>
                         <div className="pt-1 text-gray-600">{fest.codename}</div>
                         <div className="pt-4 flex items-center gap-2">
-                        <div className="flex flex-wrap justify-start items-center gap-4">
-                            <div>{ fest.isContinue ? "진행중" : "미진행"}</div>
-                            <div className="flex items-center gap-1">
-                                <GoStarFill className="fill-yellow-400" />
-                                {fest.avgPoint}
-                            </div>
-                            <div className="flex items-center gap-1">
-                                <div>리뷰</div>
-                                <div>{fest.cntReview >= 50 ? '50+' : `${fest.cntReview}`}</div>
-                            </div>
+                            <div className="flex flex-wrap justify-start items-center gap-4">
+                                <div>{ fest.isContinue ? "진행중" : "미진행"}</div>
                                 <div className="flex items-center gap-1">
-                                    <GoBookmarkFill className="fill-yellow-400" />
-                                    {fest.tag[0]?.cnt}
+                                    <GoStarFill className="fill-yellow-400" />
+                                    {fest.avgPoint}
+                                </div>
+                                <div className="flex items-center gap-1">
+                                    <div>리뷰</div>
+                                    <div>{fest.cntReview >= 50 ? '50+' : `${fest.cntReview}`}</div>
+                                </div>
+                                    <div className="flex items-center gap-1">
+                                        <GoBookmarkFill className="fill-yellow-400" />
+                                        {fest.tag[0]?.cnt}
+                                </div>
                             </div>
-                        </div>
                         </div>
                     </div>
                 </div>
