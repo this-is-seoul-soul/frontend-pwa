@@ -59,6 +59,12 @@ export const FestDetailPage = ({ }: Props) => {
         setActiveTab(tab);
     };
 
+    const [isHeart, setIsHeart] = useState(fest.isHeart);
+    const handleHeart = async (event: React.MouseEvent) => {
+        // TODO: 찜 추가/취소 api 연결
+        setIsHeart(!isHeart);
+    };
+
     return (
         <div>
             <div className="w-full h-32 overflow-hidden">
@@ -68,8 +74,17 @@ export const FestDetailPage = ({ }: Props) => {
                 <div className="flex flex-col p-4 pb-8">
                     <div className="flex justify-end gap-2">
                         <GoShareAndroid size={24} className=" text-gray-600"/>
-                        <GoBookmark size={24} className=" text-gray-600"/>
+                        <div onClick={(e) => handleHeart(e)}>
+                        {isHeart == true ? (
+                            <GoBookmarkFill size={24} className=" fill-yellow-400"/>
+                        ) : (
+                            <GoBookmark size={24} className=" text-gray-400 " />
+                            )}
+                        </div>
+                    
                     </div>
+                </div>
+                <div>
                     <div className="flex flex-col justify-center items-center">
                         <div className="text-xl font-extrabold">{fest.title}</div>
                         <div className="pt-1 text-gray-600">{fest.codename}</div>
