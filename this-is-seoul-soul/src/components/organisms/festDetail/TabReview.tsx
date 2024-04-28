@@ -3,16 +3,19 @@ import { ListHeader } from "components/molecules/ListHeader";
 import { festDetail } from "types/festDetail";
 import { GoStar, GoStarFill  } from "react-icons/go";
 import { useState } from "react";
+import { useAppNavigation } from "hooks/useAppNavigation";
 
 interface TabReviewProps {
     fest: festDetail
 }
 
 export const TabReview = ({ fest }: TabReviewProps) => {
+    const navigator = useAppNavigation();
     const [rating, setRating] = useState<number>(0);
 
     const handleStarClick = (starNumber: number) => {
         setRating(starNumber);
+        navigator.navigateToReviewCreate(starNumber, fest.festSeq);
     };
 
     const maxStars = 5;
