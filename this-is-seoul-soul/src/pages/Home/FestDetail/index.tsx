@@ -4,9 +4,9 @@ import { headerTitleAtom } from "stores/headerStore";
 import { festDetail } from "types/festDetail";
 import { GoBookmark, GoBookmarkFill, GoShareAndroid, GoStarFill } from "react-icons/go";
 import { useState } from "react";
-import { TabHomePage } from "./TabHomePage";
-import { TabReviewPage } from "./TabReviewPage";
-import { TabMapPage } from "./TabMapPage";
+import { TabHome } from "../../../components/organisms/festDetail/TabHome";
+import { TabReview } from "../../../components/organisms/festDetail/TabReview";
+import { TabMap } from "../../../components/organisms/festDetail/TabMap";
 import { tabItemType } from "types/tab";
 
 interface Props {}
@@ -41,9 +41,9 @@ const fest : festDetail = {
 
 
 const tabs = [
-    { label: '홈', component: <TabHomePage fest={fest} /> },
-    { label: '리뷰', component: <TabReviewPage fest={fest} /> },
-    { label: '지도', component: <TabMapPage /> },
+    { label: '홈', component: <TabHome fest={fest} /> },
+    { label: '리뷰', component: <TabReview fest={fest} /> },
+    { label: '지도', component: <TabMap /> },
 ];
 
 export const FestDetailPage = ({ }: Props) => {

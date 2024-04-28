@@ -4,11 +4,11 @@ import { festDetail } from "types/festDetail";
 import { GoStar, GoStarFill  } from "react-icons/go";
 import { useState } from "react";
 
-interface TabReviewPageProps {
+interface TabReviewProps {
     fest: festDetail
 }
 
-export const TabReviewPage = ({ fest }: TabReviewPageProps) => {
+export const TabReview = ({ fest }: TabReviewProps) => {
     const [rating, setRating] = useState<number>(0);
 
     const handleStarClick = (starNumber: number) => {

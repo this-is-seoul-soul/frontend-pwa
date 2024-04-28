@@ -1,6 +1,6 @@
 interface Props {}
 
-export const TabMapPage = ({} : Props) => {
+export const TabMap = ({} : Props) => {
     return (
         <div>
             탭 지도
