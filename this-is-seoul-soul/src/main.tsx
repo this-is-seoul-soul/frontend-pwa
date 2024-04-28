@@ -12,6 +12,7 @@ import { MapPage } from 'pages/Map/index.tsx';
 import { HeartPage } from 'pages/Heart/index.tsx';
 import { MyPage } from 'pages/My/index.tsx';
 import { FestDetailPage } from "pages/Home/FestDetail/index.tsx";
+import { ReviewCreatePage } from "pages/Home/FestDetail/ReviewCreate/index.tsx";
 
 const router = createBrowserRouter([
   {
@@ -53,7 +54,11 @@ const router = createBrowserRouter([
       {
         path: '/festdetail',
         element: <FestDetailPage />,
-      }
+      },
+      {
+        path: '/festdetail/review',
+        element: <ReviewCreatePage />,
+      },
     ],
   },
 ]);

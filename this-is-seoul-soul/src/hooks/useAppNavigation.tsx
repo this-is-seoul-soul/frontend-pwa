@@ -4,6 +4,7 @@ import {
   FestiTestProsecutorPage,
   signInPage,
   FestDetailPage,
+  ReviewCreatePage,
 } from 'constants/pathname';
 import { createSearchParams, useNavigate } from 'react-router-dom';
 
@@ -40,6 +41,21 @@ export const useAppNavigation = () => {
     });
   };
 
+  // 리뷰 등록 화면
+  const navigateToReviewCreate = (rating: number, festSeq: number) => {
+    navigate(
+      {
+        pathname: ReviewCreatePage.path,
+        search: createSearchParams({
+          festSeq: `${festSeq}`
+        }).toString()
+      },
+      {
+        state: { rating: rating }
+      }
+    );
+  };
+
 
   return {
     navigateToSignIn,
@@ -47,5 +63,6 @@ export const useAppNavigation = () => {
     navigateToFestiTestLanding,
     navigateToFestiTestProsecutor,
     navigateToFestDetail,
+    navigateToReviewCreate,
   };
 };

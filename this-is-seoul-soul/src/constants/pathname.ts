@@ -43,6 +43,11 @@ export const FestDetailPage = {
   label: "축제 상세",
 }
 
+export const ReviewCreatePage = {
+  path: '/festdetail/review',
+  label: "리뷰 등록",
+}
+
 export const pathname = [
   signInPage,
   CheckNicknamePage,
@@ -53,4 +58,5 @@ export const pathname = [
   heartPage,
   myPage,
   FestDetailPage,
+  ReviewCreatePage,
 ];
