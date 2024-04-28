@@ -16,9 +16,10 @@ export const FestInfoHomeItem = ({ fest }: FestInfoProps) => {
     const image = fest.mainImg || Default;
     const navigation = useAppNavigation();
 
-    const handleHeart = async () => {
-    // TODO: 찜 추가/취소 api 연결
-    setIsHeart(!isHeart);
+    const handleHeart = async (event: React.MouseEvent) => {
+        // TODO: 찜 추가/취소 api 연결
+        event.stopPropagation () 
+        setIsHeart(!isHeart);
     };
 
     return (
@@ -30,7 +31,7 @@ export const FestInfoHomeItem = ({ fest }: FestInfoProps) => {
                 <div className={`${codeColor} rounded-lg text-xs px-2 py-1`}>
                     {fest.codeName}
                 </div>
-                <div className="relative" onClick={handleHeart}>
+                <div className="" onClick={(e) => handleHeart(e)}>
                     {isHeart == true ? (
                         <GoBookmarkFill  size={"1.25rem"} className="  fill-yellow-400"/>
                     ) : (
