@@ -2,6 +2,8 @@ import { ChangeEvent, useState } from "react";
 import { GoStar, GoStarFill } from "react-icons/go";
 import { useLocation, useSearchParams } from "react-router-dom";
 import { MdAddAPhoto } from "react-icons/md";
+import { BottomButton } from "components/atoms/buttons/BottomButton";
+import { useAppNavigation } from "hooks/useAppNavigation";
 
 interface Props {}
 
@@ -16,6 +18,7 @@ interface Props {}
 */
 
 export const ReviewCreatePage = ({ }: Props) => {
+    const navigation = useAppNavigation();
     const MAX_LENGTH = 1000;
     let [inputCount, setInputCount] = useState(0);
     const location = useLocation();
@@ -37,6 +40,11 @@ export const ReviewCreatePage = ({ }: Props) => {
         }
         
         setInputCount(text.length);
+    }
+
+    const handleRegistReview = () => {
+        // TODO: 리뷰 등록 api 연결
+        navigation.navigateToFestDetail(festSeq);
     }
 
     const maxStars = 5;
@@ -78,6 +86,8 @@ export const ReviewCreatePage = ({ }: Props) => {
                     <span>/{MAX_LENGTH} 자</span>
                 </div>
             </section>
+            
+            <BottomButton title="완료" type="button" onClick={handleRegistReview} disabled={ inputCount <= 0 ? true : false}/>
         </div>
     );
 }
