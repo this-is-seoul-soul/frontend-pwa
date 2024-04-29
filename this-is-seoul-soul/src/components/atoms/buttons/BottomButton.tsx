@@ -11,7 +11,7 @@ export type ButtonType = 'submit' | 'reset' | 'button' | undefined;
 
 export const BottomButton = ({ onClick, title, type, color }: BottomButtonProps) => {
   return (
-    <div className={cls('font-bold text-xl absolute w-full left-0 bottom-12 px-4')}>
+    <div className={cls('z-20 font-bold text-xl absolute w-full left-0 bottom-12 px-4')}>
       <button
         type={type}
         onClick={onClick}

@@ -5,6 +5,8 @@ import UserLocation from 'assets/images/UserLocation.png';
 import { useEffect, useState } from 'react';
 import { FestLocationType } from 'types/fest';
 import { LocationType } from 'types/map';
+import { SearchBar } from 'components/organisms/SearchBar';
+import { MapFilter } from 'components/molecules/MapFilter/MapFilter';
 
 const CurLocation: LocationType = {
   lot: 0,
@@ -38,6 +40,10 @@ export const MapPage = () => {
     setPlaces(PlaceDummy);
   };
 
+  // const handleMoveMyLocation = () => {
+  //   console.log('내 위치로 이동');
+  // };
+
   useEffect(() => {
     fetchPlaces();
 
@@ -61,6 +67,10 @@ export const MapPage = () => {
 
   return (
     <div className={cls('w-full h-full')}>
+      <div className='z-10 w-full absolute'>
+        <SearchBar map />
+        <MapFilter />
+      </div>
       <Map
         center={{ lat: userLocation.lat, lng: userLocation.lot }}
         className={cls('w-full h-full z-0')}
@@ -88,6 +98,12 @@ export const MapPage = () => {
           />
         ))}
       </Map>
+      {/* <div
+        className='z-10 absolute bottom-20 right-2 rounded-full bg-white p-2 drop-shadow-xl'
+        onClick={handleMoveMyLocation}
+      >
+        <RiCrosshairLine size={24} className='text-yellow-400' />
+      </div> */}
     </div>
   );
 };
