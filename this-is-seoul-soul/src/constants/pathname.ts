@@ -40,8 +40,28 @@ export const FestiTestProsecutorPage = {
 
 export const FestDetailPage = {
   path: '/festdetail',
-  label: "축제 상세",
-}
+  label: '축제 상세',
+};
+
+export const SettingPage = {
+  path: '/setting',
+  label: '설정',
+};
+
+export const MyReviewDetailsPage = {
+  path: '/my/myreviewdetails',
+  label: '나의 리뷰',
+};
+
+export const FestivalRegisterPage = {
+  path: '/festivalregister',
+  label: '축제 등록',
+};
+
+export const SearchPage = {
+  path: '/search',
+  label: '검색',
+};
 
 export const ReviewCreatePage = {
   path: '/festdetail/review',
@@ -59,4 +79,8 @@ export const pathname = [
   myPage,
   FestDetailPage,
   ReviewCreatePage,
+  SettingPage,
+  MyReviewDetailsPage,
+  FestivalRegisterPage,
+  SearchPage,
 ];
