@@ -1,7 +1,7 @@
 import { FestInfoMapItem } from 'components/atoms/festInfo/FestInfoMapItem';
 import { ListHeader } from 'components/molecules/ListHeader';
-import ExclamationMark from 'assets/images/ExclamationMark.png';
 import { useEffect, useState } from 'react';
+import { IoAlertCircleOutline } from 'react-icons/io5';
 import { Fest } from 'types/fest';
 import { cls } from 'utils/cls';
 
@@ -60,8 +60,8 @@ export const HeartPage = () => {
           </div>
         ) : (
           <div className={cls('max-w-full mt-32 relative flex justify-center items-center')}>
-            <div>
-              <img src={ExclamationMark} className={cls('w-12 m-auto py-2')} />
+              <div>
+                <IoAlertCircleOutline size={40} className={cls('mx-auto my-2')} />
               <div className={cls('text-sm')}>저장된 장소가 없습니다.</div>
             </div>
           </div>

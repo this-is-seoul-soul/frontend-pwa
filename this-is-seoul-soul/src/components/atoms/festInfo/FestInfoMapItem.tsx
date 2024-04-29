@@ -1,12 +1,11 @@
 import Star from 'assets/images/Star.png';
-import Bookmark from 'assets/images/Bookmark.png';
-import BookmarkChecked from 'assets/images/BookmarkChecked.png';
 import Default from 'assets/images/Default.png';
 import { cls } from 'utils/cls';
 import type { Fest } from 'types/fest';
 import { codeNameColor } from 'constants/codename';
 import { useState } from 'react';
 import { pathname } from 'constants/pathname';
+import { IoBookmark, IoBookmarkOutline } from 'react-icons/io5';
 
 type FestInfoProps = {
   fest: Fest;
@@ -50,9 +49,9 @@ export const FestInfoMapItem = ({ fest }: FestInfoProps) => {
     >
       <div className={cls('w-5 absolute top-5 right-4')} onClick={handleHeart}>
         {isHeart == true ? (
-          <img src={BookmarkChecked} alt="즐겨찾기" />
+          <IoBookmark size={'1.25rem'} className="fill-yellow-400" />
         ) : (
-          <img src={Bookmark} alt="즐겨찾기" />
+          <IoBookmarkOutline size={'1.25rem'} />
         )}
       </div>
       <div className="relative flex my-3 items-center">
@@ -61,9 +60,7 @@ export const FestInfoMapItem = ({ fest }: FestInfoProps) => {
           <div className={cls(`${codeColor} inline-block rounded-lg px-2 py-1`)}>
             {fest.codeName}
           </div>
-          <div className={cls('font-bold text-lg pt-2 line-clamp-2')}>
-            {fest.title}
-          </div>
+          <div className={cls('font-bold text-lg pt-2 line-clamp-2')}>{fest.title}</div>
           <div className="py-1">
             <span className={cls('text-gray-700')}>이용 요금</span>
             <span className={cls('px-3')}>{fest.useFee}</span>
