@@ -11,8 +11,12 @@ import { HomePage } from 'pages/Home/index.tsx';
 import { MapPage } from 'pages/Map/index.tsx';
 import { HeartPage } from 'pages/Heart/index.tsx';
 import { MyPage } from 'pages/My/index.tsx';
-import { FestDetailPage } from "pages/Home/FestDetail/index.tsx";
-import { ReviewCreatePage } from "pages/Home/FestDetail/ReviewCreate/index.tsx";
+import { FestDetailPage } from 'pages/Home/FestDetail/index.tsx';
+import { ReviewCreatePage } from 'pages/Home/FestDetail/ReviewCreate/index.tsx';
+import { SettingPage } from 'pages/Setting/index.tsx';
+import { MyReviewDetails } from 'pages/My/MyReviewDetails/index.tsx';
+import { FestivalRegisterPage } from 'pages/FestivalRegister/index.tsx';
+import { SearchPage } from 'pages/Search/index.tsx';
 
 const router = createBrowserRouter([
   {
@@ -52,12 +56,28 @@ const router = createBrowserRouter([
         element: <MyPage />,
       },
       {
+        path: '/my/myreviewdetails',
+        element: <MyReviewDetails />,
+      },
+      {
         path: '/festdetail',
         element: <FestDetailPage />,
       },
       {
         path: '/festdetail/review',
         element: <ReviewCreatePage />,
+      },
+      {
+        path: '/setting',
+        element: <SettingPage />,
+      },
+      {
+        path: '/festivalregister',
+        element: <FestivalRegisterPage />,
+      },
+      {
+        path: '/search',
+        element: <SearchPage />,
       },
     ],
   },

@@ -2,10 +2,10 @@ import { FestInfoMapItem } from 'components/atoms/festInfo/FestInfoMapItem';
 import { ListHeader } from 'components/molecules/ListHeader';
 import { useEffect, useState } from 'react';
 import { IoAlertCircleOutline } from 'react-icons/io5';
-import { Fest } from 'types/fest';
+import { FestType } from 'types/fest';
 import { cls } from 'utils/cls';
 
-const FestDummy: Fest[] = [
+const FestDummy: FestType[] = [
   {
     festSeq: 1,
     title: '농어촌 토마토 행사',
@@ -35,7 +35,7 @@ const FestDummy: Fest[] = [
 ];
 
 export const HeartPage = () => {
-  const [heartFest, setHeartFest] = useState<Fest[]>(FestDummy);
+  const [heartFest, setHeartFest] = useState<FestType[]>(FestDummy);
 
   useEffect(() => {
     const handleHeartFest = async () => {
@@ -60,8 +60,8 @@ export const HeartPage = () => {
           </div>
         ) : (
           <div className={cls('max-w-full mt-32 relative flex justify-center items-center')}>
-              <div>
-                <IoAlertCircleOutline size={40} className={cls('mx-auto my-2')} />
+            <div>
+              <IoAlertCircleOutline size={40} className={cls('mx-auto my-2')} />
               <div className={cls('text-sm')}>저장된 장소가 없습니다.</div>
             </div>
           </div>

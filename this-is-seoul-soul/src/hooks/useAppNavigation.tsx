@@ -5,6 +5,10 @@ import {
   signInPage,
   FestDetailPage,
   ReviewCreatePage,
+  SettingPage,
+  MyReviewDetailsPage,
+  FestivalRegisterPage,
+  SearchPage,
 } from 'constants/pathname';
 import { createSearchParams, useNavigate } from 'react-router-dom';
 
@@ -36,8 +40,8 @@ export const useAppNavigation = () => {
     navigate({
       pathname: FestDetailPage.path,
       search: createSearchParams({
-        festSeq: `${festSeq}`
-      }).toString()
+        festSeq: `${festSeq}`,
+      }).toString(),
     });
   };
 
@@ -56,6 +60,25 @@ export const useAppNavigation = () => {
     );
   };
 
+  // 설정 화면
+  const navigateToSetting = () => {
+    navigate(SettingPage.path);
+  };
+
+  // 내 리뷰 상세 보기
+  const navigateToMyReviewDetails = () => {
+    navigate(MyReviewDetailsPage.path);
+  };
+
+  // 축제 등록하는 페이지
+  const navigateToFestivalRegister = () => {
+    navigate(FestivalRegisterPage.path);
+  };
+
+  // 검색하기
+  const navigateToSearch = () => {
+    navigate(SearchPage.path);
+  };
 
   return {
     navigateToSignIn,
@@ -64,5 +87,9 @@ export const useAppNavigation = () => {
     navigateToFestiTestProsecutor,
     navigateToFestDetail,
     navigateToReviewCreate,
+    navigateToSetting,
+    navigateToMyReviewDetails,
+    navigateToFestivalRegister,
+    navigateToSearch,
   };
 };

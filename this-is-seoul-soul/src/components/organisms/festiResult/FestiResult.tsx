@@ -55,11 +55,11 @@ export const FestiResult = ({ selectedTypes }: FestiResultProps) => {
             const countB: number = typeCounts[types[2]] ? typeCounts[types[2]] : 0;
             let widthClass: number = 1;
             if (countA >= 3 || countB >= 3) widthClass = 3;
-            else if (countA >= 2) widthClass = 1;
-            else if (countB >= 2) widthClass = 2;
+            else if (countA == 2) widthClass = 1;
+            else if (countB == 2) widthClass = 2;
 
             return (
-              <div key={i} className='w-full grid grid-cols-5 gap-3 pb-2'>
+              <div key={i} className='w-full grid grid-cols-5 gap-3 pn-2'>
                 <div className='col-span-1'>
                   <div
                     className={cls(
@@ -88,8 +88,7 @@ export const FestiResult = ({ selectedTypes }: FestiResultProps) => {
                     <div
                       className={cls(
                         'h-4 animate-pulse rounded-full bg-gradient-to-r from-yellow-400 to-yellow-300',
-                        `w-${widthClass === 1 ? countA : countB}/3`,
-                        `w-${widthClass === 3 ? 'full' : ''}`
+                        `${widthClass === 3 ? 'w-full' : `w-2/3`}`
                       )}
                     ></div>
                   </div>
