@@ -19,4 +19,12 @@ export const goodList = [
         goodId: 4,
         label: "깨끗해요"
     },
+];
+
+export const tagColor = [
+    '#FFBE16',
+    '#FFCB45',
+    '#FFD873',
+    '#FFE5A2',
+    '#FFF2D0',
 ]
