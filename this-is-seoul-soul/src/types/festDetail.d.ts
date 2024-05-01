@@ -19,3 +19,8 @@ export type festDetail = {
     isHeart: boolean,
     tag: [ { tag: int, cnt: int } ]
 }
+
+export type reviewTagList = {
+    total: number,
+    tag: { tag: number, cnt: number }[]
+}
