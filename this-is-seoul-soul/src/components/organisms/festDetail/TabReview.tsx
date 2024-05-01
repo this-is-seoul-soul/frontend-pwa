@@ -61,7 +61,7 @@ export const TabReview = ({ fest }: TabReviewProps) => {
                 <TitleSection title="이런 점이 좋았어요!" description={`총 ${fest.cntReview}명 참여`} />
                 <div className='py-4'>
                     {dummyTags?.tag.map((item) => {
-                        return <TagBar index={item.tag} tagTotal={dummyTags.total} tag={item.tag} cnt={item.cnt} />
+                        return <div key={item.tag}><TagBar index={item.tag} tagTotal={dummyTags.total} tag={item.tag} cnt={item.cnt} /></div>
                     })}
                 </div>
                 

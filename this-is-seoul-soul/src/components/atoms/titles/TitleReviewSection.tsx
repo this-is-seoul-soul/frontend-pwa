@@ -1,6 +1,6 @@
 interface TitleSectionProps {
     title: string
-    description: string
+    description?: string
 }
 
 export const TitleSection = ({title, description} : TitleSectionProps) => {
