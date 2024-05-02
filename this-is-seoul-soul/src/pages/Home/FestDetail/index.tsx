@@ -42,7 +42,7 @@ const fest: festDetail = {
 const tabs = [
   { label: '홈', component: <TabHome fest={fest} /> },
   { label: '리뷰', component: <TabReview fest={fest} /> },
-  { label: '지도', component: <TabMap /> },
+  { label: '지도', component: <TabMap fest={fest} /> },
 ];
 
 export const FestDetailPage = () => {
@@ -68,38 +68,38 @@ export const FestDetailPage = () => {
   };
 
   return (
-    <div>
-      <div className='w-full h-32 overflow-hidden'>
-        <img src={fest.mainImg} alt='' />
+    <div className="w-full min-h-full pt-[47px] flex flex-col">
+      <div className="w-full h-32 overflow-hidden">
+        <img src={fest.mainImg} alt="" />
       </div>
       <section>
-        <div className='flex flex-col p-4 pb-8'>
-          <div className='flex justify-end gap-2'>
-            <GoShareAndroid size={24} className=' text-gray-600' />
+        <div className="flex flex-col p-4 pb-8">
+          <div className="flex justify-end gap-2">
+            <GoShareAndroid size={24} className=" text-gray-600" />
             <div onClick={(e) => handleHeart(e)}>
               {isHeart == true ? (
-                <GoBookmarkFill size={24} className=' fill-yellow-400' />
+                <GoBookmarkFill size={24} className=" fill-yellow-400" />
               ) : (
-                <GoBookmark size={24} className=' text-gray-400 ' />
+                <GoBookmark size={24} className=" text-gray-400 " />
               )}
             </div>
           </div>
-          <div className='flex flex-col justify-center items-center'>
-            <div className='text-xl font-extrabold'>{fest.title}</div>
-            <div className='pt-1 text-gray-600'>{fest.codename}</div>
-            <div className='pt-4 flex items-center gap-2'>
-              <div className='flex flex-wrap justify-start items-center gap-4'>
+          <div className="flex flex-col justify-center items-center">
+            <div className="text-xl font-extrabold">{fest.title}</div>
+            <div className="pt-1 text-gray-600">{fest.codename}</div>
+            <div className="pt-4 flex items-center gap-2">
+              <div className="flex flex-wrap justify-start items-center gap-4">
                 <div>{fest.isContinue ? '진행중' : '미진행'}</div>
-                <div className='flex items-center gap-1'>
-                  <GoStarFill className='fill-yellow-400' />
+                <div className="flex items-center gap-1">
+                  <GoStarFill className="fill-yellow-400" />
                   {fest.avgPoint}
                 </div>
-                <div className='flex items-center gap-1'>
+                <div className="flex items-center gap-1">
                   <div>리뷰</div>
                   <div>{fest.cntReview >= 50 ? '50+' : `${fest.cntReview}`}</div>
                 </div>
-                <div className='flex items-center gap-1'>
-                  <GoBookmarkFill className='fill-yellow-400' />
+                <div className="flex items-center gap-1">
+                  <GoBookmarkFill className="fill-yellow-400" />
                   {fest.tag[0]?.cnt}
                 </div>
               </div>
@@ -121,8 +121,8 @@ export const FestDetailPage = () => {
             </div>
           ))}
         </div>
-        {activeTab?.component}
       </section>
+      {activeTab?.component}
     </div>
   );
 };

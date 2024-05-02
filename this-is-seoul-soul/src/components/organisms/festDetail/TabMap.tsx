@@ -1,9 +1,16 @@
-interface Props {}
+import { festDetail } from 'types/festDetail';
+import { Map, MapMarker } from 'react-kakao-maps-sdk';
 
-export const TabMap = ({} : Props) => {
-    return (
-        <div>
-            탭 지도
-        </div>
-    );
+interface TabMapProps {
+  fest: festDetail;
 }
+
+export const TabMap = ({ fest }: TabMapProps) => {
+  const markerPosition = { lat: fest.lot, lng: fest.lat };
+
+  return (
+    <Map center={markerPosition} className="w-full h-full flex-grow" level={3}>
+      <MapMarker position={markerPosition} />
+    </Map>
+  );
+};
