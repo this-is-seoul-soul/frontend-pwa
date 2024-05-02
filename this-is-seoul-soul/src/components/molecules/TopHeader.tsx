@@ -5,8 +5,6 @@ import {
   SettingPage,
   ReviewCreatePage,
 } from 'constants/pathname';
-import { useAtomValue } from 'jotai';
-import { headerTitleAtom } from 'stores/headerStore';
 import { TopHeaderBase } from './TopHeaderBase';
 
 interface TopHeaderProps {
