@@ -3,22 +3,24 @@ import './App.css';
 import { BottomTabNavigation } from './components/organisms/BottomTabNavigation';
 import { pathname, signInPage } from './constants/pathname';
 import { useEffect } from 'react';
-import { TopHeader } from "components/molecules/TopHeader";
+import { TopHeader } from 'components/molecules/TopHeader';
 
-export type LoginStatusType = 'init' | 'nickname' | 'festi' | 'complete';
 
 export default function App() {
-  // const [status, setStatus] = useState<LoginStatusType>();
   const label = (pathname.find((item) => item.path === location.pathname) || {}).label;
 
   const navigate = useNavigate();
 
+
   useEffect(() => {
     const isInitialRoute = localStorage.getItem('isInitialRoute');
+    console.log(isInitialRoute);
     if (isInitialRoute !== 'F') {
+      localStorage.setItem('isInitialRoute', 'F');
       navigate(signInPage.path, { replace: true });
     }
   }, [navigate]);
+
 
   return (
     <div className='w-full h-full'>
