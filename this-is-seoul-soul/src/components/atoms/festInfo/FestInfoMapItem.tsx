@@ -49,29 +49,29 @@ export const FestInfoMapItem = ({ fest }: FestInfoProps) => {
     >
       <div className={cls('w-5 absolute top-5 right-4')} onClick={handleHeart}>
         {isHeart == true ? (
-          <IoBookmark size={'1.25rem'} className="fill-yellow-400" />
+          <IoBookmark size={'1.25rem'} className={cls('fill-yellow-400')} />
         ) : (
           <IoBookmarkOutline size={'1.25rem'} />
         )}
       </div>
-      <div className="relative flex my-3 items-center">
+      <div className={cls('relative flex my-3 items-center')}>
         <img src={image} className={cls('w-28 h-28 object-cover')} />
         <div className={cls('px-3 text-xs')}>
           <div className={cls(`${codeColor} inline-block rounded-lg px-2 py-1`)}>
             {fest.codeName}
           </div>
           <div className={cls('font-bold text-lg pt-2 line-clamp-2')}>{fest.title}</div>
-          <div className="py-1">
+          <div className={cls('py-1')}>
             <span className={cls('text-gray-700')}>이용 요금</span>
             <span className={cls('px-3')}>{fest.useFee}</span>
           </div>
-          <div className="relative flex flex-wrap items-center mb-1">
-            {fest.isContinue && <span className="pr-3">진행 중</span>}
+          <div className={cls('relative flex flex-wrap items-center mb-1')}>
+            {fest.isContinue && <span className={cls('pr-3')}>진행 중</span>}
             <span className={cls('w-3')}>
-              <img src={Star} alt="평점" />
+              <img src={Star} alt='평점' />
             </span>
             <span className={cls('px-1')}>{fest.avgPoint}</span>
-            <span className="px-2">리뷰</span>
+            <span className={cls('px-2')}>리뷰</span>
             {fest.cntReview >= 50 ? <span>50+</span> : <span>{fest.cntReview}</span>}
           </div>
           <div className={cls('text-gray-700')}>

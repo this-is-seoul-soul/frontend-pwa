@@ -12,8 +12,6 @@ interface TopHeaderProps {
 }
 
 export const TopHeader = ({ label }: TopHeaderProps) => {
-  // const headerTitle = useAtomValue(headerTitleAtom);
-
   return (
     <>
       {(label === FestDetailPage.label ||

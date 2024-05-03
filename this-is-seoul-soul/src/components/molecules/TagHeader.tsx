@@ -34,9 +34,9 @@ export const TagHeader = ({ total, tag }: TagHeaderProps) => {
         ))}
         {sortedTags.length > 5 &&
           (visibleTags === 5 ? (
-            <IoChevronDown onClick={handleShowMore} className="w-full mx-auto" size={24}/>
+            <IoChevronDown onClick={handleShowMore} className={cls('w-full mx-auto')} size={24} />
           ) : (
-            <IoChevronUp onClick={handleFold} className="w-full mx-auto" size={24}/>
+            <IoChevronUp onClick={handleFold} className={cls('w-full mx-auto')} size={24} />
           ))}
       </div>
     </div>

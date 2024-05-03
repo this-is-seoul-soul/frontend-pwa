@@ -9,6 +9,7 @@ import { TabHome } from '../../../components/organisms/festDetail/TabHome';
 import { TabReview } from '../../../components/organisms/festDetail/TabReview';
 import { TabMap } from '../../../components/organisms/festDetail/TabMap';
 import { tabItemType } from 'types/tab';
+import { cls } from 'utils/cls';
 
 const fest: festDetail = {
   festSeq: 12345,
@@ -68,38 +69,38 @@ export const FestDetailPage = () => {
   };
 
   return (
-    <div className="w-full min-h-full pt-[47px] flex flex-col">
-      <div className="w-full h-32 overflow-hidden">
-        <img src={fest.mainImg} alt="" />
+    <div className={cls('w-full min-h-full pt-[47px] flex flex-col')}>
+      <div className={cls('w-full h-32 overflow-hidden')}>
+        <img src={fest.mainImg} alt='' />
       </div>
       <section>
-        <div className="flex flex-col p-4 pb-8">
-          <div className="flex justify-end gap-2">
-            <GoShareAndroid size={24} className=" text-gray-600" />
+        <div className={cls('flex flex-col p-4 pb-8')}>
+          <div className={cls('flex justify-end gap-2')}>
+            <GoShareAndroid size={24} className={cls('text-gray-600')} />
             <div onClick={(e) => handleHeart(e)}>
               {isHeart == true ? (
-                <GoBookmarkFill size={24} className=" fill-yellow-400" />
+                <GoBookmarkFill size={24} className={cls('fill-yellow-400')} />
               ) : (
-                <GoBookmark size={24} className=" text-gray-400 " />
+                <GoBookmark size={24} className={cls('text-gray-400')} />
               )}
             </div>
           </div>
-          <div className="flex flex-col justify-center items-center">
-            <div className="text-xl font-extrabold">{fest.title}</div>
-            <div className="pt-1 text-gray-600">{fest.codename}</div>
-            <div className="pt-4 flex items-center gap-2">
-              <div className="flex flex-wrap justify-start items-center gap-4">
+          <div className={cls('flex flex-col justify-center items-center')}>
+            <div className={cls('text-xl font-extrabold')}>{fest.title}</div>
+            <div className={cls('pt-1 text-gray-600')}>{fest.codename}</div>
+            <div className={cls('pt-4 flex items-center gap-2')}>
+              <div className={cls('flex flex-wrap justify-start items-center gap-4')}>
                 <div>{fest.isContinue ? '진행중' : '미진행'}</div>
-                <div className="flex items-center gap-1">
-                  <GoStarFill className="fill-yellow-400" />
+                <div className={cls('flex items-center gap-1')}>
+                  <GoStarFill className={cls('fill-yellow-400')} />
                   {fest.avgPoint}
                 </div>
-                <div className="flex items-center gap-1">
+                <div className={cls('flex items-center gap-1')}>
                   <div>리뷰</div>
                   <div>{fest.cntReview >= 50 ? '50+' : `${fest.cntReview}`}</div>
                 </div>
-                <div className="flex items-center gap-1">
-                  <GoBookmarkFill className="fill-yellow-400" />
+                <div className={cls('flex items-center gap-1')}>
+                  <GoBookmarkFill className={cls('fill-yellow-400')} />
                   {fest.tag[0]?.cnt}
                 </div>
               </div>
