@@ -1,9 +1,18 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import jotaiDebugLabel from 'jotai/babel/plugin-debug-label';
+import jotaiReactRefresh from 'jotai/babel/plugin-react-refresh';
+import { sentryVitePlugin } from '@sentry/vite-plugin';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react({ babel: { plugins: [jotaiDebugLabel, jotaiReactRefresh] } }),
+    sentryVitePlugin({
+      org: '3f56768989e9',
+      project: 'javascript-react',
+    }),
+  ],
   resolve: {
     alias: {
       src: '/src',
@@ -15,11 +24,29 @@ export default defineConfig({
       constants: '/src/constants',
       types: '/src/types',
       utils: '/src/utils',
-      // apis: '/src/apis',
-      // atoms: '/src/components/atoms',
+      apis: '/src/apis',
+      atoms: '/src/components/atoms',
       molecules: '/src/components/molecules',
       organisms: '/src/components/organisms',
       templates: '/src/components/templates',
+    },
+  },
+  build: {
+    rollupOptions: {
+      input: {
+        main: '/index.html',
+      },
+    },
+
+    sourcemap: true,
+  },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://43.202.235.85',
+        changeOrigin: true,
+        secure: true,
+      },
     },
   },
 });

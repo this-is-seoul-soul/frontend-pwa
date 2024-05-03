@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+import { randomNicknameApi } from 'apis/userApi';
 import { BottomButton } from 'components/atoms/buttons/BottomButton';
 import { ReissueIconButton } from 'components/atoms/buttons/ReissueIconButton';
 import { FormInputText } from 'components/atoms/inputs/FormInputText';
@@ -20,13 +22,16 @@ export const CheckNickname = () => {
     },
   });
 
-  const generateRandomNickName = () => {
+  const generateRandomNickName = async () => {
     // TODO: 랜덤 닉네임 받아오는 api 연결
-    const randomNickName: string = Math.random().toString(36).slice(2, 10);
-    // setRandomNickName(generateRandomNickName);
-    setValue('nickname', randomNickName);
-    console.log(randomNickName);
-    return randomNickName;
+    const result = await randomNicknameApi();
+    if (result.status === 200) {
+      const newNickname = result.data.data.nickname;
+      setRandomNickName(newNickname);
+      setValue('nickname', newNickname);
+      return newNickname;
+    }
+    return '닉네임 실패';
   };
 
   const handleStoreNickname = (data: NicknameProps) => {
@@ -39,7 +44,7 @@ export const CheckNickname = () => {
   };
 
   useEffect(() => {
-    setRandomNickName(generateRandomNickName());
+    generateRandomNickName();
   }, []);
 
   return (
