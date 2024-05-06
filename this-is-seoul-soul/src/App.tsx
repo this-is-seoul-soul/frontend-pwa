@@ -4,13 +4,12 @@ import { BottomTabNavigation } from './components/organisms/BottomTabNavigation'
 import { pathname, signInPage } from './constants/pathname';
 import { useEffect } from 'react';
 import { TopHeader } from 'components/molecules/TopHeader';
-
+import { cls } from 'utils/cls';
 
 export default function App() {
   const label = (pathname.find((item) => item.path === location.pathname) || {}).label;
 
   const navigate = useNavigate();
-
 
   useEffect(() => {
     const isInitialRoute = localStorage.getItem('isInitialRoute');
@@ -21,9 +20,8 @@ export default function App() {
     }
   }, [navigate]);
 
-
   return (
-    <div className='w-full h-full'>
+    <div className={cls('w-full h-full')}>
       <TopHeader label={label!} />
       <Outlet />
       <BottomTabNavigation label={label!} />

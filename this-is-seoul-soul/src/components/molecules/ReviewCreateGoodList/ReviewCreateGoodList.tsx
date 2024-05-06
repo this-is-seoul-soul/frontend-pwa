@@ -17,7 +17,7 @@ export const ReviewCreateGoodList = () => {
   };
 
   return (
-    <div className="flex flex-col gap-2 py-6">
+    <div className={cls('flex flex-col gap-2 py-6')}>
       {goodList.map((item) => {
         return (
           <div

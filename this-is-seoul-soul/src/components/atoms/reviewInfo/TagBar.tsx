@@ -17,13 +17,13 @@ export const TagBar = ({
 
   return (
     <div className={cls('pb-1')}>
-      <div className="relative rounded-full px-2">
+      <div className={cls('relative rounded-full px-2')}>
         <ProgressBar
           completed={cnt}
           maxCompleted={tagTotal}
-          baseBgColor="#EEEEEE"
+          baseBgColor='#EEEEEE'
           isLabelVisible={false}
-          height="40px"
+          height='40px'
           bgColor={bgColor}
         />
         <div className={cls('absolute inset-0 flex items-center')}>

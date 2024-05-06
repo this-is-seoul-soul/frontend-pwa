@@ -65,7 +65,7 @@ export const SearchPage = {
 
 export const ReviewCreatePage = {
   path: '/festdetail/review',
-  label: "리뷰 등록",
+  label: '리뷰 등록',
 }
 
 export const pathname = [
