@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { randomNicknameApi } from 'apis/userApi';
+import { nicknameEditApi, randomNicknameApi } from 'apis/userApi';
 import { BottomButton } from 'components/atoms/buttons/BottomButton';
 import { ReissueIconButton } from 'components/atoms/buttons/ReissueIconButton';
 import { FormInputText } from 'components/atoms/inputs/FormInputText';
@@ -34,10 +34,10 @@ export const CheckNickname = () => {
     return '닉네임 실패';
   };
 
-  const handleStoreNickname = (data: NicknameProps) => {
+  const handleStoreNickname = async (data: NicknameProps) => {
     console.log(data);
     // TODO: 닉네임 연결하는 api 요청
-    const result = true;
+    const result = await nicknameEditApi(data.nickname);
     if (result) {
       navigation.navigateToFestiTestLanding();
     }

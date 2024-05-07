@@ -1,3 +1,4 @@
+import { festiResultApi } from 'apis/userApi';
 import LogoCharacter from 'assets/images/LogoCharacter.png';
 import { BottomButton } from 'components/atoms/buttons/BottomButton';
 import { festiTypes } from 'constants/festi';
@@ -19,11 +20,12 @@ export const FestiResult = ({ selectedTypes }: FestiResultProps) => {
     return counts;
   }, {});
 
-  const handleMoveHomePage = () => {
-    // TODO: mbti 전송하는 api 연결
-    navigate(homePage.path);
-    history.pushState(null, '', '');
-    window.location.reload();
+  const handleMoveHomePage = async () => {
+    const result = await festiResultApi(mbti.join());
+    console.log(result);
+    if (result.status === 200) {
+      navigate(homePage.path);
+    }
   };
 
   useEffect(() => {
