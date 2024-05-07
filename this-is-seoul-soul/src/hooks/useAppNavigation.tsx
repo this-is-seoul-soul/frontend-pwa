@@ -9,6 +9,7 @@ import {
   MyReviewDetailsPage,
   FestivalRegisterPage,
   SearchPage,
+  privatePolicyPage,
 } from 'constants/pathname';
 import { createSearchParams, useNavigate } from 'react-router-dom';
 
@@ -51,11 +52,11 @@ export const useAppNavigation = () => {
       {
         pathname: ReviewCreatePage.path,
         search: createSearchParams({
-          festSeq: `${festSeq}`
-        }).toString()
+          festSeq: `${festSeq}`,
+        }).toString(),
       },
       {
-        state: { rating: rating }
+        state: { rating: rating },
       }
     );
   };
@@ -80,6 +81,11 @@ export const useAppNavigation = () => {
     navigate(SearchPage.path);
   };
 
+  // 개인정보처리방침
+  const navigateToPrivatePolicy = () => {
+    navigate(privatePolicyPage.path);
+  };
+
   return {
     navigateToSignIn,
     navigateToCheckNickname,
@@ -91,5 +97,6 @@ export const useAppNavigation = () => {
     navigateToMyReviewDetails,
     navigateToFestivalRegister,
     navigateToSearch,
+    navigateToPrivatePolicy,
   };
 };

@@ -4,6 +4,7 @@ import {
   MyReviewDetailsPage,
   SettingPage,
   ReviewCreatePage,
+  privatePolicyPage,
 } from 'constants/pathname';
 import { TopHeaderBase } from './TopHeaderBase';
 
@@ -18,7 +19,8 @@ export const TopHeader = ({ label }: TopHeaderProps) => {
         label === ReviewCreatePage.label ||
         label === SettingPage.label ||
         label === MyReviewDetailsPage.label ||
-        label === FestivalRegisterPage.label) && <TopHeaderBase back title={label} />}
+        label === FestivalRegisterPage.label ||
+        label === privatePolicyPage.label) && <TopHeaderBase back title={label} />}
     </>
   );
 };
