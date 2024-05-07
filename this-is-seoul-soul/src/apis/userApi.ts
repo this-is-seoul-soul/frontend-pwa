@@ -33,7 +33,7 @@ export const nicknameDuplicateApi = async (nickname: string) => {
 // 닉네임 수정
 export const nicknameEditApi = async (nickname: string) => {
   const url = memberUrl + '/nickname';
-  const res = await axios.patch(url, { nickname: nickname });
+  const res = await axios.patch(url, nickname);
   return res;
 };
 
@@ -84,7 +84,7 @@ export const refreshTokenApi = async () => {
 // 회원 등록 상태 파악
 export const userStatusApi = async (googleId: string) => {
   const url = memberUrl + '/status';
-  const res = await axios.get(url, { params: googleId });
+  const res = await axios.get(url, { params: { googleId: googleId } });
   console.log(res);
   return res;
 };

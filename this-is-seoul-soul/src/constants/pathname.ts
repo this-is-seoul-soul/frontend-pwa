@@ -66,7 +66,12 @@ export const SearchPage = {
 export const ReviewCreatePage = {
   path: '/festdetail/review',
   label: '리뷰 등록',
-}
+};
+
+export const privatePolicyPage = {
+  path: '/policy/private',
+  label: '개인정보처리방침',
+};
 
 export const pathname = [
   signInPage,
@@ -83,4 +88,5 @@ export const pathname = [
   MyReviewDetailsPage,
   FestivalRegisterPage,
   SearchPage,
+  privatePolicyPage,
 ];
