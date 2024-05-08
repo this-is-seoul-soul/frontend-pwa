@@ -26,10 +26,13 @@ export const randomNicknameApi = async () => {
 // 닉네임 중복 검사
 export const nicknameDuplicateApi = async (nickname: string) => {
   const url = memberUrl + '/nickname/duplicate';
-  const res = await axios.get(url, { params: { nickname: nickname } });
+  const res = await axios.get(url, {
+    params: {
+      nickname: nickname,
+    },
+  });
   return res;
 };
-
 // 닉네임 수정
 export const nicknameEditApi = async (nickname: string) => {
   const url = memberUrl + '/nickname';

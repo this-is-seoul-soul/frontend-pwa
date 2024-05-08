@@ -7,6 +7,7 @@ interface FormInputTextProps {
   control: any;
   placeholder: string;
   rules?: any;
+  onChange?: (value: string) => void;
 }
 
 export const FormInputText = ({
@@ -14,8 +15,13 @@ export const FormInputText = ({
   control,
   placeholder,
   rules,
+  onChange,
   ...etc
 }: FormInputTextProps) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    onChange && onChange(value);
+  };
   return (
     <Controller
       name={name}
@@ -24,7 +30,10 @@ export const FormInputText = ({
       render={({ field: { onChange, value } }) => (
         <input
           className={cls('w-full bg-gray-100 rounded-2xl py-4 px-4')}
-          onChange={onChange}
+          onChange={(e) => {
+            onChange(e);
+            handleChange(e);
+          }}
           value={value}
           placeholder={placeholder}
           {...etc}

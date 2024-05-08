@@ -1,5 +1,7 @@
 export type UserInfoType = {
-  profileImg: string;
+  email: string;
   nickname: string;
-  festi: string;
+  profile: string;
+  mbti: string;
+  notification: boolean;
 };
