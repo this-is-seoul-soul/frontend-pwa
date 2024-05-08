@@ -1,6 +1,6 @@
 export const PrivatePolicy = () => {
   return (
-    <div className='h-full overflow-y-auto mb-12 mx-4 mt-6 text-justify space-y-2'>
+    <div className='h-full overflow-y-auto mb-12 px-4 mt-6 text-justify space-y-2'>
       <h2 className='text-2xl font-bold'>개인정보 처리 방침</h2>
       <br />
       <p>
@@ -108,8 +108,7 @@ export const PrivatePolicy = () => {
           <div className='indent-[-8px]'>
             <p>&bull; 개인정보를 제공받는 자 : 이것이 서울 소울이다</p>
             <p>
-              &bull; 제공받는 자의 개인정보 이용목적 : 이메일, 이름, 서비스 이용 기록,
-              접속 로그
+              &bull; 제공받는 자의 개인정보 이용목적 : 이메일, 이름, 서비스 이용 기록, 접속 로그
             </p>
             <p>&bull; 제공받는 자의 보유.이용기간: 개인정보 수집일로부터 3년</p>
           </div>
