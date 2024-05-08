@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
@@ -65,8 +66,17 @@ export default {
       blue: '#2F49A5',
     },
     extend: {},
+    fontFamily: {
+      pretendardThin: ['Pretendard-Thin'],
+      PretendardSemiBold: ['Pretendard-SemiBold'],
+      PretendardRegular: ['Pretendard-Regular'],
+      PretendardMedium: ['Pretendard-Medium'],
+      PretendardLight: ['Pretendard-Light'],
+      PretendardExtraLight: ['Pretendard-ExtraLight'],
+      PretendardExtraBold: ['Pretendard-ExtraBold'],
+      PretendardBold: ['Pretendard-Bold'],
+      PretendardBlack: ['Pretendard-Black'],
+    },
   },
-  plugins: [
-    require('tailwind-scrollbar-hide')
-  ],
+  plugins: [require('tailwind-scrollbar-hide')],
 };
