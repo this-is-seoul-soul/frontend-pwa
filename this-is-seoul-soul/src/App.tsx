@@ -26,7 +26,7 @@ export default function App() {
   }, [navigate]);
 
   return (
-    <div className={cls('w-full h-full')}>
+    <div className={cls('w-full h-full font-PretendardMedium')}>
       <TopHeader label={label!} />
       <Outlet />
       <BottomTabNavigation label={label!} />
