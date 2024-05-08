@@ -38,7 +38,7 @@ export const CheckNickname = () => {
     console.log(data);
     // TODO: 닉네임 연결하는 api 요청
     const result = await nicknameEditApi(data.nickname);
-    if (result) {
+    if (result.status === 200) {
       navigation.navigateToFestiTestLanding();
     }
   };
