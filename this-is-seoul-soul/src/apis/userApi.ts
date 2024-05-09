@@ -52,7 +52,7 @@ export const signUpApi = async (data: MemberResponse) => {
 // mbti 검사 결과
 export const festiResultApi = async (festi: string) => {
   const url = memberUrl + '/mbti';
-  const res = await axios.patch(url, { MBTI: festi });
+  const res = await axios.patch(url, { mbti: festi });
   return res;
 };
 
