@@ -29,6 +29,7 @@ export const GoogleLoginButton = () => {
     console.log(result);
     if (result.status === 200) {
       localStorage.setItem('accessToken', result.data.data.accessToken);
+      localStorage.setItem('refreshToken', result.data.data.refreshToken);
       handleAuthStatus(clientId);
     } else if (result.status === 403) {
       console.log('로그인 시 에러 발생했습니다.');

@@ -21,7 +21,7 @@ export const FestiResult = ({ selectedTypes }: FestiResultProps) => {
   }, {});
 
   const handleMoveHomePage = async () => {
-    const result = await festiResultApi(mbti.join());
+    const result = await festiResultApi(mbti.join(''));
     console.log(result);
     if (result.status === 200) {
       navigate(homePage.path);

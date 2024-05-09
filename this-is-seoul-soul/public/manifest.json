@@ -2,7 +2,7 @@
   "theme_color": "#FFBE16",
   "background_color": "#FFFFFF",
   "display": "standalone",
-  "scope": "",
+  "scope": "/",
   "start_url": "/auth/signin",
   "name": "This is Seoul Soul",
   "short_name": "This is Seoul Soul",
