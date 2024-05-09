@@ -35,6 +35,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: '/index.html',
+        sw: './sw.js',
       },
     },
 
@@ -43,7 +44,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://43.202.235.85',
+        target: 'https://seoulsoul.site',
         changeOrigin: true,
         secure: true,
       },
