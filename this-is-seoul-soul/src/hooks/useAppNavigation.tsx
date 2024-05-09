@@ -10,6 +10,7 @@ import {
   FestivalRegisterPage,
   SearchPage,
   privatePolicyPage,
+  SearchResultPage,
 } from 'constants/pathname';
 import { createSearchParams, useNavigate } from 'react-router-dom';
 
@@ -81,6 +82,16 @@ export const useAppNavigation = () => {
     navigate(SearchPage.path);
   };
 
+  // 검색 결과 페이지
+  const navigateToSearchResult = (keyword: string) => {
+    navigate({
+      pathname: SearchResultPage.path,
+      search: createSearchParams({
+        keyword: `${keyword}`,
+      }).toString(),
+    });
+  };
+
   // 개인정보처리방침
   const navigateToPrivatePolicy = () => {
     navigate(privatePolicyPage.path);
@@ -97,6 +108,7 @@ export const useAppNavigation = () => {
     navigateToMyReviewDetails,
     navigateToFestivalRegister,
     navigateToSearch,
+    navigateToSearchResult,
     navigateToPrivatePolicy,
   };
 };

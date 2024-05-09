@@ -18,6 +18,7 @@ import { MyReviewDetails } from 'pages/My/MyReviewDetails/index.tsx';
 import { FestivalRegisterPage } from 'pages/FestivalRegister/index.tsx';
 import { SearchPage } from 'pages/Search/index.tsx';
 import { PrivatePolicy } from 'pages/Policy/Private/index.tsx';
+import { SearchResultPage } from 'pages/Search/SearchResult/index.tsx';
 
 const router = createBrowserRouter([
   {
@@ -79,6 +80,10 @@ const router = createBrowserRouter([
       {
         path: '/search',
         element: <SearchPage />,
+      },
+      {
+        path: '/search/result',
+        element: <SearchResultPage />,
       },
       {
         path: '/policy/private',
