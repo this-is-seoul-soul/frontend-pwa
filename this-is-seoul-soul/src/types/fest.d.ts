@@ -19,3 +19,18 @@ export type FestLocationType = {
   lat: number;
   isHeart: boolean;
 }
+
+export type FestivalRegisterType = {
+  title: string;
+  codeName: string;
+  guName: string;
+  place: string;
+  useTrgt: string;
+  isFree: string;
+  useFee: string;
+  startDate: string;
+  endDate: string;
+  lot: number;
+  lat: number;
+  mainImg: string;
+};
