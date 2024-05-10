@@ -17,7 +17,7 @@ interface NicknameProps {
 export const CheckNickname = () => {
   const [randomNickName, setRandomNickName] = useState('');
   const [duplicateMessage, setDuplicateMessage] = useState('');
-  const [isSubmitEnabled, setIsSubmitEnabled] = useState(false);
+  const [isSubmitEnabled, setIsSubmitEnabled] = useState(true);
   const navigation = useAppNavigation();
 
   const { handleSubmit, control, setValue } = useForm({

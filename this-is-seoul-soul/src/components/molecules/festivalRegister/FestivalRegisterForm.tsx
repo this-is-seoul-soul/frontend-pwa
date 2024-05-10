@@ -1,27 +1,15 @@
+import { festivalRegisterApi } from 'apis/festApi';
+import { CategorizeFestivalInputText } from 'components/atoms/inputs/CategorizeFestivalInputText';
 import { RegisterFormInputText } from 'components/atoms/inputs/RegisterFormInputText';
 import { useForm } from 'react-hook-form';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
+import { FestivalRegisterType } from 'types/fest';
 import { cls } from 'utils/cls';
 
 type FestivalRegisterFormType = {
   position: { lat: number; lng: number };
   address: string;
   setLocation: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
-type FestivalRegisterType = {
-  title: string;
-  codeName: string;
-  guName: string;
-  place: string;
-  useTrgt: string;
-  isFree: string;
-  useFee: string;
-  startDate: string;
-  endDate: string;
-  lot: number;
-  lat: number;
-  mainImg: string;
 };
 
 export const FestivalRegisterForm = ({
@@ -32,23 +20,25 @@ export const FestivalRegisterForm = ({
   const { handleSubmit, control } = useForm({
     defaultValues: {
       title: '',
-      codeName: '',
-      guName: '',
+      codeName: '뮤지컬/오페라',
+      guName: '구로구',
       place: address,
-      useTrgt: '',
-      isFree: '',
-      useFee: '',
-      startDate: '',
-      endDate: '',
+      useTrgt: '7세 이상',
+      isFree: '유료',
+      useFee: 'R 50,000원 / S 40,000원 / A 30,000원',
+      startDate: '2024-05-10',
+      endDate: '2024-05-29',
       lot: position.lat,
       lat: position.lng,
       mainImg: '',
     },
   });
 
-  const onSubmit = (data: FestivalRegisterType) => {
+  const onSubmit = async (data: FestivalRegisterType) => {
     // form 데이터를 처리할 로직 추가
     console.log(data);
+    const res = await festivalRegisterApi(data);
+    console.log(res);
   };
 
   return (
@@ -85,6 +75,7 @@ export const FestivalRegisterForm = ({
           control={control}
           placeholder='행사 이름을 작성하세요.'
         />
+        <CategorizeFestivalInputText name='codeName' placeholder='행사 이름을 작성하세요.' />
         <div>행사 분류</div>
         <div>이용 대상</div>
         <div>이용 요금</div>
