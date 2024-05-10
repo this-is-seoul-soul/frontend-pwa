@@ -63,6 +63,11 @@ export const SearchPage = {
   label: '검색',
 };
 
+export const SearchResultPage = {
+  path: '/search/result',
+  label: '검색 결과',
+};
+
 export const ReviewCreatePage = {
   path: '/festdetail/review',
   label: '리뷰 등록',
@@ -88,5 +93,6 @@ export const pathname = [
   MyReviewDetailsPage,
   FestivalRegisterPage,
   SearchPage,
+  SearchResultPage,
   privatePolicyPage,
 ];

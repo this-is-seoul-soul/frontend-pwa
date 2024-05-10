@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 import { SearchItem } from 'components/atoms/search/SearchItem';
+import { useAppNavigation } from 'hooks/useAppNavigation';
 import { CiCircleAlert } from 'react-icons/ci';
 import { GoSearch } from 'react-icons/go';
 import { IoClose } from 'react-icons/io5';
@@ -20,6 +21,8 @@ export const SearchList = ({
   keywords,
   onRemoveKeyword,
 }: SearchListProps) => {
+  const navigator = useAppNavigation();
+
   return (
     <div className='w-full h-[93.3%] mt-[1%] bg-white px-4'>
       {value.length === 0 ? (
@@ -44,7 +47,12 @@ export const SearchList = ({
                   <div key={Keyword.id} className='flex items-center justify-between py-2'>
                     <div className='flex gap-4'>
                       <GoSearch size={20} className='text-gray-400 stroke-1 ' />
-                      <div className=''>{Keyword.text}</div>
+                      <div
+                        className=''
+                        onClick={() => navigator.navigateToSearchResult(Keyword.text)}
+                      >
+                        {Keyword.text}
+                      </div>
                     </div>
                     <div onClick={() => onRemoveKeyword(Keyword.id)} className='justify-self-end'>
                       <IoClose />
@@ -57,8 +65,7 @@ export const SearchList = ({
         </div>
       ) : (
         <div>
-          검색한 경우
-          <SearchItem />
+          <SearchItem keyword={value} />
         </div>
       )}
     </div>
