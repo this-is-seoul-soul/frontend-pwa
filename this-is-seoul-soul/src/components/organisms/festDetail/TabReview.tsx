@@ -114,7 +114,7 @@ export const TabReview = ({ fest }: TabReviewProps) => {
             description={`평점 ${fest.avgPoint}\u00A0  총 ${fest.cntReview}개`}
           />
         </div>
-        <ListHeader sort />
+        <ListHeader />
         <div className='pt-2 pb-14'>
           {ReviewDummy.map((reviewItem) => {
             return <ReviewItem review={reviewItem} />;

@@ -34,3 +34,13 @@ export type FestivalRegisterType = {
   lat: number;
   mainImg: string;
 };
+
+export type searchRequestType = {
+  isFree: boolean,
+  isContinue: boolean,
+  region: string,
+  codename: string,
+  sort: number,
+  page: number,
+  limit: number
+}

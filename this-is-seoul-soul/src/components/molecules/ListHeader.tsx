@@ -3,10 +3,10 @@ import { cls } from 'utils/cls';
 
 interface ListHeaderProps {
   total?: number;
-  sort?: boolean;
+  sort?: (index: number) => void;
 }
 
-export const ListHeader = ({ total, sort = false }: ListHeaderProps) => {
+export const ListHeader = ({ total, sort }: ListHeaderProps) => {
   return (
     <div className={cls('flex justify-between items-center px-6 bg-white')}>
       {total ? (
@@ -17,7 +17,7 @@ export const ListHeader = ({ total, sort = false }: ListHeaderProps) => {
         <div></div>
       )}
       {sort && (
-        <div className={cls('flex items-center')}>
+        <div onClick={() => sort(1)} className={cls('flex items-center')}>
           추천순 <IoIosArrowDown className={cls('mt-1 pl-1')} />
         </div>
       )}
