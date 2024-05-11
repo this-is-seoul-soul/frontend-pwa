@@ -87,9 +87,9 @@ export const refreshTokenApi = async () => {
 // 리뷰 작성자 정보 조회
 
 // 회원 등록 상태 파악
-export const userStatusApi = async (googleId: string) => {
+export const userStatusApi = async (googleId?: string) => {
   const url = memberUrl + '/status';
-  const res = await axios.get(url, { params: { googleId: googleId } });
-  console.log(res);
+  const params = googleId ? { googleId: googleId } : {};
+  const res = await axios.get(url, { params: params });
   return res;
 };

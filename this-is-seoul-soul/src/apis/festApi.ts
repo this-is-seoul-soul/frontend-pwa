@@ -57,11 +57,31 @@ export const mapFestApi = async (data: MapResponse) => {
 // 분류에 맞는 행사 조회
 
 // 행사 상세 정보 조회
+export const festDeatailInfoApi = async (festSeq: number) => {
+  const url = festUrl + '/search/detail';
+  const res = axios.get(url, { params: { festSeq: festSeq } });
+  return res;
+};
 
 // 행사 찜 추가
+export const festHeartAddApi = async (festSeq: number) => {
+  const url = festUrl + `/heart/${festSeq}`;
+  const res = axios.post(url);
+  return res;
+}
 
 // 행사 찜 제거
+export const festHeartDeleteApi = async (festSeq: number) => {
+  const url = festUrl + `/heart/${festSeq}`;
+  const res = axios.delete(url);
+  return res;
+}
 
 // 행사 찜 조회
+export const festHeartInfoApi = async () => {
+  const url = festUrl + '/heart';
+  const res = axios.get(url);
+  return res;
+};
 
 // 행사 추천
