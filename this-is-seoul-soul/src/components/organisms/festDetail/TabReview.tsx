@@ -1,6 +1,6 @@
 import { TitleSection } from 'components/atoms/titles/TitleReviewSection';
 import { ListHeader } from 'components/molecules/ListHeader';
-import { festDetail, reviewTagList } from 'types/festDetail';
+import { FestDetailType, reviewTagList } from 'types/festDetail';
 import { GoStar, GoStarFill } from 'react-icons/go';
 import { useState } from 'react';
 import { useAppNavigation } from 'hooks/useAppNavigation';
@@ -8,7 +8,7 @@ import { TagBar } from 'components/atoms/reviewInfo/TagBar';
 import { ReviewItem } from 'components/atoms/review/ReviewItem';
 
 interface TabReviewProps {
-  fest: festDetail;
+  fest: FestDetailType;
 }
 
 const dummyTags: reviewTagList = {

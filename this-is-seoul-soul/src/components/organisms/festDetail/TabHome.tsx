@@ -1,11 +1,11 @@
-import { festDetail } from 'types/festDetail';
+import { FestDetailType } from 'types/festDetail';
 import { GoLocation, GoPerson } from 'react-icons/go';
 import { MdAccessTime } from 'react-icons/md';
 import { FaWonSign, FaLink } from 'react-icons/fa6';
 import { cls } from 'utils/cls';
 
 interface TabHomeProps {
-  fest: festDetail;
+  fest: FestDetailType;
 }
 
 export const TabHome = ({ fest }: TabHomeProps) => {
@@ -23,7 +23,7 @@ export const TabHome = ({ fest }: TabHomeProps) => {
         <div>
           <MdAccessTime size={18} className={cls('mt-1 text-gray-600 stroke-1 stroke-gray-600')} />
         </div>
-        <span className={cls('font-bold')}>{fest.isContinue ? '진행중' : '미진행'}</span>
+        <span className={cls('font-bold')}>{fest.continue ? '진행중' : '미진행'}</span>
         <span id='period' className={cls('text-gray-800')}>
           {fest.startDate} ~ {fest.endDate}
         </span>

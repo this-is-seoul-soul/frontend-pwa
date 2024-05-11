@@ -1,4 +1,4 @@
-export type festDetail = {
+export type FestDetailType = {
     festSeq: int,
     title: string,
     codename: string,
@@ -15,9 +15,9 @@ export type festDetail = {
     mainImg: string,
     avgPoint: double,
     cntReview: int,
-    isContinue: boolean,
-    isHeart: boolean,
-    tag: [ { tag: int, cnt: int } ]
+    continue: boolean,
+    heart: boolean,
+    tag: { tag: int, cnt: int }[] | null
 }
 
 export type reviewTagList = {

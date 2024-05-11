@@ -1,8 +1,8 @@
-import { festDetail } from 'types/festDetail';
+import { FestDetailType } from 'types/festDetail';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 
 interface TabMapProps {
-  fest: festDetail;
+  fest: FestDetailType;
 }
 
 export const TabMap = ({ fest }: TabMapProps) => {
