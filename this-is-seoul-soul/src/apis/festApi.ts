@@ -90,3 +90,8 @@ export const festHeartInfoApi = async () => {
 };
 
 // 행사 추천
+export const festRecommendApi = async () => {
+  const url = festUrl + '/recommend';
+  const res = axios.get(url);
+  return res;
+}
