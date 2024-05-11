@@ -15,8 +15,8 @@ type FestInfoProps = {
 export const FestInfoMapItem = ({ fest }: FestInfoProps) => {
   const label = (pathname.find((item) => item.path === location.pathname) || {}).label;
 
-  const [isHeart, setIsHeart] = useState(fest.isHeart);
-  const codeColor = codeNameColor[fest.codeName] || 'bg-gray-100';
+  const [isHeart, setIsHeart] = useState(fest.heart);
+  const codeColor = codeNameColor[fest.codename] || 'bg-gray-100';
   const image = fest.mainImg || Default;
   const navigation = useAppNavigation();
 
@@ -54,7 +54,7 @@ export const FestInfoMapItem = ({ fest }: FestInfoProps) => {
         <img src={image} className={cls('w-28 h-28 object-cover')} />
         <div className={cls('px-3 text-xs')}>
           <div className={cls(`${codeColor} inline-block rounded-lg px-2 py-1`)}>
-            {fest.codeName}
+            {fest.codename}
           </div>
           <div className={cls('font-bold text-lg pt-2 line-clamp-2')}>{fest.title}</div>
           <div className={cls('py-1')}>
@@ -62,7 +62,7 @@ export const FestInfoMapItem = ({ fest }: FestInfoProps) => {
             <span className={cls('px-3')}>{fest.useFee}</span>
           </div>
           <div className={cls('relative flex flex-wrap items-center mb-1')}>
-            {fest.isContinue && <span className={cls('pr-3')}>진행 중</span>}
+            {fest.continue && <span className={cls('pr-3')}>진행 중</span>}
             <div className='text-xs flex items-center gap-1'>
               <GoStarFill className='fill-yellow-400' />
               {fest.avgPoint}
