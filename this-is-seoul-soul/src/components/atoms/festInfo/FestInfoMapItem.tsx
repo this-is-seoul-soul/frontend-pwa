@@ -56,10 +56,14 @@ export const FestInfoMapItem = ({ fest }: FestInfoProps) => {
           <div className={cls(`${codeColor} inline-block rounded-lg px-2 py-1`)}>
             {fest.codename}
           </div>
-          <div className={cls('font-bold text-lg pt-2 line-clamp-2')}>{fest.title}</div>
+          <div className={cls('font-bold text-lg pt-2 line-clamp-2')}>
+            {fest.title.length > 10 ? `${fest.title.substring(0, 10)}...` : fest.title}
+          </div>
           <div className={cls('py-1')}>
             <span className={cls('text-gray-700')}>이용 요금</span>
-            <span className={cls('px-3')}>{fest.useFee}</span>
+            <span className={cls('px-3')}>
+              {fest.useFee.length > 12 ? `${fest.useFee.substring(0, 12)}...` : fest.useFee}
+            </span>
           </div>
           <div className={cls('relative flex flex-wrap items-center mb-1')}>
             {fest.continue && <span className={cls('pr-3')}>진행 중</span>}

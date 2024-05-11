@@ -10,98 +10,6 @@ import { sortList } from 'constants/sort';
 import { userInfoApi } from 'apis/userApi';
 // import InfiniteScroll from 'react-infinite-scroller';
 
-// const FestDummy = [
-//   {
-//     festSeq: 4808,
-//     title: '런던 심포니 [안토니오 파파노 & 유자 왕]',
-//     codename: '전체',
-//     mainImg:
-//       'https://culture.seoul.go.kr/cmmn/file/getImage.do?atchFileId=3cdefa3d97384b0482b182b92f436afa&thumb=Y',
-//     startDate: '2024-10-01T09:00:00',
-//     endDate: '2024-10-01T09:00:00',
-//     useFee: '2024.4.25(목) 티켓오픈 예정',
-//     avgPoint: 0,
-//     cntReview: 0,
-//     continue: false,
-//     heart: false,
-//   },
-//   {
-//     festSeq: 4808,
-//     title: '런던 심포니 [안토니오 파파노 & 유자 왕]',
-//     codename: '전체',
-//     mainImg:
-//       'https://culture.seoul.go.kr/cmmn/file/getImage.do?atchFileId=3cdefa3d97384b0482b182b92f436afa&thumb=Y',
-//     startDate: '2024-10-01T09:00:00',
-//     endDate: '2024-10-01T09:00:00',
-//     useFee: '2024.4.25(목) 티켓오픈 예정',
-//     avgPoint: 0,
-//     cntReview: 0,
-//     continue: false,
-//     heart: false,
-//   },
-//   {
-//     festSeq: 4808,
-//     title: '런던 심포니 [안토니오 파파노 & 유자 왕]',
-//     codename: '전체',
-//     mainImg:
-//       'https://culture.seoul.go.kr/cmmn/file/getImage.do?atchFileId=3cdefa3d97384b0482b182b92f436afa&thumb=Y',
-//     startDate: '2024-10-01T09:00:00',
-//     endDate: '2024-10-01T09:00:00',
-//     useFee: '2024.4.25(목) 티켓오픈 예정',
-//     avgPoint: 0,
-//     cntReview: 0,
-//     continue: false,
-//     heart: false,
-//   },
-// ];
-
-// const recommendDummy = [
-//   {
-//     festSeq: 8958,
-//     title: '임종진 사진전',
-//     codename: '전시/미술',
-//     guname: '종로구',
-//     place: '서울시청',
-//     useTrgt: '전체',
-//     isFree: '무료',
-//     useFee: '',
-//     startDate: '2023-05-10T09:00:00',
-//     endDate: '2023-05-15T09:00:00',
-//     lot: 37.5741966894963,
-//     lat: 126.984430460968,
-//     orgLink: 'http://www.galleryindex.co.kr/',
-//     mainImg:
-//       'https://culture.seoul.go.kr/cmmn/file/getImage.do?atchFileId=79261d900b1b42a6b0bbba7e627a3e4a&thumb=Y',
-//     avgPoint: 0,
-//     cntReview: 0,
-//     tag: null,
-//     continue: false,
-//     heart: false,
-//   },
-//   {
-//     festSeq: 8958,
-//     title: '임종진 사진전',
-//     codename: '전시/미술',
-//     guname: '종로구',
-//     place: '서울시청',
-//     useTrgt: '전체',
-//     isFree: '무료',
-//     useFee: '',
-//     startDate: '2023-05-10T09:00:00',
-//     endDate: '2023-05-15T09:00:00',
-//     lot: 37.5741966894963,
-//     lat: 126.984430460968,
-//     orgLink: 'http://www.galleryindex.co.kr/',
-//     mainImg:
-//       'https://culture.seoul.go.kr/cmmn/file/getImage.do?atchFileId=79261d900b1b42a6b0bbba7e627a3e4a&thumb=Y',
-//     avgPoint: 0,
-//     cntReview: 0,
-//     tag: null,
-//     continue: false,
-//     heart: false,
-//   },
-// ];
-
 export const HomePage = () => {
   const [recommendFestList, setRecommendFestList] = useState<FestType[]>();
   const [festList, setFestList] = useState<FestType[]>();
@@ -113,7 +21,7 @@ export const HomePage = () => {
     codename: '전체',
     sort: 1,
     page: 1,
-    limit: 10,
+    limit: 50,
   });
 
   // 내 회원 정보 불러오는 함수
@@ -126,10 +34,7 @@ export const HomePage = () => {
   const getRecommendedFestList = async () => {
     const result = await festRecommendApi();
     if (result.status === 200) {
-      console.log('[홈-추천리스트 API] 성공', result.data.data);
       setRecommendFestList(result.data.data);
-    } else {
-      console.log('[홈-추천리스트 API] 실패', result);
     }
   };
 
@@ -137,10 +42,7 @@ export const HomePage = () => {
   const getSearchFestList = async () => {
     const result = await searchFestApi(params);
     if (result.status === 200) {
-      console.log('[홈-전체목록 API] 성공', result.data.data);
       setFestList(result.data.data);
-    } else {
-      console.log('[홈-전체목록 API] 실패', result);
     }
   };
 
@@ -152,7 +54,6 @@ export const HomePage = () => {
   };
 
   useEffect(() => {
-    console.log('[params 변경]', params);
     getSearchFestList();
   }, [params]);
 
