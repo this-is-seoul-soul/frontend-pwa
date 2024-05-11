@@ -1,12 +1,15 @@
-import { IoIosArrowDown } from 'react-icons/io';
+import { SortInputText } from 'components/atoms/inputs/SortInputText';
 import { cls } from 'utils/cls';
 
 interface ListHeaderProps {
   total?: number;
-  sort?: boolean;
+  sort?: {
+    sortList: { [key: string]: number };
+    callback: (sortId: number) => void;
+  };
 }
 
-export const ListHeader = ({ total, sort = false }: ListHeaderProps) => {
+export const ListHeader = ({ total, sort }: ListHeaderProps) => {
   return (
     <div className={cls('flex justify-between items-center px-6 bg-white')}>
       {total ? (
@@ -16,11 +19,7 @@ export const ListHeader = ({ total, sort = false }: ListHeaderProps) => {
       ) : (
         <div></div>
       )}
-      {sort && (
-        <div className={cls('flex items-center')}>
-          추천순 <IoIosArrowDown className={cls('mt-1 pl-1')} />
-        </div>
-      )}
+      {sort && <SortInputText sortList={sort.sortList} setValue={sort.callback} />}
     </div>
   );
 };
