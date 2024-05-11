@@ -10,8 +10,8 @@ type FestInfoProps = {
 };
 
 export const FestInfoHomeItem = ({ fest }: FestInfoProps) => {
-  const [isHeart, setIsHeart] = useState(fest.isHeart);
-  const codeColor = codeNameColor[fest.codeName] || 'bg-gray-100';
+  const [isHeart, setIsHeart] = useState(fest.heart);
+  const codeColor = codeNameColor[fest.codename] || 'bg-gray-100';
   const image = fest.mainImg || Default;
   const navigation = useAppNavigation();
 
@@ -33,7 +33,7 @@ export const FestInfoHomeItem = ({ fest }: FestInfoProps) => {
         <img src={image} className='absolute w-full h-full left-0 right-0 top-0 object-cover' />
       </div>
       <div id='category' className='flex items-center justify-between pt-1'>
-        <div className={`${codeColor} rounded-lg text-xs px-2 py-1`}>{fest.codeName}</div>
+        <div className={`${codeColor} rounded-lg text-xs px-2 py-1`}>{fest.codename}</div>
         <div onClick={(e) => handleHeart(e)}>
           {isHeart == true ? (
             <GoBookmarkFill size={'1.25rem'} className='  fill-yellow-400' />
@@ -50,7 +50,7 @@ export const FestInfoHomeItem = ({ fest }: FestInfoProps) => {
         <div>{fest.useFee}</div>
       </div>
       <div className='text-xs flex flex-wrap justify-start items-center gap-2'>
-        {fest.isContinue && <div>{fest.isContinue ? '진행중' : '미진행'}</div>}
+        {fest.continue && <div>{fest.continue ? '진행중' : '미진행'}</div>}
         <div className='text-xs flex items-center gap-1'>
           <GoStarFill className='fill-yellow-400' />
           {fest.avgPoint}

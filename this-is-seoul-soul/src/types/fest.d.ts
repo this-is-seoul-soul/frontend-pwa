@@ -1,15 +1,15 @@
 export type FestType = {
   festSeq: number;
   title: string;
-  codeName: string;
+  codename: string;
   mainImg: string;
   startDate: string;
   endDate: string;
   useFee: string;
   avgPoint: number;
   cntReview: number;
-  isContinue: boolean;
-  isHeart: boolean;
+  continue: boolean;
+  heart: boolean;
 };
 
 export type FestLocationType = {
@@ -35,7 +35,7 @@ export type FestivalRegisterType = {
   mainImg: string;
 };
 
-export type searchRequestType = {
+export type FestDetailSearchType = {
   isFree: boolean,
   isContinue: boolean,
   region: string,

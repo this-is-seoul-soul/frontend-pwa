@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import axios from 'apis';
-import { FestivalRegisterType, searchRequestType } from 'types/fest';
+import { FestivalRegisterType, FestDetailSearchType } from 'types/fest';
 import { MapResponse } from 'types/map';
 
 const festUrl = '/fest';
@@ -55,7 +55,7 @@ export const mapFestApi = async (data: MapResponse) => {
 };
 
 // 분류에 맞는 행사 조회
-export const searchFestApi = async (params: searchRequestType) => {
+export const searchFestApi = async (params: FestDetailSearchType) => {
   const url = festUrl + '/search';
   const res = await axios.get(url, { params: params });
   return res;
