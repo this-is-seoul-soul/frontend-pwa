@@ -1,10 +1,31 @@
 import { festivalRegisterApi } from 'apis/festApi';
+import { CalendarInputText } from 'components/atoms/inputs/CalendarInputText';
 import { CategorizeFestivalInputText } from 'components/atoms/inputs/CategorizeFestivalInputText';
+import { PictureRegisterFormInputText } from 'components/atoms/inputs/PictureRegisterFormInputText';
+import { PriceInputText } from 'components/atoms/inputs/PriceInputText';
 import { RegisterFormInputText } from 'components/atoms/inputs/RegisterFormInputText';
+import { TargetAudienceInputText } from 'components/atoms/inputs/TargetAudienceInputText';
+import { myPage } from 'constants/pathname';
 import { useForm } from 'react-hook-form';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
+import { useNavigate } from 'react-router-dom';
 import { FestivalRegisterType } from 'types/fest';
 import { cls } from 'utils/cls';
+
+type FormData = {
+  title: string;
+  codeName: string;
+  guName: string;
+  place: string;
+  useTrgt: string;
+  isFree: string;
+  useFee: string;
+  startDate: string;
+  endDate: string;
+  lot: number;
+  lat: number;
+  mainImg: string;
+};
 
 type FestivalRegisterFormType = {
   position: { lat: number; lng: number };
@@ -17,17 +38,21 @@ export const FestivalRegisterForm = ({
   address,
   setLocation,
 }: FestivalRegisterFormType) => {
-  const { handleSubmit, control } = useForm({
+  const addressParts = address.split(' ');
+  const guName = addressParts[1];
+  const navigate = useNavigate();
+
+  const { handleSubmit, control, setValue, getValues } = useForm<FormData>({
     defaultValues: {
       title: '',
-      codeName: '뮤지컬/오페라',
-      guName: '구로구',
+      codeName: '',
+      guName: guName,
       place: address,
-      useTrgt: '7세 이상',
-      isFree: '유료',
-      useFee: 'R 50,000원 / S 40,000원 / A 30,000원',
-      startDate: '2024-05-10',
-      endDate: '2024-05-29',
+      useTrgt: '',
+      isFree: '',
+      useFee: '',
+      startDate: '2023-05-11',
+      endDate: '2023-05-20',
       lot: position.lat,
       lat: position.lng,
       mainImg: '',
@@ -36,9 +61,18 @@ export const FestivalRegisterForm = ({
 
   const onSubmit = async (data: FestivalRegisterType) => {
     // form 데이터를 처리할 로직 추가
-    console.log(data);
+    if (data.isFree === '무료') {
+      data.useFee = '무료';
+    } else {
+      data.useFee = '유료';
+    }
     const res = await festivalRegisterApi(data);
     console.log(res);
+    if (res.status === 200) {
+      navigate(myPage.path, { replace: true });
+    } else {
+      console.log('등록 실패');
+    }
   };
 
   return (
@@ -55,6 +89,8 @@ export const FestivalRegisterForm = ({
             height: '100%',
           }}
           level={3}
+          draggable={false}
+          disableDoubleClickZoom={true}
         >
           <MapMarker position={position} />
         </Map>
@@ -75,13 +111,39 @@ export const FestivalRegisterForm = ({
           control={control}
           placeholder='행사 이름을 작성하세요.'
         />
-        <CategorizeFestivalInputText name='codeName' placeholder='행사 이름을 작성하세요.' />
-        <div>행사 분류</div>
-        <div>이용 대상</div>
-        <div>이용 요금</div>
-        <div>행사 기간</div>
-        <div>사진 첨부</div>
-        <div className={cls('font-bold text-xl w-full px-4 pb-12')}>
+        <CategorizeFestivalInputText
+          name='codeName'
+          label='행사 분류'
+          placeholder='분류를 선택해주세요.'
+          control={control}
+          setValue={setValue}
+        />
+        <TargetAudienceInputText
+          name='useTrgt'
+          label='이용 대상'
+          placeholder='이용 대상을 선택해주세요.'
+          control={control}
+          setValue={setValue}
+          getValues={getValues}
+        />
+        <PriceInputText
+          name='isFree'
+          label='이용 요금'
+          placeholder='이용 요금을 선택해주세요.'
+          control={control}
+          setValue={setValue}
+        />
+        <CalendarInputText
+          nameFirst='startDate'
+          nameSecond='endDate'
+          label='행사 기간'
+          placeholderFirst='행사 시작일'
+          placeholdSecond='행사 마감일'
+          control={control}
+          setValue={setValue}
+        />
+        <PictureRegisterFormInputText name='mainImg' label='사진 첨부' setValue={setValue} />
+        <div className={cls('font-bold text-xl w-full px-4 pb-12 pt-6')}>
           <button className='w-full bg-yellow-300 rounded-xl py-2'>완료</button>
         </div>
       </form>
