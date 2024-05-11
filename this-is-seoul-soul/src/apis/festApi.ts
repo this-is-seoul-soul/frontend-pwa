@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import axios from 'apis';
 import { FestivalRegisterType } from 'types/fest';
+import { MapResponse } from 'types/map';
 
 const festUrl = '/fest';
 
@@ -27,6 +29,30 @@ export const festivalRegisterApi = async (data: FestivalRegisterType) => {
 // 행사 리뷰 태그 조회
 
 // 지도 기반 행사 조회
+export const mapFestApi = async (data: MapResponse) => {
+  const url = festUrl + '/search/map';
+
+  const params: any = {
+    lat: data.lat,
+    lot: data.lot,
+    distance: data.distance,
+  };
+
+  if (data.filter.length > 0) {
+    params.filter = data.filter.join(',');
+  }
+  if (data.year.length > 0) {
+    params.year = data.year.join(',');
+  }
+  if (data.codeName.length > 0) {
+    params.codeName = data.codeName.join(',');
+  }
+
+  const res = await axios.get(url, {
+    params: params,
+  });
+  return res;
+};
 
 // 분류에 맞는 행사 조회
 
