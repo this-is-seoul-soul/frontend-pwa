@@ -1,0 +1,15 @@
+version: "3.7"
+
+services:
+  client:
+    container_name: front
+    image: seoulsoul_front
+    ports:
+      - 3000:80
+    networks:
+      - deploy
+    environment:
+      - TZ=Asia/Seoul
+networks:
+  deploy:
+    external: true
