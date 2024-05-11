@@ -1,29 +1,51 @@
 import { Outlet, useNavigate } from 'react-router-dom';
 import './App.css';
 import { BottomTabNavigation } from './components/organisms/BottomTabNavigation';
-import { homePage, pathname, signInPage } from './constants/pathname';
+import {
+  CheckNicknamePage,
+  FestiTestLandingPage,
+  homePage,
+  pathname,
+  signInPage,
+} from './constants/pathname';
 import { useEffect } from 'react';
 import { TopHeader } from 'components/molecules/TopHeader';
 import { cls } from 'utils/cls';
+import { userStatusApi } from 'apis/userApi';
 
 export default function App() {
   const label = (pathname.find((item) => item.path === location.pathname) || {}).label;
 
   const navigate = useNavigate();
 
+  const handleUserStatus = async () => {
+    const res = await userStatusApi();
+    console.log(res);
+    if (res.status === 200) {
+      if (res.data.data.status === 'complete') {
+        navigate(homePage.path, { replace: true });
+      } else if (res.data.data.status === 'festi') {
+        navigate(FestiTestLandingPage.path, { replace: true });
+      } else if (res.data.data.status === 'nickname') {
+        navigate(CheckNicknamePage.path, { replace: true });
+      } else {
+        navigate(CheckNicknamePage.path, { replace: true });
+      }
+    } else if (res.status === 403) {
+      navigate(signInPage.path, { replace: true });
+      localStorage.removeItem('accessToken');
+      localStorage.removeItem('refreshToken');
+    }
+  };
+
   useEffect(() => {
-    // localStorageaccesstoken이 있는지..
     const localAccessToken = localStorage.getItem('accessToken');
-    console.log(localAccessToken);
     if (localAccessToken !== null) {
-      navigate(homePage.path, { replace: true });
+      handleUserStatus();
     } else {
       navigate(signInPage.path, { replace: true });
     }
-    // accesstoken이 만료되었는지
-    // 만료된 상태가 아니라면 -> 어디까지 회원가입한 상태인지 파악하고 페이지 이동
-    // 없다면 signInPage로 이동
-  }, [navigate]);
+  }, []);
 
   return (
     <div className={cls('w-full h-full font-PretendardMedium')}>
