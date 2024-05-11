@@ -1,11 +1,11 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { codeNameColor } from 'constants/codename';
+import { priceList } from 'constants/price';
 import useBottomSheet from 'hooks/useBottomSheet';
 import { useState } from 'react';
 import { Controller } from 'react-hook-form';
 import { cls } from 'utils/cls';
 
-interface CategorizeFestivalInputTextProps {
+/* eslint-disable @typescript-eslint/no-explicit-any */
+interface PriceInputTextProps {
   name: string;
   control?: any;
   placeholder: string;
@@ -13,13 +13,13 @@ interface CategorizeFestivalInputTextProps {
   label: string;
 }
 
-export const CategorizeFestivalInputText = ({
+export const PriceInputText = ({
   name,
   control,
   placeholder,
   setValue,
   label,
-}: CategorizeFestivalInputTextProps) => {
+}: PriceInputTextProps) => {
   const { component, openPopup, closePopup } = useBottomSheet();
   const [selectedOption, setSelectedOption] = useState(null);
 
@@ -29,24 +29,24 @@ export const CategorizeFestivalInputText = ({
     closePopup();
   };
 
-  const radioButtons = Object.keys(codeNameColor).map((key) => (
-    <div key={key} className='py-2'>
+  const radioButtons = priceList.map((item) => (
+    <div key={item.priceId} className='py-2'>
       <input
         type='radio'
-        id={key}
+        id={String(item.priceId)}
         name='option'
-        value={key}
-        defaultChecked={selectedOption === key}
+        value={item.label}
+        defaultChecked={selectedOption === item.label}
         onChange={handleOptionChange}
         className='accent-yellow-400 text-white'
       />
       <label
-        htmlFor={key}
+        htmlFor={String(item.priceId)}
         className={`${
-          selectedOption === key ? 'font-bold' : 'font-normal text-gray-700'
+          selectedOption === item.label ? 'font-bold' : 'font-normal text-gray-700'
         } font-PretendardMedium px-3`}
       >
-        {key}
+        {item.label}
       </label>
     </div>
   ));
@@ -59,7 +59,11 @@ export const CategorizeFestivalInputText = ({
         </div>
       </div>
     );
-    const modalTitle = <div className='w-full py-2 flex justify-center items-center'>{label}</div>;
+    const modalTitle = (
+      <div className='w-full py-2 flex justify-center items-center font-PretendardMedium'>
+        {label}
+      </div>
+    );
     openPopup(modalContent, modalTitle);
   };
 
