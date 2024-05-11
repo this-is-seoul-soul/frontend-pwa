@@ -19,6 +19,7 @@ import { FestivalRegisterPage } from 'pages/FestivalRegister/index.tsx';
 import { SearchPage } from 'pages/Search/index.tsx';
 import { PrivatePolicy } from 'pages/Policy/Private/index.tsx';
 import { SearchResultPage } from 'pages/Search/SearchResult/index.tsx';
+import { GooglePage } from 'pages/Auth/Google/index.tsx';
 
 const router = createBrowserRouter([
   {
@@ -89,12 +90,16 @@ const router = createBrowserRouter([
         path: '/policy/private',
         element: <PrivatePolicy />,
       },
+      {
+        path: '/auth/google',
+        element: <GooglePage />,
+      },
     ],
   },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
+  // <React.StrictMode>
+  <RouterProvider router={router} />
+  // </React.StrictMode>
 );
