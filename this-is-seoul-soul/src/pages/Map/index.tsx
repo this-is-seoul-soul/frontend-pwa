@@ -19,16 +19,16 @@ export const MapPage = () => {
   const [userLocation, setUserLocation] = useState<LocationType>(CurLocation);
   const [places, setPlaces] = useState<FestLocationType[]>([]);
 
-  const fetchPlaces = async () => {
+  const fetchPlaces = async (lat: number, lot: number) => {
     // TODO: 장소 위치 불러오기 api 연결
-    const currentYear = new Date().getFullYear();
+    // const currentYear = new Date().getFullYear();
 
     const result = await mapFestApi({
-      lat: userLocation.lat,
-      lot: userLocation.lot,
-      distance: 3,
+      lat: lat,
+      lot: lot,
+      distance: 10,
       filter: [],
-      year: [currentYear],
+      year: [],
       codeName: [],
     });
     console.log(result);
@@ -42,8 +42,6 @@ export const MapPage = () => {
   // };
 
   useEffect(() => {
-    fetchPlaces();
-
     const user = navigator.geolocation.watchPosition(
       (position) => {
         setUserLocation({
@@ -51,8 +49,7 @@ export const MapPage = () => {
           lot: position.coords.longitude,
           heading: position.coords.heading || 0,
         });
-
-        console.log('사용자의 위치: ', userLocation);
+        fetchPlaces(position.coords.latitude, position.coords.longitude);
       },
       (error) => console.error('사용자 위치 가져오기 실패', error)
     );

@@ -95,3 +95,17 @@ export const festRecommendApi = async () => {
   const res = axios.get(url);
   return res;
 }
+
+// 내가 작성한 축제 조회
+export const myFestInfoApi = async () => {
+  const url = festUrl + '/mine';
+  const res = axios.get(url);
+  return res;
+}
+
+// 내가 작성한 리뷰 조회
+export const myReviewInfoApi = async () => {
+  const url = festUrl + '/review/mine';
+  const res = axios.get(url);
+  return res;
+}
