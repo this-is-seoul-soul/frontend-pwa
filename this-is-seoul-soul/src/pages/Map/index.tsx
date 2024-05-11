@@ -15,23 +15,6 @@ const CurLocation: LocationType = {
   heading: 0,
 };
 
-const PlaceDummy: FestLocationType[] = [
-  {
-    festSeq: 1,
-    title: '장소1',
-    lot: 126.79581,
-    lat: 33.5563,
-    isHeart: true,
-  },
-  {
-    festSeq: 2,
-    title: '장소2',
-    lot: 126.8988711,
-    lat: 37.511168,
-    isHeart: true,
-  },
-];
-
 export const MapPage = () => {
   const [userLocation, setUserLocation] = useState<LocationType>(CurLocation);
   const [places, setPlaces] = useState<FestLocationType[]>([]);
