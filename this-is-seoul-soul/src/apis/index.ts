@@ -13,7 +13,6 @@ axios.interceptors.request.use(
     if (typeof window !== 'undefined') {
       const accessToken = localStorage.getItem('accessToken');
       if (accessToken) {
-        console.log('config', config.url);
         config.headers['Authorization'] = `${accessToken}`;
       }
     }

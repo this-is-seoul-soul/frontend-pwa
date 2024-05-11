@@ -51,8 +51,8 @@ export const FestivalRegisterForm = ({
       useTrgt: '',
       isFree: '',
       useFee: '',
-      startDate: '2023-05-11',
-      endDate: '2023-05-20',
+      startDate: '',
+      endDate: '',
       lot: position.lat,
       lat: position.lng,
       mainImg: '',
@@ -68,7 +68,7 @@ export const FestivalRegisterForm = ({
     }
     const res = await festivalRegisterApi(data);
     console.log(res);
-    if (res.status === 200) {
+    if (res.status === 201) {
       navigate(myPage.path, { replace: true });
     } else {
       console.log('등록 실패');
