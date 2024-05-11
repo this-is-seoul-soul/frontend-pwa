@@ -43,11 +43,11 @@ export const FestInfoHomeItem = ({ fest }: FestInfoProps) => {
         </div>
       </div>
       <div id='title' className='font-bold py-1'>
-        {fest.title}
+        {fest.title.length > 10 ? `${fest.title.substring(0, 10)}...` : fest.title}
       </div>
       <div id='fee' className='text-xs flex items-center gap-2'>
         <div className='text-gray-700'>이용 요금</div>
-        <div>{fest.useFee}</div>
+        <div>{fest.useFee.length > 12 ? `${fest.useFee.substring(0, 12)}...` : fest.useFee}</div>
       </div>
       <div className='text-xs flex flex-wrap justify-start items-center gap-2'>
         {fest.continue && <div>{fest.continue ? '진행중' : '미진행'}</div>}
