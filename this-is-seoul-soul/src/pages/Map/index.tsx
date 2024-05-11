@@ -7,6 +7,7 @@ import { FestLocationType } from 'types/fest';
 import { LocationType } from 'types/map';
 import { SearchBar } from 'components/organisms/SearchBar';
 import { MapFilter } from 'components/molecules/MapFilter/MapFilter';
+import { mapFestApi } from 'apis/festApi';
 
 const CurLocation: LocationType = {
   lot: 0,
@@ -37,7 +38,20 @@ export const MapPage = () => {
 
   const fetchPlaces = async () => {
     // TODO: 장소 위치 불러오기 api 연결
-    setPlaces(PlaceDummy);
+    const currentYear = new Date().getFullYear();
+
+    const result = await mapFestApi({
+      lat: userLocation.lat,
+      lot: userLocation.lot,
+      distance: 3,
+      filter: [],
+      year: [currentYear],
+      codeName: [],
+    });
+    console.log(result);
+    if (result.status === 200) {
+      setPlaces(result.data.data);
+    }
   };
 
   // const handleMoveMyLocation = () => {
