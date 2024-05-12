@@ -34,8 +34,8 @@ export const getFestReviewListApi = async (params: FestReivewParamType) => {
 
 // 행사 리뷰 태그 조회
 export const getFestReviewTagsApi = async (festSeq: number) => {
-  const url = festUrl + '/review/tag';
-  const res = axios.get(url, { params: { festSeq: festSeq } });
+  const url = festUrl + `/review/tag/${festSeq}`;
+  const res = axios.get(url);
   return res;
 }
 
