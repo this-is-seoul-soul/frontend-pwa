@@ -40,7 +40,7 @@ export const TabReview = ({ fest }: TabReviewProps) => {
   const getReviews = async () => {
     const result = await getFestReviewListApi(params);
     if (result.status === 200) {
-      setReviews(result.data.data);
+      setReviews(result.data.data.reviewResList);
     }
   };
 
