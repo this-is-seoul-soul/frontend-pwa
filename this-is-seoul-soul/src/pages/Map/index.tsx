@@ -34,14 +34,16 @@ export const MapPage = () => {
       codeName: [],
     });
 
+    console.log(result);
+
     if (result.status === 200) {
       const allPlace = result.data.data;
-      const convertPlaces = allPlace.map((item: MapFestType) => ({
+      const convertPlaces = allPlace.map((item: FestLocationType) => ({
         festSeq: item.festSeq,
         title: item.title,
         lot: item.lot,
         lat: item.lat,
-        isHeart: item.heart,
+        isHeart: item.isHeart,
       }));
 
       setPlaces(convertPlaces);
@@ -50,6 +52,7 @@ export const MapPage = () => {
 
   const handleMarkerClick = async (festSeq: number) => {
     const result = await festDeatailInfoApi(festSeq);
+    
     if (result.status === 200) {
       setSelectedFest(result.data.data);
     }
