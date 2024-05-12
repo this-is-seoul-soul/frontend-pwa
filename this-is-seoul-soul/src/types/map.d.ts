@@ -12,3 +12,11 @@ export interface MapResponse {
   year: number[];
   codeName: string[];
 }
+
+export type MapFestType = {
+  festSeq: number;
+  heart: boolean;
+  lat: number;
+  lot: number;
+  title: string;
+}

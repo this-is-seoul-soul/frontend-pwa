@@ -4,7 +4,7 @@ import CustomMarker from 'assets/images/CustomMarker.png';
 import UserLocation from 'assets/images/UserLocation.png';
 import { useEffect, useState } from 'react';
 import { FestLocationType } from 'types/fest';
-import { LocationType } from 'types/map';
+import { LocationType, MapFestType } from 'types/map';
 import { SearchBar } from 'components/organisms/SearchBar';
 import { MapFilter } from 'components/molecules/MapFilter/MapFilter';
 import { mapFestApi } from 'apis/festApi';
@@ -26,14 +26,23 @@ export const MapPage = () => {
     const result = await mapFestApi({
       lat: lat,
       lot: lot,
-      distance: 10,
+      distance: 2,
       filter: [],
       year: [],
       codeName: [],
     });
-    console.log(result);
+
     if (result.status === 200) {
-      setPlaces(result.data.data);
+      const allPlace = result.data.data;
+      const convertPlaces = allPlace.map((item: MapFestType) => ({
+        festSeq: item.festSeq,
+        title: item.title,
+        lot: item.lot,
+        lat: item.lat,
+        isHeart: item.heart,
+      }));
+
+      setPlaces(convertPlaces);
     }
   };
 
