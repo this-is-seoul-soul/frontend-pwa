@@ -38,7 +38,7 @@ export const FestInfoMapItem = ({ fest }: FestInfoProps) => {
     <div
       key={fest.festSeq}
       className={cls(
-        `max-w-full relative ${
+        `max-w-full relative bg-white ${
           label === '저장' || label === 'MY' ? '' : 'rounded-md shadow-lg mx-4'
         } px-4 py-2`
       )}
