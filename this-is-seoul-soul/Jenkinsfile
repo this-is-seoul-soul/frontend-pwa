@@ -1,6 +1,10 @@
 pipeline {
   agent any
 
+  tools {
+    nodejs "nodejs"
+  }
+
   stages {
     stage('Clone Repository') {
       steps{
@@ -8,50 +12,43 @@ pipeline {
         git branch: "dev-fe", url: "https://github.com/this-is-seoul-soul/frontend-pwa", credentialsId: 'github_token'
       }
     }
-    stage('Building image') { 
-     steps { 
-      script {
-        sh "pwd"
-        sh 'cp /var/jenkins_home/util/client/.env ./this-is-seoul-soul/'
-        sh "docker build -f ./this-is-seoul-soul/Dockerfile -t seoulsoul_front ."
-       }
-     } 
+
+    stage('Build React') {
+      steps {
+        dir('this-is-seoul-soul') {
+          sh 'npm i -g pnpm'
+          sh 'rm -rf pnpm-lock.yml'
+          sh 'pnpm install'
+          sh 'pnpm build'
+        }
+      }
     }
 
-    stage('Docker build') {
-     steps {
-      echo "docker compose build"
-      sh "docker-compose -f ./this-is-seoul-soul/docker-compose.yml build --no-cache"
-     }
-     post {
-      success {
-       echo "Success to build"
-      }
-      failure {
-       echo "Docker build failed. clear unused file"
-       sh "docker system prune -f"
-       error 'pipeline aborted'
-     }
+    stage('Build image') { 
+      steps { 
+        script {
+          dir('this-is-seoul-soul') {
+            sh "pwd"
+            sh 'cp /var/jenkins_home/util/client/.env ./this-is-seoul-soul'
+            sh "docker build -t seoulsoul_front ."
+          }
+        }
+      } 
     }
-   }
 
     stage('Docker run') {
-     steps {
-      echo "docker compose build"
-      sh "docker stop front"
-      sh "docker rm front"
-      sh "docker-compose -f ./this-is-seoul-soul/docker-compose.yml up -d"
-     }
-     post {
-      success {
-       echo "Success to run"
+      steps {
+        echo "docker compose build"
+        sh "docker rm -f front"
+        sh "docker-compose -f ./this-is-seoul-soul/docker-compose.yml up -d"
       }
-      failure {
-       echo "Docker run failed. clear unused file"
-       error 'pipeline aborted'
-     }
     }
-   }
 
+    stage('Finish') {
+      steps {
+        sh 'docker images -qf dangling=true | xargs -I{} docker rmi {}'
+      }
+    }
   }
+
 }
