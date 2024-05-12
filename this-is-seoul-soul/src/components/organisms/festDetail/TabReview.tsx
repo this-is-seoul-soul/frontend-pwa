@@ -1,6 +1,6 @@
 import { TitleSection } from 'components/atoms/titles/TitleReviewSection';
 import { ListHeader } from 'components/molecules/ListHeader';
-import { FestDetailType, FestReivewParamType, ReviewTagsType, ReviewsType } from 'types/festDetail';
+import { FestDetailType, FestReivewParamType, ReviewTagsType, ReviewType } from 'types/festDetail';
 import { GoStar, GoStarFill } from 'react-icons/go';
 import { useEffect, useState } from 'react';
 import { useAppNavigation } from 'hooks/useAppNavigation';
@@ -17,11 +17,11 @@ export const TabReview = ({ fest }: TabReviewProps) => {
   const navigator = useAppNavigation();
   const [rating, setRating] = useState<number>(0);
   const [tags, setTags] = useState<ReviewTagsType>();
-  const [reviews, setReviews] = useState<ReviewsType[]>();
+  const [reviews, setReviews] = useState<ReviewType[]>();
   const [params, setParams] = useState<FestReivewParamType>({
     festSeq: fest.festSeq,
     sort: 1,
-    page: 1,
+    page: 0,
     limit: 50,
   });
 

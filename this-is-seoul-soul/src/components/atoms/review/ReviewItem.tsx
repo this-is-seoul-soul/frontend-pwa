@@ -1,5 +1,5 @@
 import { FaStar, FaRegStar, FaRegStarHalfStroke } from 'react-icons/fa6';
-import type { ReviewType } from 'types/review';
+import { ReviewType } from 'types/festDetail';
 import { cls } from 'utils/cls';
 
 type ReviewProps = {
@@ -31,7 +31,7 @@ export const ReviewItem = ({ review }: ReviewProps) => {
           className={cls('w-10 h-10 object-cover rounded-full')}
         />
         <div className={cls('px-3 text-xs')}>
-          <div className={cls('font-bold line-clamp-2')}>{review.nickname}</div>
+          <div className={cls('font-bold line-clamp-2')}>{review.nickName}</div>
           <div className={cls('text-gray-700')}>{review.mbti}</div>
         </div>
       </div>

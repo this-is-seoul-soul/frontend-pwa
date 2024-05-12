@@ -20,14 +20,15 @@ export type FestDetailType = {
     tag: { tag: int, cnt: int }[] | null
 }
 
-export type ReviewsType = {
+export type ReviewType = {
     reviewSeq: number,
-    nickname: string,
+    nickName: string,
     mbti: string,
     content: string,
     point: number,
     imgUrl: string[],
-    isMine: boolean
+    tag: number[],
+    mine: boolean
 }
 
 export type ReviewTagsType = {

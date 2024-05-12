@@ -1,52 +1,30 @@
 import { ReviewItem } from 'components/atoms/review/ReviewItem';
 import { ListHeader } from 'components/molecules/ListHeader';
 import { cls } from 'utils/cls';
-import { ReviewType } from 'types/review';
 import { useEffect, useState } from 'react';
 import { IoAlertCircleOutline } from 'react-icons/io5';
+import { ReviewType } from 'types/festDetail';
 
 const ReviewDummy: ReviewType[] = [
   {
     reviewSeq: 1,
-    nickname: '감자',
-    mbti: 'ISFP',
-    content: '아주 좋아요^^',
-    point: 2.1,
-    imgUrl: [
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/640px-Eq_it-na_pizza-margherita_sep2005_sml.jpg',
-      'https://i.namu.wiki/i/umI-heVYVS9miQNqXM13FRUOHHL4l1nzsZgN9XRLFG7nI_7Dyf-Myr6HmiWf9Qd7SAZQz3WYSQHPXXtGAwLTag.webp',
-      'https://cdn.dominos.co.kr/admin/upload/goods/20230619_F33836Pn.jpg',
-    ],
-    isMine: true,
+    nickName: '질투하는 공룡',
+    mbti: 'DACE',
+    content: 'this place is so good!',
+    point: 5,
+    imgUrl: ['string'],
+    tag: [0],
+    mine: true,
   },
   {
-    reviewSeq: 2,
-    nickname: '고구마',
-    mbti: 'INFP',
-    content: '아주 좋아요^^',
-    point: 3.4,
-    imgUrl: [
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/640px-Eq_it-na_pizza-margherita_sep2005_sml.jpg',
-      'https://i.namu.wiki/i/umI-heVYVS9miQNqXM13FRUOHHL4l1nzsZgN9XRLFG7nI_7Dyf-Myr6HmiWf9Qd7SAZQz3WYSQHPXXtGAwLTag.webp',
-      'https://cdn.dominos.co.kr/admin/upload/goods/20230619_F33836Pn.jpg',
-    ],
-    isMine: true,
-  },
-  {
-    reviewSeq: 3,
-    nickname: '당근',
-    mbti: 'ESTP',
-    content: '아주 좋아요^^',
-    point: 4.9,
-    imgUrl: [
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/640px-Eq_it-na_pizza-margherita_sep2005_sml.jpg',
-      'https://i.namu.wiki/i/umI-heVYVS9miQNqXM13FRUOHHL4l1nzsZgN9XRLFG7nI_7Dyf-Myr6HmiWf9Qd7SAZQz3WYSQHPXXtGAwLTag.webp',
-      'https://cdn.dominos.co.kr/admin/upload/goods/20230619_F33836Pn.jpg',
-      'https://cdn.dominos.co.kr/admin/upload/goods/20230619_F33836Pn.jpg',
-      'https://cdn.dominos.co.kr/admin/upload/goods/20230619_F33836Pn.jpg',
-      'https://cdn.dominos.co.kr/admin/upload/goods/20230619_F33836Pn.jpg',
-    ],
-    isMine: true,
+    reviewSeq: 1,
+    nickName: '질투하는 공룡',
+    mbti: 'DACE',
+    content: 'this place is so good!',
+    point: 5,
+    imgUrl: ['string'],
+    tag: [0],
+    mine: true,
   },
 ];
 
