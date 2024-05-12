@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { GoBookmark, GoBookmarkFill, GoStarFill } from 'react-icons/go';
 import { useAppNavigation } from 'hooks/useAppNavigation';
 import { FestType } from 'types/fest';
+import { festHeartAddApi, festHeartDeleteApi } from 'apis/festApi';
 
 type FestInfoProps = {
   fest: FestType;
@@ -12,13 +13,20 @@ type FestInfoProps = {
 export const FestInfoHomeItem = ({ fest }: FestInfoProps) => {
   const [isHeart, setIsHeart] = useState(fest.heart);
   const codeColor = codeNameColor[fest.codename] || 'bg-gray-100';
-  const image = fest.mainImg || Default;
   const navigation = useAppNavigation();
 
   const handleHeart = async (event: React.MouseEvent) => {
     // TODO: 찜 추가/취소 api 연결
     event.stopPropagation();
-    setIsHeart(!isHeart);
+    let res;
+    if (isHeart) {
+      res = await festHeartDeleteApi(fest.festSeq);
+    } else {
+      res = await festHeartAddApi(fest.festSeq);
+    }
+    if (res.status === 201) {
+      setIsHeart(!isHeart);
+    }
   };
 
   return (
@@ -30,7 +38,10 @@ export const FestInfoHomeItem = ({ fest }: FestInfoProps) => {
         id='image-container'
         className='relative w-full min-w-[140px] min-h-[140px] h-0 pb-[100%]'
       >
-        <img src={image} className='absolute w-full h-full left-0 right-0 top-0 object-cover' />
+        <img
+          src={fest.mainImg ? fest.mainImg : Default}
+          className='absolute w-full h-full left-0 right-0 top-0 object-cover'
+        />
       </div>
       <div id='category' className='flex items-center justify-between pt-1'>
         <div className={`${codeColor} rounded-lg text-xs px-2 py-1`}>{fest.codename}</div>

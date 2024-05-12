@@ -17,7 +17,6 @@ export const FestInfoMapItem = ({ fest }: FestInfoProps) => {
 
   const [isHeart, setIsHeart] = useState(fest.heart);
   const codeColor = codeNameColor[fest.codename] || 'bg-gray-100';
-  const image = fest.mainImg || Default;
   const navigation = useAppNavigation();
 
   const handleHeart = async (event: React.MouseEvent) => {
@@ -30,7 +29,7 @@ export const FestInfoMapItem = ({ fest }: FestInfoProps) => {
       res = await festHeartAddApi(fest.festSeq);
     }
     console.log('북마크', res);
-    if (res.status === 200) {
+    if (res.status === 201) {
       setIsHeart(!isHeart);
     }
   };
@@ -39,7 +38,9 @@ export const FestInfoMapItem = ({ fest }: FestInfoProps) => {
     <div
       key={fest.festSeq}
       className={cls(
-        `max-w-full relative ${label === '저장' ? '' : 'rounded-md shadow-lg mx-4'} px-4 py-2`
+        `max-w-full relative ${
+          label === '저장' || label === 'MY' ? '' : 'rounded-md shadow-lg mx-4'
+        } px-4 py-2`
       )}
       onClick={() => navigation.navigateToFestDetail(fest.festSeq)}
     >
@@ -51,7 +52,10 @@ export const FestInfoMapItem = ({ fest }: FestInfoProps) => {
         )}
       </div>
       <div className={cls('relative flex my-3 items-center')}>
-        <img src={image} className={cls('w-28 h-28 object-cover')} />
+        <img
+          src={fest.mainImg ? fest.mainImg : Default}
+          className={cls('w-28 h-28 object-cover')}
+        />
         <div className={cls('px-3 text-xs')}>
           <div className={cls(`${codeColor} inline-block rounded-lg px-2 py-1`)}>
             {fest.codename}
