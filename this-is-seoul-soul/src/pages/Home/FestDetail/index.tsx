@@ -36,7 +36,7 @@ export const FestDetailPage = () => {
   const handleHeart = async () => {
     const result = isHeart ? await festHeartDeleteApi(festSeq) : await festHeartAddApi(festSeq);
     if (result.status === 200) {
-      setIsHeart((prev) => !prev);
+      setIsHeart(!isHeart);
     }
   };
 
