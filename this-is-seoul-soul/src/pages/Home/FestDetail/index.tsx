@@ -4,7 +4,7 @@ import { useSetAtom } from 'jotai';
 import { headerTitleAtom } from 'stores/headerStore';
 import { FestDetailType } from 'types/festDetail';
 import { GoBookmark, GoBookmarkFill, GoShareAndroid, GoStarFill } from 'react-icons/go';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { TabHome } from '../../../components/organisms/festDetail/TabHome';
 import { TabReview } from '../../../components/organisms/festDetail/TabReview';
 import { TabMap } from '../../../components/organisms/festDetail/TabMap';
@@ -13,27 +13,30 @@ import { cls } from 'utils/cls';
 import { useSearchParams } from 'react-router-dom';
 import { festDeatailInfoApi } from 'apis/festApi';
 
+type TabType = {
+  label: string;
+  component: JSX.Element;
+}[];
+
 export const FestDetailPage = () => {
-  const [fest, setFest] = useState<FestDetailType>({} as FestDetailType);
+  const setHeaderTitle = useSetAtom(headerTitleAtom);
   const [searchParams] = useSearchParams();
   const param = searchParams.get('festSeq') || '';
-  //eslint-disable-next-line @typescript-eslint/no-unused-vars
   const festSeq = parseInt(param);
-  const tabs = [
+
+  const [fest, setFest] = useState<FestDetailType>({} as FestDetailType);
+  const [isHeart, setIsHeart] = useState(fest?.heart);
+  const [tabs, setTabs] = useState<TabType>([
     { label: '홈', component: <TabHome fest={fest} /> },
     { label: '리뷰', component: <TabReview fest={fest} /> },
     { label: '지도', component: <TabMap fest={fest} /> },
-  ];
-
-  const setHeaderTitle = useSetAtom(headerTitleAtom);
-
+  ]);
   const [activeTab, setActiveTab] = useState<tabItemType>(tabs[0]);
+
   const handleTabClick = (tab: tabItemType) => {
     setActiveTab(tab);
   };
 
-  const [isHeart, setIsHeart] = useState(fest?.heart);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleHeart = async (event: React.MouseEvent) => {
     // TODO: 찜 추가/취소 api 연결
     console.log(event);
@@ -43,8 +46,15 @@ export const FestDetailPage = () => {
   const getFestDetail = async () => {
     const result = await festDeatailInfoApi(festSeq);
     if (result.status === 200) {
-      setFest(result.data.data);
-      setHeaderTitle(result.data.data.title);
+      const fest = result.data.data;
+      setFest(fest);
+      setHeaderTitle(fest.title);
+      setTabs(
+        tabs.map((tab) => ({
+          ...tab,
+          component: React.cloneElement(tab.component, { fest: fest }),
+        }))
+      );
     }
   };
 
