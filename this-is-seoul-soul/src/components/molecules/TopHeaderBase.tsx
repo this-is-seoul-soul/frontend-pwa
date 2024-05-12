@@ -40,11 +40,11 @@ export const TopHeaderBase = ({ back = false, title = '' }: BaseTopHeaderProps) 
         </div>
         <div className={cls('justify-self-center font-bold text-gray-900')}>
           {['축제 상세', '리뷰 등록'].includes(title) && headerTitle
-            ? headerTitle.length > 10
-              ? `${headerTitle.substring(0, 10)}...`
+            ? headerTitle.length > 8
+              ? `${headerTitle.substring(0, 8)}...`
               : headerTitle
-            : title.length > 10
-            ? `${title.substring(0, 10)}...`
+            : title.length > 8
+            ? `${title.substring(0, 8)}...`
             : title}
         </div>
         <div className={cls('justify-self-end')}></div>

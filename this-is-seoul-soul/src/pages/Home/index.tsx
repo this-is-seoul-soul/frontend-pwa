@@ -20,7 +20,7 @@ export const HomePage = () => {
     region: '전체',
     codename: '전체',
     sort: 1,
-    page: 1,
+    page: 0,
     limit: 50,
   });
 
