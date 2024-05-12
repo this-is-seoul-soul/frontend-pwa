@@ -61,10 +61,10 @@ export const FestivalRegisterForm = ({
 
   const onSubmit = async (data: FestivalRegisterType) => {
     // form 데이터를 처리할 로직 추가
-    if (data.isFree === '무료') {
-      data.useFee = '무료';
+    if (data.useFee === '무료') {
+      data.isFree = '무료';
     } else {
-      data.useFee = '유료';
+      data.isFree = '유료';
     }
     const res = await festivalRegisterApi(data);
     console.log(res);
@@ -127,7 +127,7 @@ export const FestivalRegisterForm = ({
           getValues={getValues}
         />
         <PriceInputText
-          name='isFree'
+          name='useFee'
           label='이용 요금'
           placeholder='이용 요금을 선택해주세요.'
           control={control}

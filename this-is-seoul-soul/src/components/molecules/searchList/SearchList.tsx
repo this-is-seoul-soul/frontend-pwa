@@ -1,16 +1,18 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
-import { SearchItem } from 'components/atoms/search/SearchItem';
+import { FestInfoMapItem } from 'components/atoms/festInfo/FestInfoMapItem';
 import { useAppNavigation } from 'hooks/useAppNavigation';
 import { CiCircleAlert } from 'react-icons/ci';
 import { GoSearch } from 'react-icons/go';
 import { IoClose } from 'react-icons/io5';
+import { FestType } from 'types/fest';
 import { Keyword } from 'types/search';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 type SearchListProps = {
   value: string;
   keywords: Keyword[];
+  searchList: FestType[];
   onClearKeywords: () => void;
   onRemoveKeyword: (id: any) => void;
 };
@@ -19,14 +21,15 @@ export const SearchList = ({
   value,
   onClearKeywords,
   keywords,
+  searchList,
   onRemoveKeyword,
 }: SearchListProps) => {
   const navigator = useAppNavigation();
 
   return (
-    <div className='w-full h-[93.3%] mt-[1%] bg-white px-4'>
+    <div className='w-full h-[93.3%] mt-[1%] bg-white'>
       {value.length === 0 ? (
-        <div className='w-full h-full'>
+        <div className='w-full h-full px-4'>
           <div className='flex items-center justify-between'>
             <div className='font-bold py-2 content-start'>최근 검색어</div>
             <div className='content-end text-xs' onClick={onClearKeywords}>
@@ -65,7 +68,13 @@ export const SearchList = ({
         </div>
       ) : (
         <div>
-          <SearchItem keyword={value} />
+          {searchList.map((searchItem) => {
+            return (
+              <div>
+                <FestInfoMapItem fest={searchItem} />
+              </div>
+            );
+          })}
         </div>
       )}
     </div>
