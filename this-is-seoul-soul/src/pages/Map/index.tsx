@@ -3,11 +3,12 @@ import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import CustomMarker from 'assets/images/CustomMarker.png';
 import UserLocation from 'assets/images/UserLocation.png';
 import { useEffect, useState } from 'react';
-import { FestLocationType } from 'types/fest';
+import { FestLocationType, FestType } from 'types/fest';
 import { LocationType, MapFestType } from 'types/map';
 import { SearchBar } from 'components/organisms/SearchBar';
 import { MapFilter } from 'components/molecules/MapFilter/MapFilter';
-import { mapFestApi } from 'apis/festApi';
+import { festDeatailInfoApi, mapFestApi } from 'apis/festApi';
+import { FestInfoMapItem } from 'components/atoms/festInfo/FestInfoMapItem';
 
 const CurLocation: LocationType = {
   lot: 0,
@@ -18,6 +19,7 @@ const CurLocation: LocationType = {
 export const MapPage = () => {
   const [userLocation, setUserLocation] = useState<LocationType>(CurLocation);
   const [places, setPlaces] = useState<FestLocationType[]>([]);
+  const [selectedFest, setSelectedFest] = useState<FestType>();
 
   const fetchPlaces = async (lat: number, lot: number) => {
     // TODO: 장소 위치 불러오기 api 연결
@@ -43,6 +45,13 @@ export const MapPage = () => {
       }));
 
       setPlaces(convertPlaces);
+    }
+  };
+
+  const handleMarkerClick = async (festSeq: number) => {
+    const result = await festDeatailInfoApi(festSeq);
+    if (result.status === 200) {
+      setSelectedFest(result.data.data);
     }
   };
 
@@ -98,6 +107,7 @@ export const MapPage = () => {
               src: CustomMarker,
               size: { width: 40, height: 40 },
             }}
+            onClick={() => handleMarkerClick(place.festSeq)}
           />
         ))}
       </Map>
@@ -107,6 +117,11 @@ export const MapPage = () => {
       >
         <RiCrosshairLine size={24} className='text-yellow-400' />
       </div> */}
+      {selectedFest && (
+        <div className='w-full absolute bottom-20 z-10'>
+          <FestInfoMapItem fest={selectedFest} />
+        </div>
+      )}
     </div>
   );
 };
