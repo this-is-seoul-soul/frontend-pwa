@@ -39,9 +39,10 @@ export type ReviewTagsType = {
 export type ReviewRegisterType = {
     content: string,
     point: number,
-    imgUrl: string[],
+    // imgUrl: string[],
     tag: number[],
-    festSeq: number
+    festSeq: number,
+    [key: string]: string | number | number[]; 
 }
 
 export type FestReivewParamType = {
