@@ -39,7 +39,7 @@ export const FestInfoMapItem = ({ fest }: FestInfoProps) => {
       key={fest.festSeq}
       className={cls(
         `max-w-full relative bg-white ${
-          label === '저장' || label === 'MY' ? '' : 'rounded-md shadow-lg mx-4'
+          label === '저장' || label === 'MY' || label === '검색' ? '' : 'rounded-md shadow-lg mx-4'
         } px-4 py-2`
       )}
       onClick={() => navigation.navigateToFestDetail(fest.festSeq)}
@@ -52,10 +52,12 @@ export const FestInfoMapItem = ({ fest }: FestInfoProps) => {
         )}
       </div>
       <div className={cls('relative flex my-3 items-center')}>
-        <img
-          src={fest.mainImg ? fest.mainImg : Default}
-          className={cls('w-28 h-28 object-cover')}
-        />
+        <div className='w-28 h-28 '>
+          <img
+            src={fest.mainImg ? fest.mainImg : Default}
+            className={cls('w-full h-full object-cover')}
+          />
+        </div>
         <div className={cls('px-3 text-xs')}>
           <div className={cls(`${codeColor} inline-block rounded-lg px-2 py-1`)}>
             {fest.codename}

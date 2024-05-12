@@ -4,6 +4,7 @@ import { SearchInputBar } from 'components/atoms/inputs/SearchInputBar';
 import { SearchList } from 'components/molecules/searchList/SearchList';
 // import { useAppNavigation } from 'hooks/useAppNavigation';
 import { useEffect, useState } from 'react';
+import { FestType } from 'types/fest';
 import { Keyword } from 'types/search';
 import { debounce } from 'utils/debounce';
 
@@ -12,11 +13,11 @@ export const SearchPage = () => {
   const [keywords, setKeywords] = useState<Keyword[]>(
     JSON.parse(localStorage.getItem('keywords') || '[]')
   );
+  const [searchList, setSearchList] = useState<FestType[]>([]);
   // const navigator = useAppNavigation();
 
   useEffect(() => {
     localStorage.setItem('keywords', JSON.stringify(keywords));
-    // debounceHandleSearchKeyword(keywords);
   }, [keywords]);
 
   useEffect(() => {
@@ -38,7 +39,9 @@ export const SearchPage = () => {
   const debounceHandleSearchKeyword = debounce(async (keyword: string) => {
     console.log('keyword', keyword);
     const res = await festivalInquireApi({ lat: -1, lot: -1, keyword: keyword });
-    console.log(res);
+    if (res.status === 200) {
+      setSearchList(res.data.data);
+    }
   }, 300);
 
   //검색어 삭제
@@ -62,6 +65,7 @@ export const SearchPage = () => {
         keywords={keywords}
         onClearKeywords={handleClearKeywords}
         onRemoveKeyword={handleRemoveKeyword}
+        searchList={searchList}
       />
     </div>
   );
