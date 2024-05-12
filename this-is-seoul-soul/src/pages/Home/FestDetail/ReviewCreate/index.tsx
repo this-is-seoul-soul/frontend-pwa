@@ -19,17 +19,17 @@ export const ReviewCreatePage = () => {
   const param = searchParams.get('festSeq') || '';
   const festSeq = parseInt(param);
   const navigate = useNavigate();
-
+  const [imgUrls, setImgUrls] = useState<string[]>([]);
+  const form = new FormData();
   const methods = useForm<ReviewRegisterType>({
     defaultValues: {
       point: location.state.rating,
       content: '',
-      imgUrl: [],
+      // imgUrl: [],
       tag: [],
       festSeq: festSeq,
     },
   });
-
   const { register, handleSubmit, setValue, watch } = methods;
 
   const handleContent = (event: ChangeEvent<HTMLTextAreaElement>) => {
@@ -40,21 +40,28 @@ export const ReviewCreatePage = () => {
     setValue('content', text);
   };
 
-  const [imgUrls, setImgUrls] = useState<string[]>([]);
   const handleImageUpload = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
       const file = event.target.files[0];
-      const updatedImgUrls = imgUrls.concat(URL.createObjectURL(file));
-      console.log(file);
-      console.log(updatedImgUrls);
-      setImgUrls(updatedImgUrls);
-      setValue('imgUrl', [...watch('imgUrl'), file.name]);
+      setImgUrls((imgUrls) => [...imgUrls, URL.createObjectURL(file)]);
+      form.set('imgUrl', file, file.name);
+      // setValue('imgUrl', [...watch('imgUrl'), event.target.value]);
     }
   };
 
   const onSubmit = async (data: ReviewRegisterType) => {
+    for (const key in data) {
+      const value = data[key];
+      if (Array.isArray(value)) {
+        for (const elem of value) form.set(key, elem.toString());
+      } else {
+        form.set(key, value.toString());
+      }
+    }
+
     console.log('리뷰 등록 data', data);
-    const result = await reviewRegisterApi(data);
+    console.log('리뷰 등록 form', form);
+    const result = await reviewRegisterApi(form);
     if (result.status === 201) {
       navigate(`${FestDetailPage.path}?festSeq=${festSeq}`, { replace: true });
     } else {
