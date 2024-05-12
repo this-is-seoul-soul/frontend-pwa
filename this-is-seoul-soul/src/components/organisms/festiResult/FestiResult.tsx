@@ -1,7 +1,7 @@
 import { festiResultApi } from 'apis/userApi';
 import LogoCharacter from 'assets/images/LogoCharacter.png';
 import { BottomButton } from 'components/atoms/buttons/BottomButton';
-import { festiTypes } from 'constants/festi';
+import { festiContent, festiTypes } from 'constants/festi';
 import { homePage } from 'constants/pathname';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -48,6 +48,23 @@ export const FestiResult = ({ selectedTypes }: FestiResultProps) => {
           <div className={cls('font-bold text-gray-900 text-4xl my-6 text-center')}>{mbti}</div>
           <div className={cls('mb-8')}>
             <img src={LogoCharacter} alt='캐릭터' />
+          </div>
+        </div>
+        <div className='w-full px-8 font-PretendardExtraLight text-gray-800'>
+          <div>
+            {festiContent[mbti.join('')] ? (
+              festiContent[mbti.join('')].map((description, index) => (
+                <>
+                  <div key={index} className={cls('text-xs text-center pb-4')}>
+                    {description}
+                  </div>
+                </>
+              ))
+            ) : (
+              <div className={cls('text-xs text-center')}>
+                No content available for this FESTI type
+              </div>
+            )}
           </div>
         </div>
 

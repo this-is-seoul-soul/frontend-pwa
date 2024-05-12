@@ -14,7 +14,7 @@ import { cls } from 'utils/cls';
 
 type FormData = {
   title: string;
-  codeName: string;
+  codename: string;
   guName: string;
   place: string;
   useTrgt: string;
@@ -45,7 +45,7 @@ export const FestivalRegisterForm = ({
   const { handleSubmit, control, setValue, getValues } = useForm<FormData>({
     defaultValues: {
       title: '',
-      codeName: '',
+      codename: '',
       guName: guName,
       place: address,
       useTrgt: '',
@@ -112,7 +112,7 @@ export const FestivalRegisterForm = ({
           placeholder='행사 이름을 작성하세요.'
         />
         <CategorizeFestivalInputText
-          name='codeName'
+          name='codename'
           label='행사 분류'
           placeholder='분류를 선택해주세요.'
           control={control}
