@@ -34,15 +34,14 @@ export const MapPage = () => {
       codeName: [],
     });
 
-    console.log(result);
-
     if (result.status === 200) {
       const allPlace = result.data.data;
+      console.log('allPlace', allPlace);
       const convertPlaces = allPlace.map((item: FestLocationType) => ({
         festSeq: item.festSeq,
         title: item.title,
-        lot: item.lot,
-        lat: item.lat,
+        lot: item.lat,
+        lat: item.lot,
         isHeart: item.isHeart,
       }));
 
