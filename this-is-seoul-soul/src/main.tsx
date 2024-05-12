@@ -90,7 +90,7 @@ const router = createBrowserRouter([
         element: <PrivatePolicy />,
       },
       {
-        path: '/auth/google',
+        path: '/auth/google-callback',
         element: <GooglePage />,
       },
     ],
