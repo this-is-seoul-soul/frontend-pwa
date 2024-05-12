@@ -20,12 +20,13 @@ export const ReviewCreatePage = () => {
   const festSeq = parseInt(param);
   const navigate = useNavigate();
   const [imgUrls, setImgUrls] = useState<string[]>([]);
+  const [files, setFiles] = useState<File[]>([]);
   const form = new FormData();
   const methods = useForm<ReviewRegisterType>({
     defaultValues: {
       point: location.state.rating,
       content: '',
-      // imgUrl: [],
+      imgUrl: [],
       tag: [],
       festSeq: festSeq,
     },
@@ -43,21 +44,18 @@ export const ReviewCreatePage = () => {
   const handleImageUpload = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
       const file = event.target.files[0];
+      setFiles((files) => [...files, file]);
       setImgUrls((imgUrls) => [...imgUrls, URL.createObjectURL(file)]);
-      form.set('imgUrl', file, file.name);
+      // form.set('imgUrl', file, file.name);
       // setValue('imgUrl', [...watch('imgUrl'), event.target.value]);
     }
   };
 
   const onSubmit = async (data: ReviewRegisterType) => {
-    for (const key in data) {
-      const value = data[key];
-      if (Array.isArray(value)) {
-        for (const elem of value) form.set(key, elem.toString());
-      } else {
-        form.set(key, value.toString());
-      }
-    }
+    form.append('point', data['point'].toString());
+    form.append('content', data['content']);
+    data['tag'].forEach((tagId) => form.append('tag', tagId.toString()));
+    files.forEach((file) => form.append('imgUrl', file, file.name));
 
     console.log('리뷰 등록 data', data);
     console.log('리뷰 등록 form', form);
