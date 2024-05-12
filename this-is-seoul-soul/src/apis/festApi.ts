@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import axios from 'apis';
 import { FestivalRegisterType, FestDetailSearchType } from 'types/fest';
-import { FestReivewParamType } from 'types/festDetail';
+import { FestReivewParamType, ReviewRegisterType } from 'types/festDetail';
 import { MapResponse } from 'types/map';
 
 const festUrl = '/fest';
@@ -20,6 +20,11 @@ export const festivalRegisterApi = async (data: FestivalRegisterType) => {
 // 행사 조회(검색어)
 
 // 행사 리뷰 등록
+export const reviewRegisterApi = async (data: ReviewRegisterType) => {
+  const url = festUrl + '/review';
+  const res = await axios.post(url, data);
+  return res;
+}
 
 // 행사 리뷰 수정
 

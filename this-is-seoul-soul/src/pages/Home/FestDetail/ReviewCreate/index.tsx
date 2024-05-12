@@ -1,48 +1,35 @@
 import { ChangeEvent, useState } from 'react';
 import { GoStar, GoStarFill } from 'react-icons/go';
-import { useLocation, useSearchParams } from 'react-router-dom';
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { MdAddAPhoto } from 'react-icons/md';
-import { useAppNavigation } from 'hooks/useAppNavigation';
 import { TitleSection } from 'components/atoms/titles/TitleReviewSection';
 import { ReviewCreateGoodList } from 'components/molecules/ReviewCreateGoodList/ReviewCreateGoodList';
 import { BottomButton2 } from 'components/atoms/buttons/BottomButton2';
 import { useForm, FormProvider } from 'react-hook-form';
 import { cls } from 'utils/cls';
-
-/* Request Dto
-{
-    “content”: “정말 좋아요”,
-    “point”: 5,
-    “imgUrl”: [ “image1.jpg”, “image2.jpg” ],
-    “tag”: [1, 2, 4],
-    “festSeq”: 2
-}
-*/
-
-interface FormData {
-  content: string;
-  point: number;
-  imgUrl: Array<string>;
-  tag: Array<number>;
-}
+import { reviewRegisterApi } from 'apis/festApi';
+import { ReviewRegisterType } from 'types/festDetail';
+import { FestDetailPage } from 'constants/pathname';
 
 export const ReviewCreatePage = () => {
   const MAX_LENGTH = 100;
   const STARS = [1, 2, 3, 4, 5];
-  const navigation = useAppNavigation();
   const location = useLocation();
   const [searchParams] = useSearchParams();
   const param = searchParams.get('festSeq') || '';
   const festSeq = parseInt(param);
+  const navigate = useNavigate();
 
-  const methods = useForm<FormData>({
+  const methods = useForm<ReviewRegisterType>({
     defaultValues: {
       point: location.state.rating,
       content: '',
       imgUrl: [],
       tag: [],
+      festSeq: festSeq,
     },
   });
+
   const { register, handleSubmit, setValue, watch } = methods;
 
   const handleContent = (event: ChangeEvent<HTMLTextAreaElement>) => {
@@ -63,14 +50,14 @@ export const ReviewCreatePage = () => {
     }
   };
 
-  // useEffect(() => {
-  //   console.log(watch());
-  // }, [watch()]);
-
-  const onSubmit = (data: any) => {
-    // TODO: 리뷰 등록 api 연결
-    console.log('완료!', data);
-    navigation.navigateToFestDetail(festSeq);
+  const onSubmit = async (data: ReviewRegisterType) => {
+    console.log('리뷰 등록', data);
+    const result = await reviewRegisterApi(data);
+    if (result.status === 201) {
+      navigate(FestDetailPage.path, { replace: true });
+    } else {
+      console.log('등록 실패');
+    }
   };
 
   return (
