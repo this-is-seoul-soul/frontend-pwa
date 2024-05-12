@@ -16,22 +16,6 @@ export const GoogleLoginButton = () => {
     window.location.href = link;
   };
 
-  // const navigate = useNavigate();
-
-  // const handleAuthStatus = async () => {
-  //   const res = await userStatusApi();
-
-  //   if (res.data.data.status === 'complete') {
-  //     navigate(homePage.path, { replace: true });
-  //   } else if (res.data.data.status === 'festi') {
-  //     navigate(FestiTestLandingPage.path, { replace: true });
-  //   } else if (res.data.data.status === 'nickname') {
-  //     navigate(CheckNicknamePage.path, { replace: true });
-  //   } else {
-  //     navigate(CheckNicknamePage.path, { replace: true });
-  //   }
-  // };
-
   return (
     <div>
       <button
