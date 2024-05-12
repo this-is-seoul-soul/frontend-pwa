@@ -50,8 +50,8 @@ export const FestDetailPage = () => {
       const fest = result.data.data;
       setFest(fest);
       setHeaderTitle(fest.title);
-      setTabs(
-        tabs.map((tab) => ({
+      setTabs((prev) =>
+        prev.map((tab) => ({
           ...tab,
           component: React.cloneElement(tab.component, { fest: fest }),
         }))
