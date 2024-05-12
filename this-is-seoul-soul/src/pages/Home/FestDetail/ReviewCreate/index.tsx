@@ -45,6 +45,8 @@ export const ReviewCreatePage = () => {
     if (event.target.files) {
       const file = event.target.files[0];
       const updatedImgUrls = imgUrls.concat(URL.createObjectURL(file));
+      console.log(file);
+      console.log(updatedImgUrls);
       setImgUrls(updatedImgUrls);
       setValue('imgUrl', [...watch('imgUrl'), file.name]);
     }
