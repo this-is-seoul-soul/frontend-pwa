@@ -25,7 +25,7 @@ export const FestDetailPage = () => {
   const festSeq = parseInt(param);
 
   const [fest, setFest] = useState<FestDetailType>();
-  const [isHeart, setIsHeart] = useState(fest?.heart);
+  const [isHeart, setIsHeart] = useState<boolean>();
   const [tabs, setTabs] = useState<TabType>();
   const [activeTab, setActiveTab] = useState<tabItemType>();
 
@@ -36,7 +36,7 @@ export const FestDetailPage = () => {
   const handleHeart = async () => {
     const result = isHeart ? await festHeartDeleteApi(festSeq) : await festHeartAddApi(festSeq);
     if (result.status === 200) {
-      setIsHeart(!isHeart);
+      setIsHeart((isHeart) => !isHeart);
     }
   };
 
@@ -50,6 +50,7 @@ export const FestDetailPage = () => {
         { label: '지도', component: <TabMap fest={fest} /> },
       ];
       setFest(fest);
+      setIsHeart(fest.heart);
       setHeaderTitle(fest.title);
       setTabs(tabs);
       setActiveTab(tabs[0]);
