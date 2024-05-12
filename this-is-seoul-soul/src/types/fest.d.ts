@@ -18,11 +18,11 @@ export type FestLocationType = {
   lot: number;
   lat: number;
   isHeart: boolean;
-}
+};
 
 export type FestivalRegisterType = {
   title: string;
-  codeName: string;
+  codename: string;
   guName: string;
   place: string;
   useTrgt: string;
@@ -36,11 +36,17 @@ export type FestivalRegisterType = {
 };
 
 export type FestDetailSearchType = {
-  isFree: boolean,
-  isContinue: boolean,
-  region: string,
-  codename: string,
-  sort: number,
-  page: number,
-  limit: number
-}
+  isFree: boolean;
+  isContinue: boolean;
+  region: string;
+  codename: string;
+  sort: number;
+  page: number;
+  limit: number;
+};
+
+export type FestSearchType = {
+  keyword: string;
+  lot: number;
+  lat: number;
+};
