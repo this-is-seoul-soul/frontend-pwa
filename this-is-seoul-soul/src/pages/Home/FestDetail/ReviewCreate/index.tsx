@@ -51,10 +51,10 @@ export const ReviewCreatePage = () => {
   };
 
   const onSubmit = async (data: ReviewRegisterType) => {
-    console.log('리뷰 등록', data);
+    console.log('리뷰 등록 data', data);
     const result = await reviewRegisterApi(data);
     if (result.status === 201) {
-      navigate(FestDetailPage.path, { replace: true });
+      navigate(`${FestDetailPage.path}?festSeq=${festSeq}`, { replace: true });
     } else {
       console.log('등록 실패');
     }
