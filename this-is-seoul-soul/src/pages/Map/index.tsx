@@ -4,7 +4,7 @@ import CustomMarker from 'assets/images/CustomMarker.png';
 import UserLocation from 'assets/images/UserLocation.png';
 import { useEffect, useState } from 'react';
 import { FestLocationType, FestType } from 'types/fest';
-import { LocationType, MapFestType } from 'types/map';
+import { LocationType } from 'types/map';
 import { SearchBar } from 'components/organisms/SearchBar';
 import { MapFilter } from 'components/molecules/MapFilter/MapFilter';
 import { festDeatailInfoApi, mapFestApi } from 'apis/festApi';
