@@ -11,7 +11,7 @@ import { TabMap } from '../../../components/organisms/festDetail/TabMap';
 import { tabItemType } from 'types/tab';
 import { cls } from 'utils/cls';
 import { useSearchParams } from 'react-router-dom';
-import { festDeatailInfoApi } from 'apis/festApi';
+import { festDeatailInfoApi, festHeartAddApi, festHeartDeleteApi } from 'apis/festApi';
 
 type TabType = {
   label: string;
@@ -37,10 +37,11 @@ export const FestDetailPage = () => {
     setActiveTab(tab);
   };
 
-  const handleHeart = async (event: React.MouseEvent) => {
-    // TODO: 찜 추가/취소 api 연결
-    console.log(event);
-    setIsHeart(!isHeart);
+  const handleHeart = async () => {
+    const result = isHeart ? await festHeartDeleteApi(festSeq) : await festHeartAddApi(festSeq);
+    if (result.status === 200) {
+      setIsHeart((prev) => !prev);
+    }
   };
 
   const getFestDetail = async () => {
@@ -71,7 +72,7 @@ export const FestDetailPage = () => {
         <div className={cls('flex flex-col p-4 pb-8')}>
           <div className={cls('flex justify-end gap-2')}>
             <GoShareAndroid size={24} className={cls('text-gray-600')} />
-            <div onClick={(e) => handleHeart(e)}>
+            <div onClick={handleHeart}>
               {isHeart == true ? (
                 <GoBookmarkFill size={24} className={cls('fill-yellow-400')} />
               ) : (
