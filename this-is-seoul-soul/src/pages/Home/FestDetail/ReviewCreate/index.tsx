@@ -56,9 +56,11 @@ export const ReviewCreatePage = () => {
   const onSubmit = async (data: ReviewRegisterType) => {
     form.append('addReviewReq', JSON.stringify(data.addReviewReq));
     files.forEach((file) => form.append('imgUrl', file, file.name));
+    // form.append('imgUrl', data.imgUrl);
 
     console.log('리뷰 등록 data', data);
     console.log('리뷰 등록 form', form);
+    console.log(form.getAll('imgUrl'));
     const result = await reviewRegisterApi(form);
     if (result.status === 201) {
       navigate(`${FestDetailPage.path}?festSeq=${festSeq}`, { replace: true });
