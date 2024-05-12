@@ -28,7 +28,7 @@ export const MapPage = () => {
     const result = await mapFestApi({
       lat: lat,
       lot: lot,
-      distance: 2,
+      distance: 5,
       filter: [],
       year: [],
       codeName: [],
