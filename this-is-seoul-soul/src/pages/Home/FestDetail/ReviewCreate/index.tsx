@@ -27,7 +27,7 @@ interface FormData {
 }
 
 export const ReviewCreatePage = () => {
-  const MAX_LENGTH = 10;
+  const MAX_LENGTH = 100;
   const STARS = [1, 2, 3, 4, 5];
   const navigation = useAppNavigation();
   const location = useLocation();

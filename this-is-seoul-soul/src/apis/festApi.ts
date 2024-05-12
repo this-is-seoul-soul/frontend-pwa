@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import axios from 'apis';
 import { FestivalRegisterType, FestDetailSearchType } from 'types/fest';
+import { FestReivewParamType } from 'types/festDetail';
 import { MapResponse } from 'types/map';
 
 const festUrl = '/fest';
@@ -25,8 +26,18 @@ export const festivalRegisterApi = async (data: FestivalRegisterType) => {
 // 행사 리뷰 삭제
 
 // 행사 리뷰 조회
+export const getFestReviewListApi = async (params: FestReivewParamType) => {
+  const url = festUrl + '/review';
+  const res = await axios.get(url, { params: params });
+  return res;
+}
 
 // 행사 리뷰 태그 조회
+export const getFestReviewTagsApi = async (festSeq: number) => {
+  const url = festUrl + '/review/tag';
+  const res = axios.get(url, { params: { festSeq: festSeq } });
+  return res;
+}
 
 // 지도 기반 행사 조회
 export const mapFestApi = async (data: MapResponse) => {

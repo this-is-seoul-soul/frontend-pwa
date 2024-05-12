@@ -1,79 +1,57 @@
 import { TitleSection } from 'components/atoms/titles/TitleReviewSection';
 import { ListHeader } from 'components/molecules/ListHeader';
-import { FestDetailType, reviewTagList } from 'types/festDetail';
+import { FestDetailType, FestReivewParamType, ReviewTagsType, ReviewsType } from 'types/festDetail';
 import { GoStar, GoStarFill } from 'react-icons/go';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useAppNavigation } from 'hooks/useAppNavigation';
 import { TagBar } from 'components/atoms/reviewInfo/TagBar';
 import { ReviewItem } from 'components/atoms/review/ReviewItem';
+import { sortList } from 'constants/sort';
+import { getFestReviewListApi, getFestReviewTagsApi } from 'apis/festApi';
 
 interface TabReviewProps {
   fest: FestDetailType;
 }
 
-const dummyTags: reviewTagList = {
-  total: 12,
-  tag: [
-    {
-      tag: 0,
-      cnt: 4,
-    },
-    {
-      tag: 1,
-      cnt: 3,
-    },
-    {
-      tag: 2,
-      cnt: 2,
-    },
-    {
-      tag: 3,
-      cnt: 1,
-    },
-    {
-      tag: 4,
-      cnt: 0,
-    },
-  ],
-};
-
-const ReviewDummy = [
-  {
-    reviewSeq: 1,
-    nickname: '감자',
-    mbti: 'ISFP',
-    content: '아주 좋아요^^',
-    point: 4,
-    imgUrl: [
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/640px-Eq_it-na_pizza-margherita_sep2005_sml.jpg',
-      'https://i.namu.wiki/i/umI-heVYVS9miQNqXM13FRUOHHL4l1nzsZgN9XRLFG7nI_7Dyf-Myr6HmiWf9Qd7SAZQz3WYSQHPXXtGAwLTag.webp',
-      'https://cdn.dominos.co.kr/admin/upload/goods/20230619_F33836Pn.jpg',
-    ],
-    isMine: true,
-  },
-  {
-    reviewSeq: 1,
-    nickname: '감자',
-    mbti: 'ISFP',
-    content: '아주 좋아요^^',
-    point: 4,
-    imgUrl: [
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/640px-Eq_it-na_pizza-margherita_sep2005_sml.jpg',
-      'https://i.namu.wiki/i/umI-heVYVS9miQNqXM13FRUOHHL4l1nzsZgN9XRLFG7nI_7Dyf-Myr6HmiWf9Qd7SAZQz3WYSQHPXXtGAwLTag.webp',
-      'https://cdn.dominos.co.kr/admin/upload/goods/20230619_F33836Pn.jpg',
-    ],
-    isMine: true,
-  },
-];
-
 export const TabReview = ({ fest }: TabReviewProps) => {
   const navigator = useAppNavigation();
   const [rating, setRating] = useState<number>(0);
+  const [tags, setTags] = useState<ReviewTagsType>();
+  const [reviews, setReviews] = useState<ReviewsType[]>();
+  const [params, setParams] = useState<FestReivewParamType>({
+    festSeq: fest.festSeq,
+    sort: 1,
+    page: 1,
+    limit: 50,
+  });
 
   const handleStarClick = (starNumber: number) => {
     setRating(starNumber);
     navigator.navigateToReviewCreate(starNumber, fest.festSeq);
   };
+
+  const getReviewTags = async () => {
+    const result = await getFestReviewTagsApi(fest.festSeq);
+    if (result.status === 200) {
+      setTags(result.data.data);
+    }
+  };
+
+  const getReviews = async () => {
+    const result = await getFestReviewListApi(params);
+    if (result.status === 200) {
+      setReviews(result.data.data);
+    }
+  };
+
+  useEffect(() => {
+    getReviews();
+  }, [params]);
+
+  useEffect(() => {
+    getReviewTags();
+    getReviews();
+  }, []);
 
   const maxStars = 5;
   let stars = [];
@@ -89,15 +67,23 @@ export const TabReview = ({ fest }: TabReviewProps) => {
       </span>
     );
   }
+
+  const handleSort = (i: number) => {
+    setParams((prev) => ({
+      ...prev,
+      sort: i,
+    }));
+  };
+
   return (
     <div className='scrollbar-hide'>
       <section className='p-4'>
         <TitleSection title='이런 점이 좋았어요!' description={`총 ${fest.cntReview}명 참여`} />
         <div className='py-4'>
-          {dummyTags?.tag.map((item) => {
+          {tags?.tag.map((item) => {
             return (
               <div key={item.tag}>
-                <TagBar index={item.tag} tagTotal={dummyTags.total} tag={item.tag} cnt={item.cnt} />
+                <TagBar index={item.tag} tagTotal={tags.total} tag={item.tag} cnt={item.cnt} />
               </div>
             );
           })}
@@ -114,9 +100,9 @@ export const TabReview = ({ fest }: TabReviewProps) => {
             description={`평점 ${fest.avgPoint}\u00A0  총 ${fest.cntReview}개`}
           />
         </div>
-        <ListHeader />
+        <ListHeader total={reviews?.length} sort={{ sortList: sortList, callback: handleSort }} />
         <div className='pt-2 pb-14'>
-          {ReviewDummy.map((reviewItem) => {
+          {reviews?.map((reviewItem) => {
             return <ReviewItem review={reviewItem} />;
           })}
         </div>
