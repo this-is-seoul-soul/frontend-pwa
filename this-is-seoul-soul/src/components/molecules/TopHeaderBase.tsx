@@ -1,5 +1,4 @@
 import { useAtomValue } from 'jotai';
-import { useEffect } from 'react';
 import { IoIosArrowBack } from 'react-icons/io';
 import { useNavigate } from 'react-router-dom';
 import { headerTitleAtom } from 'stores/headerStore';

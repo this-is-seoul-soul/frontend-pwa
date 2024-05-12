@@ -4,7 +4,7 @@ import { useSetAtom } from 'jotai';
 import { headerTitleAtom } from 'stores/headerStore';
 import { FestDetailType } from 'types/festDetail';
 import { GoBookmark, GoBookmarkFill, GoShareAndroid, GoStarFill } from 'react-icons/go';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { TabHome } from '../../../components/organisms/festDetail/TabHome';
 import { TabReview } from '../../../components/organisms/festDetail/TabReview';
 import { TabMap } from '../../../components/organisms/festDetail/TabMap';
@@ -24,14 +24,10 @@ export const FestDetailPage = () => {
   const param = searchParams.get('festSeq') || '';
   const festSeq = parseInt(param);
 
-  const [fest, setFest] = useState<FestDetailType>({} as FestDetailType);
+  const [fest, setFest] = useState<FestDetailType>();
   const [isHeart, setIsHeart] = useState(fest?.heart);
-  const [tabs, setTabs] = useState<TabType>([
-    { label: '홈', component: <TabHome fest={fest} /> },
-    { label: '리뷰', component: <TabReview fest={fest} /> },
-    { label: '지도', component: <TabMap fest={fest} /> },
-  ]);
-  const [activeTab, setActiveTab] = useState<tabItemType>(tabs[0]);
+  const [tabs, setTabs] = useState<TabType>();
+  const [activeTab, setActiveTab] = useState<tabItemType>();
 
   const handleTabClick = (tab: tabItemType) => {
     setActiveTab(tab);
@@ -48,14 +44,15 @@ export const FestDetailPage = () => {
     const result = await festDeatailInfoApi(festSeq);
     if (result.status === 200) {
       const fest = result.data.data;
+      const tabs = [
+        { label: '홈', component: <TabHome fest={fest} /> },
+        { label: '리뷰', component: <TabReview fest={fest} /> },
+        { label: '지도', component: <TabMap fest={fest} /> },
+      ];
       setFest(fest);
       setHeaderTitle(fest.title);
-      setTabs((prev) =>
-        prev.map((tab) => ({
-          ...tab,
-          component: React.cloneElement(tab.component, { fest: fest }),
-        }))
-      );
+      setTabs(tabs);
+      setActiveTab(tabs[0]);
     }
   };
 
@@ -104,12 +101,12 @@ export const FestDetailPage = () => {
         </div>
       </section>
       <section>
-        <div className={`grid grid-cols-${tabs.length} border-b-2`}>
-          {tabs.map((tab, id) => (
+        <div className={`grid grid-cols-${tabs?.length} border-b-2`}>
+          {tabs?.map((tab, id) => (
             <div
               key={id}
               className={`w-1/2 text-center mx-auto py-2 ${
-                activeTab.label === tab.label ? 'font-extrabold border-b border-b-black' : ''
+                activeTab?.label === tab.label ? 'font-extrabold border-b border-b-black' : ''
               }`}
               onClick={() => handleTabClick(tab)}
             >

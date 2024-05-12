@@ -90,7 +90,7 @@ export const HomePage = () => {
         <div className={cls('pl-6 pt-9 pb-3 text-lg bg-white')}>
           <b>원하시는 축제</b>를 만나보세요!
         </div>
-        <ListHeader total={24} sort={{ sortList: sortList, callback: handleSort }} />
+        <ListHeader total={festList?.length} sort={{ sortList: sortList, callback: handleSort }} />
         <div>{/*<InfiniteScroll></InfiniteScroll>*/}</div>
         <div className={cls('grid grid-cols-2 gap-4 p-5 pb-24 bg-white')}>
           {festList && festList?.length > 0 ? (
