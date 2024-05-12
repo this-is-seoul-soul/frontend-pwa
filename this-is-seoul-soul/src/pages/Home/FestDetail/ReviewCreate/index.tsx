@@ -24,11 +24,13 @@ export const ReviewCreatePage = () => {
   const form = new FormData();
   const methods = useForm<ReviewRegisterType>({
     defaultValues: {
-      point: location.state.rating,
-      content: '',
+      addReviewReq: {
+        point: location.state.rating,
+        content: '',
+        tag: [],
+        festSeq: festSeq,
+      },
       imgUrl: [],
-      tag: [],
-      festSeq: festSeq,
     },
   });
   const { register, handleSubmit, setValue, watch } = methods;
@@ -38,7 +40,7 @@ export const ReviewCreatePage = () => {
     if (text.length > MAX_LENGTH) {
       return;
     }
-    setValue('content', text);
+    setValue('addReviewReq.content', text);
   };
 
   const handleImageUpload = (event: ChangeEvent<HTMLInputElement>) => {
@@ -47,14 +49,12 @@ export const ReviewCreatePage = () => {
       setFiles((files) => [...files, file]);
       setImgUrls((imgUrls) => [...imgUrls, URL.createObjectURL(file)]);
       // form.set('imgUrl', file, file.name);
-      // setValue('imgUrl', [...watch('imgUrl'), event.target.value]);
+      setValue('imgUrl', [...watch('imgUrl'), file]);
     }
   };
 
   const onSubmit = async (data: ReviewRegisterType) => {
-    form.append('point', data['point'].toString());
-    form.append('content', data['content']);
-    data['tag'].forEach((tagId) => form.append('tag', tagId.toString()));
+    form.append('addReviewReq', JSON.stringify(data.addReviewReq));
     files.forEach((file) => form.append('imgUrl', file, file.name));
 
     console.log('리뷰 등록 data', data);
@@ -74,8 +74,8 @@ export const ReviewCreatePage = () => {
           <div className={cls('flex flex-col items-center gap-2 pt-16')}>
             <div className={cls('flex justify-center gap-1')}>
               {STARS.map((starNum) => (
-                <span key={starNum} onClick={() => setValue('point', starNum)}>
-                  {starNum <= watch('point') ? (
+                <span key={starNum} onClick={() => setValue('addReviewReq.point', starNum)}>
+                  {starNum <= watch('addReviewReq.point') ? (
                     <GoStarFill size={52} className={cls('text-yellow-400')} />
                   ) : (
                     <GoStar size={52} className={cls('text-gray-300')} />
@@ -84,7 +84,7 @@ export const ReviewCreatePage = () => {
               ))}
             </div>
             <div className={cls('text-xl')}>
-              <span className={cls('font-bold')}>{watch('point')}</span> / 5
+              <span className={cls('font-bold')}>{watch('addReviewReq.point')}</span> / 5
             </div>
           </div>
         </section>
@@ -128,10 +128,10 @@ export const ReviewCreatePage = () => {
 
         <section className={cls('px-8 py-4')}>
           <textarea
-            {...register('content', {
+            {...register('addReviewReq.content', {
               required: true,
             })}
-            value={watch('content')}
+            value={watch('addReviewReq.content')}
             onChange={handleContent}
             placeholder='리뷰를 작성하세요.'
             className={cls(
@@ -139,7 +139,7 @@ export const ReviewCreatePage = () => {
             )}
           />
           <div className={cls('flex justify-end text-gray-500')}>
-            <span>{watch('content')?.length}</span>
+            <span>{watch('addReviewReq.content')?.length}</span>
             <span>/{MAX_LENGTH} 자</span>
           </div>
         </section>
@@ -152,7 +152,11 @@ export const ReviewCreatePage = () => {
         <BottomButton2
           title='완료'
           type='submit'
-          disabled={watch('content').length === 0 || watch('tag').length === 0 ? true : false}
+          disabled={
+            watch('addReviewReq.content').length === 0 || watch('addReviewReq.tag').length === 0
+              ? true
+              : false
+          }
         />
       </form>
     </FormProvider>
