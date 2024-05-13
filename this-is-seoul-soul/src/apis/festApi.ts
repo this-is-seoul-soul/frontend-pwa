@@ -25,12 +25,12 @@ export const festivalInquireApi = async (data: FestSearchType) => {
 };
 
 // 행사 리뷰 등록
-export const reviewRegisterApi = async (data: FormData) => {
+export const reviewRegisterApi = async (form: FormData) => {
   const url = festUrl + '/review';
-  const res = await axios.post(url, data, {
+  const res = await axios.post(url, form, {
     headers: {
       'Content-Type': 'multipart/form-data'
-    }
+    },
   });
   return res;
 };

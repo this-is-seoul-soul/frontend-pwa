@@ -54,7 +54,12 @@ export const ReviewCreatePage = () => {
   };
 
   const onSubmit = async (data: ReviewRegisterType) => {
-    form.append('addReviewReq', JSON.stringify(data.addReviewReq));
+    form.append(
+      'addReviewReq',
+      new Blob([JSON.stringify(data.addReviewReq)], {
+        type: 'application/json',
+      })
+    );
     files.forEach((file) => form.append('imgUrl', file, file.name));
     // form.append('imgUrl', data.imgUrl);
 
