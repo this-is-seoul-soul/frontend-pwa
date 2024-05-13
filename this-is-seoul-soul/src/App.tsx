@@ -29,9 +29,9 @@ export default function App() {
       } else if (res.data.data.status === 'nickname') {
         navigate(CheckNicknamePage.path, { replace: true });
       } else {
-        navigate(CheckNicknamePage.path, { replace: true });
+        navigate(signInPage.path, { replace: true });
       }
-    } else if (res.status === 403) {
+    } else {
       navigate(signInPage.path, { replace: true });
       localStorage.removeItem('accessToken');
       localStorage.removeItem('refreshToken');
