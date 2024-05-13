@@ -39,7 +39,7 @@ export const FestiTestProsecutorPage = {
 };
 
 export const FestDetailPage = {
-  path: '/festdetail',
+  path: '/afestdetail',
   label: '축제 상세',
 };
 
