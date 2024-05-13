@@ -62,7 +62,7 @@ const router = createBrowserRouter([
         element: <MyReviewDetails />,
       },
       {
-        path: '/festdetail',
+        path: '/afestdetail',
         element: <FestDetailPage />,
       },
       {
