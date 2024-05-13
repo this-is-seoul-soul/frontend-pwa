@@ -43,8 +43,15 @@ export type ReviewRegisterType = {
         tag: number[],
         festSeq: number,
     },
-    imgUrl: File[]
+    imgUrl: file[],
 }
+
+// export type ReviewRegisterBodyType = {
+//     content: string,
+//     point: number,
+//     tag: number[],
+//     festSeq: number,
+// }
 
 export type FestReivewParamType = {
     festSeq: number,
