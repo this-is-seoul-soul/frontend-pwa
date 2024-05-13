@@ -37,12 +37,13 @@ export type ReviewTagsType = {
 }
 
 export type ReviewRegisterType = {
-    content: string,
-    point: number,
-    // imgUrl: string[],
-    tag: number[],
-    festSeq: number,
-    [key: string]: string | number | number[]; 
+    addReviewReq: {
+        content: string,
+        point: number,
+        tag: number[],
+        festSeq: number,
+    },
+    imgUrl: File[]
 }
 
 export type FestReivewParamType = {

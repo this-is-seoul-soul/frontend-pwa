@@ -4,7 +4,7 @@ import CustomMarker from 'assets/images/CustomMarker.png';
 import UserLocation from 'assets/images/UserLocation.png';
 import { useEffect, useState } from 'react';
 import { FestLocationType, FestType } from 'types/fest';
-import { LocationType, MapFestType } from 'types/map';
+import { LocationType } from 'types/map';
 import { SearchBar } from 'components/organisms/SearchBar';
 import { MapFilter } from 'components/molecules/MapFilter/MapFilter';
 import { festDeatailInfoApi, mapFestApi } from 'apis/festApi';
@@ -28,7 +28,7 @@ export const MapPage = () => {
     const result = await mapFestApi({
       lat: lat,
       lot: lot,
-      distance: 2,
+      distance: 5,
       filter: [],
       year: [],
       codeName: [],
@@ -36,12 +36,13 @@ export const MapPage = () => {
 
     if (result.status === 200) {
       const allPlace = result.data.data;
-      const convertPlaces = allPlace.map((item: MapFestType) => ({
+      console.log('allPlace', allPlace);
+      const convertPlaces = allPlace.map((item: FestLocationType) => ({
         festSeq: item.festSeq,
         title: item.title,
-        lot: item.lot,
-        lat: item.lat,
-        isHeart: item.heart,
+        lot: item.lat,
+        lat: item.lot,
+        isHeart: item.isHeart,
       }));
 
       setPlaces(convertPlaces);
@@ -50,6 +51,7 @@ export const MapPage = () => {
 
   const handleMarkerClick = async (festSeq: number) => {
     const result = await festDeatailInfoApi(festSeq);
+    
     if (result.status === 200) {
       setSelectedFest(result.data.data);
     }

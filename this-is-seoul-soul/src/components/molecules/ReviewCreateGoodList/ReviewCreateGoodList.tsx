@@ -13,7 +13,7 @@ export const ReviewCreateGoodList = () => {
       : [...selectedGoods, goodId];
 
     setSelectedGoods(updatedSelected);
-    setValue('tag', updatedSelected);
+    setValue('addReviewReq.tag', updatedSelected);
   };
 
   return (
