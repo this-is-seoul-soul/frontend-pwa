@@ -33,15 +33,17 @@ const CalendarComponent = ({ setValue }: CalendarComponentProps) => {
 
   return (
     <div className='w-full flex justify-center content-center'>
-      <DateRange
-        locale={ko}
-        editableDateInputs={true}
-        onChange={onRangeChange}
-        moveRangeOnFirstSelection={false}
-        ranges={[state]}
-        className='w-full'
-        rangeColors={['#FFD873']}
-      />
+      <div className='text-center'>
+        <DateRange
+          locale={ko}
+          editableDateInputs={true}
+          onChange={onRangeChange}
+          moveRangeOnFirstSelection={false}
+          ranges={[state]}
+          className='w-full'
+          rangeColors={['#FFD873']}
+        />
+      </div>
     </div>
   );
 };
