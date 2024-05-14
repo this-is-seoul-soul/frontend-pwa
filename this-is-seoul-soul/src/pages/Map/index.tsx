@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { FestLocationType, FestType } from 'types/fest';
 import { LocationType } from 'types/map';
 import { SearchBar } from 'components/organisms/SearchBar';
-import { MapFilter } from 'components/molecules/MapFilter/MapFilter';
+// import { MapFilter } from 'components/molecules/MapFilter/MapFilter';
 import { festDeatailInfoApi, mapFestApi } from 'apis/festApi';
 import { FestInfoMapItem } from 'components/atoms/festInfo/FestInfoMapItem';
 
@@ -51,7 +51,7 @@ export const MapPage = () => {
 
   const handleMarkerClick = async (festSeq: number) => {
     const result = await festDeatailInfoApi(festSeq);
-    
+
     if (result.status === 200) {
       setSelectedFest(result.data.data);
     }
@@ -83,12 +83,12 @@ export const MapPage = () => {
     <div className={cls('w-full h-full')}>
       <div className='z-10 w-full absolute'>
         <SearchBar map />
-        <MapFilter />
+        {/* <MapFilter /> */}
       </div>
       <Map
         center={{ lat: userLocation.lat, lng: userLocation.lot }}
         className={cls('w-full h-full z-0')}
-        level={3}
+        level={7}
       >
         {userLocation && (
           <MapMarker
@@ -107,7 +107,7 @@ export const MapPage = () => {
             position={{ lat: place.lat, lng: place.lot }}
             image={{
               src: CustomMarker,
-              size: { width: 40, height: 40 },
+              size: { width: 25, height: 25 },
             }}
             onClick={() => handleMarkerClick(place.festSeq)}
           />

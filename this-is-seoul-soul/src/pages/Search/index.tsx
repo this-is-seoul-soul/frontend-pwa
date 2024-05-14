@@ -32,8 +32,6 @@ export const SearchPage = () => {
       text: value,
     };
     setKeywords([newKeyword, ...keywords]);
-    // navigator.navigateToSearchResult(value);//
-    // TODO: 검색해서 결과 받는 api 연결
   };
 
   const debounceHandleSearchKeyword = debounce(async (keyword: string) => {
@@ -62,6 +60,7 @@ export const SearchPage = () => {
       <SearchInputBar value={value} setValue={setValue} handleAddKeyword={handleAddKeyword} />
       <SearchList
         value={value}
+        setValue={setValue}
         keywords={keywords}
         onClearKeywords={handleClearKeywords}
         onRemoveKeyword={handleRemoveKeyword}

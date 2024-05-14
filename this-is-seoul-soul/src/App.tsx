@@ -40,7 +40,7 @@ export default function App() {
 
   useEffect(() => {
     const localAccessToken = localStorage.getItem('accessToken');
-    if (localAccessToken !== null) {
+    if (localAccessToken) {
       handleUserStatus();
     } else {
       navigate(signInPage.path, { replace: true });

@@ -37,7 +37,7 @@ export const BottomTabNavigation = ({ label }: { label: string }) => {
   return (
     <>
       {label === '축제 추천' || label === '주변' || label === '저장' || label === 'MY' ? (
-        <div className='fixed bottom-0 left-0 right-0 m-auto w-full max-w-[500px] flex bg-white p-3 border border-gray-400 rounded-t-xl'>
+        <div className='fixed z-50 bottom-0 left-0 right-0 m-auto w-full max-w-[500px] flex bg-white p-3 border border-gray-400 rounded-t-xl'>
           {tabItems.map((item, index) => (
             <div
               key={index}
