@@ -24,7 +24,9 @@ export const TabHome = ({ fest }: TabHomeProps) => {
         <div>
           <MdAccessTime size={18} className={cls('mt-1 text-gray-600 stroke-1 stroke-gray-600')} />
         </div>
-        <span className={cls('font-bold')}>{getFestState(fest.continue, fest.startDate, fest.endDate)}</span>
+        <span className={cls('font-bold')}>
+          {getFestState(fest.continue, fest.startDate, fest.endDate)}
+        </span>
         <span id='period' className={cls('text-gray-800')}>
           {fest.startDate} ~ {fest.endDate}
         </span>
@@ -33,20 +35,20 @@ export const TabHome = ({ fest }: TabHomeProps) => {
         <div>
           <FaWonSign size={18} className={cls('mt-1 text-gray-600')} />
         </div>
-        <span>{fest.isFree}</span>
+        <span>{fest.isFree !== '' ? fest.isFree : '요금 정보 제공하지 않음'}</span>
       </div>
       <div className={cls('flex items-start gap-2')}>
         <div>
           <GoPerson size={18} className={cls('mt-1 text-gray-600 stroke-1 stroke-gray-600')} />
         </div>
-        <span>{fest.useTrgt}</span>
+        <span>{fest.useTrgt ? fest.useTrgt : '연령 정보 제공하지 않음'}</span>
       </div>
       <div className={cls('flex items-start gap-2 break-all')}>
         <div>
           <FaLink size={18} className={cls('mt-1 text-gray-600 stroke-1 stroke-gray-600')} />
         </div>
         <p className={cls('text-blue')}>
-          <a href={fest.orgLink}>{fest.orgLink}</a>
+          <a href={fest.orgLink}>{fest.orgLink ? fest.orgLink : '링크 제공하지 않음'}</a>
         </p>
       </div>
     </div>

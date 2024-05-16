@@ -13,6 +13,7 @@ type FestInfoProps = {
 
 export const FestInfoHomeItem = ({ fest }: FestInfoProps) => {
   const [isHeart, setIsHeart] = useState(fest.heart);
+  const festStatus = getFestState(fest.continue, fest.startDate, fest.endDate);
   const codeColor = codeNameColor[fest.codename] || 'bg-gray-100';
   const navigation = useAppNavigation();
 
@@ -25,7 +26,7 @@ export const FestInfoHomeItem = ({ fest }: FestInfoProps) => {
     } else {
       res = await festHeartAddApi(fest.festSeq);
     }
-    if (res.status === 200 || res.status === 201 ) {
+    if (res.status === 200 || res.status === 201) {
       setIsHeart(!isHeart);
     }
   };
@@ -59,10 +60,24 @@ export const FestInfoHomeItem = ({ fest }: FestInfoProps) => {
       </div>
       <div id='fee' className='text-xs flex items-center gap-2'>
         <div className='text-gray-700'>이용 요금</div>
-        <div>{fest.useFee.length > 12 ? `${fest.useFee.substring(0, 12)}...` : fest.useFee}</div>
+        <div>
+          {fest.useFee !== ''
+            ? fest.useFee.length > 12
+              ? `${fest.useFee.substring(0, 8)}...`
+              : fest.useFee
+            : '요금 정보 X'}
+        </div>
       </div>
       <div className='text-xs flex flex-wrap justify-start items-center gap-2'>
-        <div>{getFestState(fest.continue, fest.startDate, fest.endDate)}</div>
+        <div
+          className={`${
+            festStatus === '진행중'
+              ? 'bg-green-100 py-[2px] px-[4px] rounded-md'
+              : 'bg-gray-200 py-[2px] px-[4px] rounded-md'
+          }`}
+        >
+          {festStatus}
+        </div>
         <div className='text-xs flex items-center gap-1'>
           <GoStarFill className='fill-yellow-400' />
           {fest.avgPoint}
@@ -72,7 +87,7 @@ export const FestInfoHomeItem = ({ fest }: FestInfoProps) => {
           {fest.cntReview >= 50 ? <div>50+</div> : <div>{fest.cntReview}</div>}
         </div>
       </div>
-      <div id='period' className='text-xs text-gray-700'>
+      <div id='period' className='text-xs text-gray-700 font-pretendardThin'>
         {fest.startDate} ~ {fest.endDate}
       </div>
     </div>

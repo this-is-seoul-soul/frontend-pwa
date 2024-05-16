@@ -61,3 +61,18 @@
   font-family: 'Pretendard-Thin';
   src: url('./fonts/Pretendard-Thin.otf');
 }
+
+body {
+  -ms-overflow-style: none;
+}
+
+::-webkit-scrollbar {
+  display: block;
+}
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-button {
+  display: none;
+}
+::-webkit-scrollbar-thumb {
+  border-bottom: solid 2px rgb(190, 190, 190);
+}

@@ -8,6 +8,8 @@ import { TagBar } from 'components/atoms/reviewInfo/TagBar';
 import { ReviewItem } from 'components/atoms/review/ReviewItem';
 import { sortList } from 'constants/sort';
 import { getFestReviewListApi, getFestReviewTagsApi } from 'apis/festApi';
+import LogoCharacter from 'assets/images/LogoCharacter.png';
+import { cls } from 'utils/cls';
 
 interface TabReviewProps {
   fest: FestDetailType;
@@ -54,7 +56,7 @@ export const TabReview = ({ fest }: TabReviewProps) => {
   }, []);
 
   const maxStars = 5;
-  let stars = [];
+  const stars = [];
 
   for (let i = 1; i <= maxStars; i++) {
     stars.push(
@@ -102,9 +104,20 @@ export const TabReview = ({ fest }: TabReviewProps) => {
         </div>
         <ListHeader total={reviews?.length} sort={{ sortList: sortList, callback: handleSort }} />
         <div className='pt-2 pb-14'>
-          {reviews?.map((reviewItem) => {
-            return <ReviewItem review={reviewItem} />;
-          })}
+          {reviews ? (
+            reviews?.map((reviewItem) => {
+              return <ReviewItem review={reviewItem} />;
+            })
+          ) : (
+            <div className={cls('w-full pb-10 absolute top-0 flex justify-center items-center')}>
+              <div>
+                <img src={LogoCharacter} alt='이미지 없음' className='grayscale w-12 pb-4' />
+              </div>
+              <div className='text-sm text-gray-500 font-PretendardExtraLight'>
+                지금까지 작성한 리뷰가 없습니다.
+              </div>
+            </div>
+          )}
         </div>
       </section>
     </div>
