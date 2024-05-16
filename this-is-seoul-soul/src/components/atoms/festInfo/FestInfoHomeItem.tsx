@@ -24,7 +24,7 @@ export const FestInfoHomeItem = ({ fest }: FestInfoProps) => {
     } else {
       res = await festHeartAddApi(fest.festSeq);
     }
-    if (res.status === 200) {
+    if (res.status === 200 || res.status === 201 ) {
       setIsHeart(!isHeart);
     }
   };
