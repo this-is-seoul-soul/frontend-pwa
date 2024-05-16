@@ -13,6 +13,7 @@ import { cls } from 'utils/cls';
 import { useSearchParams } from 'react-router-dom';
 import { festDeatailInfoApi, festHeartAddApi, festHeartDeleteApi } from 'apis/festApi';
 import Default from 'assets/images/Default.png';
+import { getFestState } from 'utils/fest';
 
 type TabType = {
   label: string;
@@ -27,6 +28,7 @@ export const FestDetailPage = () => {
 
   const [fest, setFest] = useState<FestDetailType>();
   const [isHeart, setIsHeart] = useState<boolean>();
+  const [festState, setFestState] = useState<string>();
   const [tabs, setTabs] = useState<TabType>();
   const [activeTab, setActiveTab] = useState<tabItemType>();
 
@@ -55,6 +57,7 @@ export const FestDetailPage = () => {
       setHeaderTitle(fest.title);
       setTabs(tabs);
       setActiveTab(tabs[0]);
+      setFestState(getFestState(fest.continue, fest.startDate, fest.endDate));
     }
   };
 
@@ -84,7 +87,7 @@ export const FestDetailPage = () => {
             <div className={cls('pt-1 text-gray-600')}>{fest?.codename}</div>
             <div className={cls('pt-4 flex items-center gap-2')}>
               <div className={cls('flex flex-wrap justify-start items-center gap-4')}>
-                <div>{fest?.continue ? '진행중' : '미진행'}</div>
+                <div>{festState}</div>
                 <div className={cls('flex items-center gap-1')}>
                   <GoStarFill className={cls('fill-yellow-400')} />
                   {fest?.avgPoint}

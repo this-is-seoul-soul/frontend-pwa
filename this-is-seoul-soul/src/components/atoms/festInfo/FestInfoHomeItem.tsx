@@ -5,6 +5,7 @@ import { GoBookmark, GoBookmarkFill, GoStarFill } from 'react-icons/go';
 import { useAppNavigation } from 'hooks/useAppNavigation';
 import { FestType } from 'types/fest';
 import { festHeartAddApi, festHeartDeleteApi } from 'apis/festApi';
+import { getFestState } from 'utils/fest';
 
 type FestInfoProps = {
   fest: FestType;
@@ -61,7 +62,7 @@ export const FestInfoHomeItem = ({ fest }: FestInfoProps) => {
         <div>{fest.useFee.length > 12 ? `${fest.useFee.substring(0, 12)}...` : fest.useFee}</div>
       </div>
       <div className='text-xs flex flex-wrap justify-start items-center gap-2'>
-        {fest.continue && <div>{fest.continue ? '진행중' : '미진행'}</div>}
+        <div>{getFestState(fest.continue, fest.startDate, fest.endDate)}</div>
         <div className='text-xs flex items-center gap-1'>
           <GoStarFill className='fill-yellow-400' />
           {fest.avgPoint}
