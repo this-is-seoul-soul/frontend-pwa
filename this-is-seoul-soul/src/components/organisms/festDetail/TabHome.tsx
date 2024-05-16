@@ -35,7 +35,7 @@ export const TabHome = ({ fest }: TabHomeProps) => {
         <div>
           <FaWonSign size={18} className={cls('mt-1 text-gray-600')} />
         </div>
-        <span>{fest.isFree !== '' ? fest.isFree : '요금 정보 제공하지 않음'}</span>
+        <span>{fest.useFee ? fest.useFee : '요금 정보 제공하지 않음'}</span>
       </div>
       <div className={cls('flex items-start gap-2')}>
         <div>
