@@ -28,8 +28,7 @@ export const FestInfoMapItem = ({ fest }: FestInfoProps) => {
     } else {
       res = await festHeartAddApi(fest.festSeq);
     }
-    console.log('북마크', res);
-    if (res.status === 201) {
+    if (res.status === 200) {
       setIsHeart(!isHeart);
     }
   };
@@ -45,7 +44,7 @@ export const FestInfoMapItem = ({ fest }: FestInfoProps) => {
       onClick={() => navigation.navigateToFestDetail(fest.festSeq)}
     >
       <div className={cls('w-5 absolute top-5 right-4 z-10')} onClick={(e) => handleHeart(e)}>
-        {isHeart == true ? (
+        {isHeart ? (
           <GoBookmarkFill size={'1.25rem'} className={cls('fill-yellow-400')} />
         ) : (
           <GoBookmark size={'1.25rem'} className=' text-gray-400 ' />
