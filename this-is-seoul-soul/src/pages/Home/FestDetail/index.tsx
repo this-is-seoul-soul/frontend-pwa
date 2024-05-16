@@ -12,6 +12,7 @@ import { tabItemType } from 'types/tab';
 import { cls } from 'utils/cls';
 import { useSearchParams } from 'react-router-dom';
 import { festDeatailInfoApi, festHeartAddApi, festHeartDeleteApi } from 'apis/festApi';
+import Default from 'assets/images/Default.png';
 
 type TabType = {
   label: string;
@@ -64,7 +65,7 @@ export const FestDetailPage = () => {
   return (
     <div className={cls('w-full min-h-full pt-[47px] flex flex-col')}>
       <div className={cls('w-full h-32 overflow-hidden')}>
-        <img src={fest?.mainImg} alt='' />
+        <img src={fest?.mainImg ? fest?.mainImg : Default} alt='' />
       </div>
       <section>
         <div className={cls('flex flex-col p-4 pb-8')}>
@@ -92,10 +93,10 @@ export const FestDetailPage = () => {
                   <div>리뷰</div>
                   <div>{fest?.cntReview >= 50 ? '50+' : `${fest?.cntReview}`}</div>
                 </div>
-                <div className={cls('flex items-center gap-1')}>
+                {/* <div className={cls('flex items-center gap-1')}>
                   <GoBookmarkFill className={cls('fill-yellow-400')} />
                   {fest?.tag && fest?.tag[0]?.cnt}
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

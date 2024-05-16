@@ -24,7 +24,7 @@ export const FestInfoHomeItem = ({ fest }: FestInfoProps) => {
     } else {
       res = await festHeartAddApi(fest.festSeq);
     }
-    if (res.status === 201) {
+    if (res.status === 200) {
       setIsHeart(!isHeart);
     }
   };
@@ -46,7 +46,7 @@ export const FestInfoHomeItem = ({ fest }: FestInfoProps) => {
       <div id='category' className='flex items-center justify-between pt-1'>
         <div className={`${codeColor} rounded-lg text-xs px-2 py-1`}>{fest.codename}</div>
         <div onClick={(e) => handleHeart(e)}>
-          {isHeart == true ? (
+          {isHeart ? (
             <GoBookmarkFill size={'1.25rem'} className='  fill-yellow-400' />
           ) : (
             <GoBookmark size={'1.25rem'} className=' text-gray-400 ' />
