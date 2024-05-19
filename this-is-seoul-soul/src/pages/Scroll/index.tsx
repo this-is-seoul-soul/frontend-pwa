@@ -17,7 +17,7 @@ export const ScrollPage = () => {
       page: 0,
       limit: LIMIT,
     },
-    getNextParams: (params, curPage) => ({ ...params, page: curPage }),
+    getNextParams: (params, curPage) => ({ ...params, page: curPage + 1 }),
     hasMoreItems: (res) => res.length === LIMIT,
   });
 
