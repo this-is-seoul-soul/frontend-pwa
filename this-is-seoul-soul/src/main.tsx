@@ -19,6 +19,7 @@ import { SearchPage } from 'pages/Search/index.tsx';
 import { PrivatePolicy } from 'pages/Policy/Private/index.tsx';
 import { SearchResultPage } from 'pages/Search/SearchResult/index.tsx';
 import { GooglePage } from 'pages/Auth/Google/index.tsx';
+import { ScrollPage } from 'pages/Scroll/index.tsx';
 
 const router = createBrowserRouter([
   {
@@ -92,6 +93,10 @@ const router = createBrowserRouter([
       {
         path: '/auth/google-callback',
         element: <GooglePage />,
+      },
+      {
+        path: '/scroll',
+        element: <ScrollPage />,
       },
     ],
   },
