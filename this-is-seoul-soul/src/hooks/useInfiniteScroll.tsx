@@ -23,7 +23,7 @@ export const useInfiniteScroll = <T, P>({
     const fetchItems = async () => {
       try {
         const response = await fetchFn(params);
-        const data = (await response.data) as T[];
+        const data = (await response.data.data) as T[];
         setItems((prev) => [...prev, ...data]);
         setHasMore(hasMoreItems(data));
       } catch (error) {
