@@ -1,5 +1,5 @@
 import { AxiosResponse } from 'axios';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 interface useInfiniteScrollProps<T, P> {
   fetchFn: (params: P) => Promise<AxiosResponse>;
