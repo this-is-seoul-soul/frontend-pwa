@@ -2,6 +2,7 @@ import { searchFestApi } from 'apis/festApi';
 import { FestInfoHomeItem } from 'components/atoms/festInfo/FestInfoHomeItem';
 import { useInfiniteScroll } from 'hooks/useInfiniteScroll';
 import { FestDetailSearchType, FestType } from 'types/fest';
+import { cls } from 'utils/cls';
 
 export const ScrollPage = () => {
   const LIMIT = 10;
@@ -23,11 +24,11 @@ export const ScrollPage = () => {
   return (
     <div>
       Scroll Page
-      <ul>
+      <div className={cls('grid grid-cols-2 gap-4 p-5 pb-24 bg-white')}>
         {items.map((fest) => (
           <FestInfoHomeItem key={fest.festSeq} fest={fest} />
         ))}
-      </ul>
+      </div>
       {hasMore && (
         <div ref={loaderRef} style={{ height: '100px', background: 'lightgray' }}>
           Loading...
