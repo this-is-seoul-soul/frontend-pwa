@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 interface useInfiniteScrollProps<T, P> {
   fetchFn: (params: P) => Promise<AxiosResponse>;
   initialParams: P;
-  getNextParams: (currentParams: P) => P;
+  getNextParams: (currentParams: P, currentPage: number) => P;
   hasMoreItems: (response: T[]) => boolean;
 }
 
@@ -17,6 +17,7 @@ export const useInfiniteScroll = <T, P>({
   const [items, setItems] = useState<T[]>([]);
   const [hasMore, setHasMore] = useState<boolean>(true);
   const [params, setParams] = useState<P>(initialParams);
+  const [currentPage, setCurrentPage] = useState<number>(0);
   const loaderRef = useRef<HTMLDivElement | null>(null); // 사용하는 컴포넌트에서 반드시 써야함
 
   useEffect(() => {
@@ -26,6 +27,7 @@ export const useInfiniteScroll = <T, P>({
         const data = (await response.data.data) as T[];
         setItems((prev) => [...prev, ...data]);
         setHasMore(hasMoreItems(data));
+        setCurrentPage((prev) => prev + 1);
       } catch (error) {
         console.error('Failed to fetch items:', error);
       }
@@ -37,7 +39,7 @@ export const useInfiniteScroll = <T, P>({
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting && hasMore) {
-        setParams((prevParams) => getNextParams(prevParams));
+        setParams((prevParams) => getNextParams(prevParams, currentPage));
       }
     });
 
@@ -50,7 +52,7 @@ export const useInfiniteScroll = <T, P>({
         observer.unobserve(loaderRef.current);
       }
     };
-  }, [hasMore, getNextParams]);
+  }, [hasMore, getNextParams, currentPage]);
 
   return { items, loaderRef, hasMore };
 };

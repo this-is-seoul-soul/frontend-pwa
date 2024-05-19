@@ -1,4 +1,5 @@
 import { searchFestApi } from 'apis/festApi';
+import { FestInfoHomeItem } from 'components/atoms/festInfo/FestInfoHomeItem';
 import { useInfiniteScroll } from 'hooks/useInfiniteScroll';
 import { FestDetailSearchType, FestType } from 'types/fest';
 
@@ -15,7 +16,7 @@ export const ScrollPage = () => {
       page: 0,
       limit: LIMIT,
     },
-    getNextParams: (cur) => ({ ...cur, page: cur.page + 1 }),
+    getNextParams: (params, curPage) => ({ ...params, page: curPage }),
     hasMoreItems: (res) => res.length === LIMIT,
   });
 
@@ -24,14 +25,7 @@ export const ScrollPage = () => {
       Scroll Page
       <ul>
         {items.map((fest) => (
-          <li key={fest.festSeq}>
-            <h2>{fest.title}</h2>
-            <img src={fest.mainImg} alt={fest.title} />
-            <p>
-              {fest.startDate} - {fest.endDate}
-            </p>
-            <p>{fest.useFee}</p>
-          </li>
+          <FestInfoHomeItem key={fest.festSeq} fest={fest} />
         ))}
       </ul>
       {hasMore && (
