@@ -8,6 +8,7 @@ import { FestDetailSearchType, FestType } from 'types/fest';
 import { UserInfoType } from 'types/user';
 import { sortList } from 'constants/sort';
 import { userInfoApi } from 'apis/userApi';
+import { useNavigate } from 'react-router-dom';
 // import InfiniteScroll from 'react-infinite-scroller';
 
 export const HomePage = () => {
@@ -23,6 +24,7 @@ export const HomePage = () => {
     page: 0,
     limit: 50,
   });
+  const navigate = useNavigate();
 
   // 내 회원 정보 불러오는 함수
   const handleGetMyInfo = async () => {
@@ -72,6 +74,9 @@ export const HomePage = () => {
           {userInfo?.nickname}님,
           <br />
           <b>이런 축제는 어떤가요?</b>
+          <button onClick={() => navigate('/scroll')} className={cls(' text-white')}>
+            스크롤
+          </button>
         </div>
         {/* <div className={cls('pl-2 pb-8 bg-white flex overflow-x-auto')}> */}
         <div className={cls('pl-2 pb-8 bg-white flex overflow-auto h-full')}>
