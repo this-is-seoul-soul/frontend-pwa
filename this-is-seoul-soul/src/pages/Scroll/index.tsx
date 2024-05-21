@@ -6,7 +6,7 @@ import { cls } from 'utils/cls';
 
 export const ScrollPage = () => {
   const LIMIT = 10;
-  const { items, loaderRef, hasMore } = useInfiniteScroll<FestType, FestDetailSearchType>({
+  const { items, target } = useInfiniteScroll<FestType, FestDetailSearchType>({
     fetchFn: searchFestApi,
     initialParams: {
       isFree: false,
@@ -17,7 +17,7 @@ export const ScrollPage = () => {
       page: 0,
       limit: LIMIT,
     },
-    getNextParams: (params, curPage) => ({ ...params, page: curPage + 1 }),
+    setNextPage: (params) => ({ ...params, page: params.page + 1 }),
     hasMoreItems: (res) => res.length === LIMIT,
   });
 
@@ -29,11 +29,7 @@ export const ScrollPage = () => {
           <FestInfoHomeItem key={fest.festSeq} fest={fest} />
         ))}
       </div>
-      {hasMore && (
-        <div ref={loaderRef} style={{ height: '100px', background: 'lightgray' }}>
-          Loading...
-        </div>
-      )}
+      <div ref={target}>로딩...</div>
     </div>
   );
 };

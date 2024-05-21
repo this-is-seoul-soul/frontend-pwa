@@ -4,55 +4,55 @@ import { useEffect, useRef, useState } from 'react';
 interface useInfiniteScrollProps<T, P> {
   fetchFn: (params: P) => Promise<AxiosResponse>;
   initialParams: P;
-  getNextParams: (currentParams: P, currentPage: number) => P;
+  setNextPage: (params: P) => P;
   hasMoreItems: (response: T[]) => boolean;
 }
 
 export const useInfiniteScroll = <T, P>({
   fetchFn,
   initialParams,
-  getNextParams,
+  setNextPage,
   hasMoreItems,
 }: useInfiniteScrollProps<T, P>) => {
   const [items, setItems] = useState<T[]>([]);
-  const [hasMore, setHasMore] = useState<boolean>(true);
   const [params, setParams] = useState<P>(initialParams);
-  const [currentPage, setCurrentPage] = useState<number>(0);
-  const loaderRef = useRef<HTMLDivElement | null>(null); // 사용하는 컴포넌트에서 반드시 써야함
+  const [hasMore, setHasMore] = useState<boolean>(true);
+  const target = useRef<HTMLDivElement | null>(null);
+
+  const observer = useRef<IntersectionObserver>(
+    new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          setParams((prev) => setNextPage(prev));
+        });
+      },
+      { threshold: 0.4 } //40%가 보일때를 기본 값으로 설정
+    )
+  );
 
   useEffect(() => {
-    const fetchItems = async () => {
-      try {
-        const response = await fetchFn(params);
-        const data = (await response.data.data) as T[];
-        setItems((prev) => [...prev, ...data]);
-        setHasMore(hasMoreItems(data));
-        setCurrentPage((prev) => prev + 1);
-      } catch (error) {
-        console.error('Failed to fetch items:', error);
-      }
+    if (!hasMore) return;
+    const getData = async () => {
+      const response = await fetchFn(params);
+      const data = (await response.data.data) as T[];
+      setItems((prev) => [...prev, ...data]);
+      setHasMore(hasMoreItems(data));
     };
-
-    fetchItems();
-  }, [fetchFn, params]);
+    getData();
+  }, [params]);
 
   useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting && hasMore) {
-        setParams((prevParams) => getNextParams(prevParams, currentPage));
-      }
-    });
-
-    if (loaderRef.current) {
-      observer.observe(loaderRef.current);
+    if (target.current) {
+      const unobserve = observe(target.current);
+      return () => observer && unobserve();
     }
+  }, [target]);
 
-    return () => {
-      if (loaderRef.current) {
-        observer.unobserve(loaderRef.current);
-      }
-    };
-  }, [hasMore, getNextParams, currentPage]);
+  const observe = (element: HTMLElement) => {
+    observer.current.observe(element);
+    return () => observer.current.unobserve(element);
+  };
 
-  return { items, loaderRef, hasMore };
+  return { items, target };
 };
