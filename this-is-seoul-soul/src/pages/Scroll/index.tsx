@@ -23,7 +23,6 @@ export const ScrollPage = () => {
 
   return (
     <div>
-      Scroll Page
       <div className={cls('grid grid-cols-2 gap-4 p-5 pb-24 bg-white')}>
         {items.map((fest) => (
           <FestInfoHomeItem key={fest.festSeq} fest={fest} />

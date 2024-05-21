@@ -9,22 +9,42 @@ import { UserInfoType } from 'types/user';
 import { sortList } from 'constants/sort';
 import { userInfoApi } from 'apis/userApi';
 import { useNavigate } from 'react-router-dom';
+import { useInfiniteScroll } from 'hooks/useInfiniteScroll';
 // import InfiniteScroll from 'react-infinite-scroller';
 
 export const HomePage = () => {
+  const LIMIT: number = 10;
   const [recommendFestList, setRecommendFestList] = useState<FestType[]>();
-  const [festList, setFestList] = useState<FestType[]>();
+  // const [festList, setFestList] = useState<FestType[]>();
   const [userInfo, setUserInfo] = useState<UserInfoType>();
-  const [params, setParams] = useState<FestDetailSearchType>({
-    isFree: false,
-    isContinue: false,
-    region: '전체',
-    codename: '전체',
-    sort: 1,
-    page: 0,
-    limit: 50,
-  });
+  // const [params, setParams] = useState<FestDetailSearchType>({
+  //   isFree: false,
+  //   isContinue: false,
+  //   region: '전체',
+  //   codename: '전체',
+  //   sort: 1,
+  //   page: 0,
+  //   limit: LIMIT,
+  // });
   const navigate = useNavigate();
+  const {
+    items: festList,
+    target,
+    setParams,
+  } = useInfiniteScroll<FestType, FestDetailSearchType>({
+    fetchFn: searchFestApi,
+    initialParams: {
+      isFree: false,
+      isContinue: false,
+      region: '전체',
+      codename: '전체',
+      sort: 1,
+      page: 0,
+      limit: LIMIT,
+    },
+    setNextPage: (params) => ({ ...params, page: params.page + 1 }),
+    hasMoreItems: (res) => res.length === LIMIT,
+  });
 
   // 내 회원 정보 불러오는 함수
   const handleGetMyInfo = async () => {
@@ -41,12 +61,12 @@ export const HomePage = () => {
   };
 
   // 전체 목록 불러오는 함수 (정렬, 상세 검색 포함)
-  const getSearchFestList = async () => {
-    const result = await searchFestApi(params);
-    if (result.status === 200) {
-      setFestList(result.data.data);
-    }
-  };
+  // const getSearchFestList = async () => {
+  //   const result = await searchFestApi(params);
+  //   if (result.status === 200) {
+  //     setFestList(result.data.data);
+  //   }
+  // };
 
   const handleSort = (i: number) => {
     setParams((prev) => ({
@@ -55,14 +75,14 @@ export const HomePage = () => {
     }));
   };
 
-  useEffect(() => {
-    getSearchFestList();
-  }, [params]);
+  // useEffect(() => {
+  //   getSearchFestList();
+  // }, [params]);
 
   useEffect(() => {
     handleGetMyInfo();
     getRecommendedFestList();
-    getSearchFestList();
+    // getSearchFestList();
   }, []);
 
   return (
@@ -95,18 +115,15 @@ export const HomePage = () => {
         <div className={cls('pl-6 pt-9 pb-3 text-lg bg-white')}>
           <b>원하시는 축제</b>를 만나보세요!
         </div>
-        <ListHeader total={festList?.length} sort={{ sortList: sortList, callback: handleSort }} />
-        <div>{/*<InfiniteScroll></InfiniteScroll>*/}</div>
+        <ListHeader sort={{ sortList: sortList, callback: handleSort }} />
         <div className={cls('grid grid-cols-2 gap-4 p-5 pb-24 bg-white')}>
-          {festList && festList?.length > 0 ? (
+          {festList &&
             festList.map((fest, index) => (
               <div key={index}>
                 <FestInfoHomeItem fest={fest} />
               </div>
-            ))
-          ) : (
-            <div>데이터가 없습니다.</div>
-          )}
+            ))}
+          <div ref={target}>로딩...</div>
         </div>
       </section>
     </div>

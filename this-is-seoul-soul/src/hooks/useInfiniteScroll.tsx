@@ -51,5 +51,5 @@ export const useInfiniteScroll = <T, P>({
     return () => observer.current.unobserve(element);
   };
 
-  return { items, target };
+  return { items, target, setParams };
 };
