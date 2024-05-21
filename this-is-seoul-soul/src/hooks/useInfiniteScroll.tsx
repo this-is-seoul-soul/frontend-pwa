@@ -20,15 +20,12 @@ export const useInfiniteScroll = <T, P>({
   const target = useRef<HTMLDivElement | null>(null);
 
   const observer = useRef<IntersectionObserver>(
-    new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          setParams((prev) => setNextPage(prev));
-        });
-      },
-      { threshold: 0.4 } //40%가 보일때를 기본 값으로 설정
-    )
+    new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        setParams((prev) => setNextPage(prev));
+      });
+    })
   );
 
   useEffect(() => {
