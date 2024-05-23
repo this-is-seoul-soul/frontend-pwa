@@ -69,6 +69,7 @@ export const HomePage = () => {
           <br />
           <b>이런 축제는 어떤가요?</b>
         </div>
+
         <div className={cls('pl-2 pb-8 bg-white flex overflow-auto h-full')}>
           {recommendFestList && recommendFestList.length > 0 ? (
             recommendFestList.map((fest, index) => (

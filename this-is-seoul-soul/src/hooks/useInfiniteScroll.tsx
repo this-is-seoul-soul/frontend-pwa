@@ -24,23 +24,17 @@ export const useInfiniteScroll = <T, P>({
     new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (!entry.isIntersecting) return;
-        next();
-        // setParams((prev) => setNextPage(prev));
+        setParams((prev) => setNextPage(prev));
       });
     })
   );
 
-  const next = useCallback(() => {
-    console.log(isFirst);
-    if (isFirst) {
-      setIsFirst((prev) => !prev);
-      return;
-    }
-    setParams((prev) => setNextPage(prev));
-  }, [isFirst]);
-
   useEffect(() => {
     if (!hasMore) return;
+    if (isFirst) {
+      setIsFirst(!isFirst);
+      return;
+    }
     const getData = async () => {
       const response = await fetchFn(params);
       const data = (await response.data.data) as T[];
@@ -48,7 +42,7 @@ export const useInfiniteScroll = <T, P>({
       setHasMore(hasMoreItems(data));
     };
     getData();
-  }, [params]);
+  }, [params, isFirst]);
 
   useEffect(() => {
     if (target.current) {
@@ -62,5 +56,5 @@ export const useInfiniteScroll = <T, P>({
     return () => observer.current.unobserve(element);
   };
 
-  return { items, target, setParams };
+  return { items, target, setParams, setIsFirst };
 };
