@@ -1,5 +1,5 @@
 import { AxiosResponse } from 'axios';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 interface useInfiniteScrollProps<T, P> {
   fetchFn: (params: P) => Promise<AxiosResponse>;
@@ -18,15 +18,25 @@ export const useInfiniteScroll = <T, P>({
   const [params, setParams] = useState<P>(initialParams);
   const [hasMore, setHasMore] = useState<boolean>(true);
   const target = useRef<HTMLDivElement | null>(null);
+  const [isFirst, setIsFirst] = useState(true);
 
   const observer = useRef<IntersectionObserver>(
     new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (!entry.isIntersecting) return;
-        setParams((prev) => setNextPage(prev));
+        next();
+        // setParams((prev) => setNextPage(prev));
       });
     })
   );
+
+  const next = useCallback(() => {
+    if (isFirst) {
+      setIsFirst(false);
+      return;
+    }
+    setParams((prev) => setNextPage(prev));
+  }, [isFirst]);
 
   useEffect(() => {
     if (!hasMore) return;
