@@ -8,25 +8,12 @@ import { FestDetailSearchType, FestType } from 'types/fest';
 import { UserInfoType } from 'types/user';
 import { sortList } from 'constants/sort';
 import { userInfoApi } from 'apis/userApi';
-import { useNavigate } from 'react-router-dom';
 import { useInfiniteScroll } from 'hooks/useInfiniteScroll';
-// import InfiniteScroll from 'react-infinite-scroller';
 
 export const HomePage = () => {
   const LIMIT: number = 10;
   const [recommendFestList, setRecommendFestList] = useState<FestType[]>();
-  // const [festList, setFestList] = useState<FestType[]>();
   const [userInfo, setUserInfo] = useState<UserInfoType>();
-  // const [params, setParams] = useState<FestDetailSearchType>({
-  //   isFree: false,
-  //   isContinue: false,
-  //   region: '전체',
-  //   codename: '전체',
-  //   sort: 1,
-  //   page: 0,
-  //   limit: LIMIT,
-  // });
-  const navigate = useNavigate();
   const {
     items: festList,
     target,
@@ -60,14 +47,6 @@ export const HomePage = () => {
     }
   };
 
-  // 전체 목록 불러오는 함수 (정렬, 상세 검색 포함)
-  // const getSearchFestList = async () => {
-  //   const result = await searchFestApi(params);
-  //   if (result.status === 200) {
-  //     setFestList(result.data.data);
-  //   }
-  // };
-
   const handleSort = (i: number) => {
     setParams((prev) => ({
       ...prev,
@@ -75,14 +54,9 @@ export const HomePage = () => {
     }));
   };
 
-  // useEffect(() => {
-  //   getSearchFestList();
-  // }, [params]);
-
   useEffect(() => {
     handleGetMyInfo();
     getRecommendedFestList();
-    // getSearchFestList();
   }, []);
 
   return (
@@ -94,11 +68,7 @@ export const HomePage = () => {
           {userInfo?.nickname}님,
           <br />
           <b>이런 축제는 어떤가요?</b>
-          <button onClick={() => navigate('/scroll')} className={cls(' text-white')}>
-            스크롤
-          </button>
         </div>
-        {/* <div className={cls('pl-2 pb-8 bg-white flex overflow-x-auto')}> */}
         <div className={cls('pl-2 pb-8 bg-white flex overflow-auto h-full')}>
           {recommendFestList && recommendFestList.length > 0 ? (
             recommendFestList.map((fest, index) => (

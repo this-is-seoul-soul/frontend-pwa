@@ -33,7 +33,7 @@ export const useInfiniteScroll = <T, P>({
   const next = useCallback(() => {
     console.log(isFirst);
     if (isFirst) {
-      setIsFirst(!isFirst);
+      setIsFirst((prev) => !prev);
       return;
     }
     setParams((prev) => setNextPage(prev));
