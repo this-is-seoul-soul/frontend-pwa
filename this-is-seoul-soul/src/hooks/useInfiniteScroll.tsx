@@ -1,5 +1,5 @@
 import { AxiosResponse } from 'axios';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 interface useInfiniteScrollProps<T, P> {
   fetchFn: (params: P) => Promise<AxiosResponse>;
@@ -18,7 +18,7 @@ export const useInfiniteScroll = <T, P>({
   const [params, setParams] = useState<P>(initialParams);
   const [hasMore, setHasMore] = useState<boolean>(true);
   const target = useRef<HTMLDivElement | null>(null);
-  const [isFirst, setIsFirst] = useState(true);
+  const isFirst = useRef(true);
 
   const observer = useRef<IntersectionObserver>(
     new IntersectionObserver((entries) => {
@@ -31,8 +31,10 @@ export const useInfiniteScroll = <T, P>({
 
   useEffect(() => {
     if (!hasMore) return;
-    if (isFirst) {
-      setIsFirst(!isFirst);
+    // 처음 mount될 때는 next page를 요청하지 않도록 하여
+    // 비동기로 인해 다음 페이지가 먼저 렌더링 되는 현상을 막음
+    if (isFirst.current) {
+      isFirst.current = false;
       return;
     }
     const getData = async () => {
@@ -42,7 +44,7 @@ export const useInfiniteScroll = <T, P>({
       setHasMore(hasMoreItems(data));
     };
     getData();
-  }, [params, isFirst]);
+  }, [params]);
 
   useEffect(() => {
     if (target.current) {
@@ -56,5 +58,5 @@ export const useInfiniteScroll = <T, P>({
     return () => observer.current.unobserve(element);
   };
 
-  return { items, target, setParams, setIsFirst };
+  return { items, target, setParams };
 };

@@ -26,7 +26,7 @@ export const HomePage = () => {
       region: '전체',
       codename: '전체',
       sort: 1,
-      page: 0,
+      page: -1, // 처음 마운트 될 때 다음 페이지를 요청하지 않도록 -1부터 시작
       limit: LIMIT,
     },
     setNextPage: (params) => ({ ...params, page: params.page + 1 }),
