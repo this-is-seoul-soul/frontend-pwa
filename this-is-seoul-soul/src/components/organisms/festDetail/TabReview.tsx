@@ -104,7 +104,7 @@ export const TabReview = ({ fest }: TabReviewProps) => {
         </div>
         <ListHeader total={reviews?.length} sort={{ sortList: sortList, callback: handleSort }} />
         <div className='pt-2 pb-14'>
-          {reviews?.length === 0 ? (
+          {reviews?.length !== 0 ? (
             reviews?.map((reviewItem) => {
               return <ReviewItem review={reviewItem} />;
             })
