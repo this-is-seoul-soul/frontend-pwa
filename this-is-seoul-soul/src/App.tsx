@@ -40,7 +40,9 @@ export default function App() {
 
   useEffect(() => {
     const localAccessToken = localStorage.getItem('accessToken');
-    if (localAccessToken) {
+    if (label === '개인정보처리방침') {
+      console.log('개인정보처리방침');
+    } else if (localAccessToken) {
       handleUserStatus();
     } else {
       navigate(signInPage.path, { replace: true });
